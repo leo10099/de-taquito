@@ -1,0 +1,55 @@
+{
+	"env": {
+		"browser": true,
+		"node": true
+	},
+	"parser": "@typescript-eslint/parser",
+	"extends": [
+		//  eslint
+		"eslint:recommended",
+		// typescript
+		"plugin:@typescript-eslint/recommended",
+		// react
+		"plugin:react/recommended",
+		// eslint-prettier-plugin
+		"plugin:prettier/recommended",
+		// eslint-config-prettier
+		"prettier",
+		"prettier/@typescript-eslint",
+		"plugin:jsx-a11y/recommended"
+	],
+	"parserOptions": {
+		"ecmaVesion": 2018,
+		"sourceType": "module"
+	},
+	"rules": {
+		// Javavascript
+		"arrow-parens": ["error", "as-needed"],
+		"consistent-return": ["error"],
+		// React
+		"react/display-name": "warn",
+		// TypeScript - ESLint
+		"@typescript-eslint/explicit-function-return-type": "off",
+		"@typescript-eslint/indent": "off",
+		"@typescript-eslint/no-empty-function": "off",
+		"@typescript-eslint/no-explicit-any": "off",
+		"@typescript-eslint/no-unused-vars": "warn",
+		// React hooks
+		"react-hooks/exhaustive-deps": "warn",
+		"react-hooks/rules-of-hooks": "error",
+		"react/require-default-props": "warn",
+		"react/self-closing-comp": [
+			"error",
+			{
+				"component": true,
+				"html": true
+			}
+		]
+	},
+	"plugins": ["react-hooks", "prettier"],
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	}
+}

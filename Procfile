@@ -1,0 +1,1 @@
+web: cd detaquito-api && npm run start:prod
