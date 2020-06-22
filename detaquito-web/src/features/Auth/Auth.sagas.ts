@@ -51,13 +51,15 @@ function* tryLogIn({ payload }: BaseAction) {
 			method: 'POST',
 			data: payload,
 		});
-		if (!response) {
-			// TODO --> Handle this globally adding general app level alert
-			return yield put(actions.loginFailure(serverNotResponding));
-		}
+
 		if (!data) {
-			return yield put(actions.loginFailure(response.data));
+			if (response?.data) {
+				return yield put(actions.registrationFailure(response.data));
+			}
+			// TODO --> Handle this globally adding general app level alert
+			return yield put(actions.registrationFailure(serverNotResponding));
 		}
+
 		return yield put(actions.loginSuccess(data));
 	} catch (e) {
 		return yield put(actions.loginFailure(e));
@@ -71,13 +73,15 @@ function* trySignUp({ payload }: BaseAction) {
 			method: 'POST',
 			data: payload,
 		});
-		if (!response) {
+
+		if (!data) {
+			if (response?.data) {
+				return yield put(actions.registrationFailure(response.data));
+			}
 			// TODO --> Handle this globally adding general app level alert
 			return yield put(actions.registrationFailure(serverNotResponding));
 		}
-		if (!data) {
-			return yield put(actions.registrationFailure(response.data));
-		}
+
 		return yield put(actions.registrationSuccess(data));
 	} catch (e) {
 		return yield put(actions.registrationFailure(e));
