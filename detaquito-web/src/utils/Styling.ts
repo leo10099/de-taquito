@@ -21,6 +21,13 @@ export const centeredText: CSSProperties = {
 	textAlign: 'center',
 };
 
+export const centeredOnFullHeight: CSSProperties = {
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+};
+
 // Styled-Components CSS Mixins
 
 export const CenterAbsolutely = () => css`

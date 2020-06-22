@@ -18,6 +18,9 @@ import { selectAccessToken, selectAccessTokenExpiry } from 'features/Auth/Auth.s
 // Types
 import { DecodedUserToken } from 'typings';
 
+// Styles
+import { centeredOnFullHeight } from 'utils';
+
 export const AuthGuard: React.FC = ({ children }) => {
 	// Hooks
 	const dispatch = useDispatch();
@@ -50,8 +53,14 @@ export const AuthGuard: React.FC = ({ children }) => {
 		}
 	}, aMinuteBeforeTokenExpiry ?? 60000000);
 
-	if (!accessToken) return <Loader />;
-	return <>{children}</>;
+	if (!accessToken)
+		return (
+			<div style={centeredOnFullHeight}>
+				<Loader />
+			</div>
+		);
+
+	return <>{children} </>;
 };
 
 AuthGuard.propTypes = { children: PropTypes.node.isRequired };

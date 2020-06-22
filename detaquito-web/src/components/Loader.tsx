@@ -76,6 +76,6 @@ export const Loader = ({ color, size, sizeUnit }: LoaderProps) => (
 
 Loader.defaultProps = {
 	size: 10,
-	color: '#E0E0E0',
+	color: '#BDBDBD',
 	sizeUnit: 'px',
 };
