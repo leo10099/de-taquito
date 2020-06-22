@@ -235,7 +235,7 @@ export const SignUp: React.FC = () => {
 			</Card>
 
 			<AlreadyRegistered>
-				¿Ya tienes una cuenta? <a href="/login">Ingresa.</a>
+				¿Ya tienes una cuenta? <a href="/session/login">Ingresa.</a>
 			</AlreadyRegistered>
 		</SignUpContainer>
 	);

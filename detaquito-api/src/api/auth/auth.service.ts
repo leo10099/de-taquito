@@ -1,5 +1,10 @@
 import { add, differenceInSeconds } from 'date-fns';
-import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  ConflictException,
+  HttpException,
+} from '@nestjs/common';
 
 // Services
 import { UserService } from '../user/user.service';
@@ -33,6 +38,10 @@ export class AuthService {
 
     if (!existingUser) {
       throw new UnauthorizedException();
+    }
+
+    if (!existingUser.secret && existingUser.googleId) {
+      throw new HttpException('User should authenticate using Google Sign-In', 400);
     }
 
     // We check if the given password is correct

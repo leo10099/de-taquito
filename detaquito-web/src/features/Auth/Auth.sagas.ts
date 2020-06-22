@@ -47,7 +47,7 @@ function* tryRefreshToken() {
 // Login
 function* tryLogIn({ payload }: BaseAction) {
 	try {
-		const { data, response } = yield Api('/local/login', {
+		const { data, response } = yield Api('auth/local/login', {
 			method: 'POST',
 			data: payload,
 		});
@@ -67,7 +67,7 @@ function* tryLogIn({ payload }: BaseAction) {
 // Registration
 function* trySignUp({ payload }: BaseAction) {
 	try {
-		const { data, response } = yield Api('/local/register', {
+		const { data, response } = yield Api('auth/local/register', {
 			method: 'POST',
 			data: payload,
 		});

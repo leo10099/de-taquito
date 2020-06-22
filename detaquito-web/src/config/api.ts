@@ -10,7 +10,7 @@ Api.interceptors.response.use(
 	async error => {
 		if (error.response?.status === 401) {
 			console.log(error.response);
-			if (window.location.pathname !== '/login') window.location.assign('/login');
+			if (window.location.pathname !== '/session/login') window.location.assign('/session/login');
 		}
 		return error;
 	}

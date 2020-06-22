@@ -56,6 +56,7 @@ export class UserService {
   }
 
   async verifyPassword(userPassword: string, passToVerify: string) {
+    console.log(userPassword);
     return await argon2.verify(userPassword, passToVerify);
   }
 }

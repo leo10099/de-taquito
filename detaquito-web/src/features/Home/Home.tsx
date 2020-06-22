@@ -7,7 +7,8 @@ import { HomeContainer } from './Home.Styles';
 export const Home: React.FC = () => {
 	return (
 		<HomeContainer>
-			<Link to="/session/signup">SIGN-UP</Link>
+			<Link to="/session/signup">REGISTRARSE</Link>
+			<Link to="/session/login">INGRESAR</Link>
 		</HomeContainer>
 	);
 };

@@ -19,7 +19,12 @@ import { Button, Card, Icon, Image, Input, Separator } from 'components';
 
 // Styles
 import { LogInContainer, LogInForm, NotRegistered } from './LogIn.Styles';
-import { centeredText, serverNotResponding } from 'utils';
+import {
+	centeredText,
+	incorrectLogInCredentials,
+	shouldLoginWithGoogle,
+	serverNotResponding,
+} from 'utils';
 
 export const LogIn: React.FC = () => {
 	// Hooks
@@ -39,7 +44,7 @@ export const LogIn: React.FC = () => {
 	} = useFormInput('');
 
 	// Handlers
-	const logInWithGoogleHandler = () => window.location.replace('/auth/google');
+	const logInWithGoogleHandler = () => window.location.replace('/api/auth/google');
 
 	const logInSubmitHandler = (
 		e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>
@@ -51,11 +56,14 @@ export const LogIn: React.FC = () => {
 
 	// Effects
 	useEffect(() => {
-		if (error?.message === 'Unauthorized') {
-			setPasswordError('E-mail o contraseña inválida. Intenta nuevamente.');
+		if (error?.message === incorrectLogInCredentials.message) {
+			setPasswordError(incorrectLogInCredentials.friendlyMessage);
 		}
 		if (error?.message === serverNotResponding.message) {
 			setPasswordError(serverNotResponding.message);
+		}
+		if (error?.message === shouldLoginWithGoogle.message) {
+			setPasswordError(shouldLoginWithGoogle.friendlyMessage);
 		}
 	}, [error, setPasswordError]);
 
@@ -117,12 +125,12 @@ export const LogIn: React.FC = () => {
 					</Button>
 				</LogInForm>
 
-				<Link to="/forgot" style={centeredText}>
+				<Link to="/session/forgot" style={centeredText}>
 					¿No recuerdas tu clave?
 				</Link>
 			</Card>
 			<NotRegistered>
-				¿No tienes una cuenta? <a href="/signup">Registrate.</a>
+				¿No tienes una cuenta? <a href="/session/signup">Registrate.</a>
 			</NotRegistered>
 		</LogInContainer>
 	);
