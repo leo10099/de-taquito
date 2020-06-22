@@ -11,8 +11,5 @@
   "engines": {
     "node": "10.x.x",
     "npm": "6.x.x"
-  },
-  "dependencies": {
-    "@hot-loader/react-dom": "^16.13.0"
   }
 }
