@@ -102,7 +102,8 @@ export const Label = styled.label.attrs(({ id }) => ({
 
 export const IconContainer = styled.span<IconContainerProps>`
 	display: inline-block;
-	top: ${({ hasError }) => (hasError ? '-42px' : '4px')};
+	position: relative;
+	top: 3px;
 `;
 
 const ErrorMessage = styled.p<ErrorMessageProps>`
