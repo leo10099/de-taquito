@@ -9,8 +9,8 @@ import {
   Res,
   Body,
 } from '@nestjs/common';
-import { ServerResponse, ServerOptions } from 'http';
-import { FastifyRequest, FastifyReply } from 'fastify';
+import { ServerResponse } from 'http';
+import { FastifyReply } from 'fastify';
 
 // Guards
 import { LocalAuthGuard } from './auth.local.guard';
@@ -29,6 +29,7 @@ import { User as UserEntity } from '../user/user.entity';
 
 // DTOs
 import { CreateUserDtoLocalStrategy } from '../user/dto/create.user.dto.local';
+import { RecoverPasswordRequestDto } from './dto/recover.password.request.dto';
 import { TokenAuthorizationPayload } from 'src/typings';
 
 @Controller('/auth')
@@ -95,5 +96,10 @@ export class AuthController {
   @Post('/refresh')
   refreshToken(@Req() req) {
     return this.authService.refreshToken(req.user);
+  }
+
+  @Post('/forgot/request')
+  recoverPasswordRequest(@Body() recoverPasswordRequestDto: RecoverPasswordRequestDto) {
+    return this.authService.recoverPasswordRequest(recoverPasswordRequestDto.email);
   }
 }

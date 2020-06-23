@@ -33,6 +33,10 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   public googleId?: string;
 
+  @Exclude({ toPlainOnly: true })
+  @Column({ type: 'varchar', nullable: true })
+  public forgotSecretToken?;
+
   constructor(partial: Partial<User>) {
     super();
     Object.assign(this, partial);

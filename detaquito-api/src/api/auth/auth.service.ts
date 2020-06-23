@@ -4,6 +4,8 @@ import {
   UnauthorizedException,
   ConflictException,
   HttpException,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 
 // Services
@@ -131,11 +133,24 @@ export class AuthService {
     }
   }
 
+  async recoverPasswordRequest(email?: string) {
+    const existingUser = await this.userService.findOneByEmail(email);
+    if (!existingUser) {
+      return new HttpException('Email not found', 400);
+    }
+
+    const forgotSecretToken = await this.jwtService.signAsync(email);
+    await this.userService.editUser(existingUser.id, { forgotSecretToken });
+
+    return true;
+  }
+
   async refreshToken(user: User) {
     return await this.logUserIn(user);
   }
 
   async emitToken(user: User, expiresIn: number): Promise<string> {
+    // TODO --> use async method
     return this.jwtService.sign(
       {
         email: user.email,
