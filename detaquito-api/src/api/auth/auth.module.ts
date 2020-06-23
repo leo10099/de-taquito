@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from '../user/user.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
+import { MailgunModule } from '../../services/Mailgun/Mailgun.module';
 
 // Components
 import { AuthService } from './auth.service';
@@ -12,6 +13,7 @@ import { AuthController } from './auth.controller';
 
 // Services
 import { ConfigService } from '@nestjs/config';
+import { MailgunService } from '../../services/Mailgun/Mailgun.service';
 
 // Passport
 import { LocalStrategy } from './auth.local.strategy';
@@ -33,6 +35,7 @@ import { JwtStrategy } from './auth.jwt.stategy';
       }),
       inject: [ConfigService],
     }),
+    MailgunModule,
   ],
   providers: [
     ConfigService,
@@ -41,6 +44,7 @@ import { JwtStrategy } from './auth.jwt.stategy';
     CookieStrategy,
     JwtStrategy,
     GoogleStrategy,
+    MailgunService,
   ],
   controllers: [AuthController],
 })

@@ -1,4 +1,5 @@
 export const Config = () => ({
+  HOST: process.env.HOST ?? 'http://localhost',
   PORT: process.env.PORT ?? 7777,
   IS_DEV: process.env.NODE_ENV === 'development',
   JTW_SECRET: process.env.JWT_TOKEN_SECRET,
@@ -16,6 +17,10 @@ export const Config = () => ({
     CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
     CALLBACK_URL: process.env.GOOGLE_CALLBACK_URL,
   },
+  MAILGUN: {
+    MAILGUN_API_KEY: process.env.MAILGUN_API_KEY,
+    MAILGUN_DOMAIN: process.env.MAILGUN_DOMAIN,
+  },
 });
 
 export enum MainConfig {
@@ -23,6 +28,7 @@ export enum MainConfig {
   JWT_ACCESS_TOKEN_EXPIRY = 'JWT_ACCESS_TOKEN_EXPIRY',
   JWT_REFRESH_TOKEN_EXPIRY = 'JWT_REFRESH_TOKEN_EXPIRY',
   PORT = 'PORT',
+  HOST = 'HOST',
   IS_DEV = 'IS_DEV',
 }
 
@@ -44,4 +50,9 @@ export enum RapidApiConfig {
   RAPID_API_BASE_URL = 'RAPID_API_BASE_URL',
   RAPID_API_HOST = 'RAPID_API_HOST',
   RAPID_API_KEY = 'RAPID_API_KEY',
+}
+
+export enum MailgunConfig {
+  MAILGUN_API_KEY = 'MAILGUN_API_KEY',
+  MAILGUN_DOMAIN = 'MAILGUN_DOMAIN',
 }

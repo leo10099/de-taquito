@@ -4,14 +4,13 @@ import {
   UnauthorizedException,
   ConflictException,
   HttpException,
-  HttpCode,
-  HttpStatus,
 } from '@nestjs/common';
 
 // Services
 import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { MailgunService } from '../../services/Mailgun/Mailgun.service';
 
 // Entities
 import { User } from '../user/user.entity';
@@ -32,6 +31,7 @@ export class AuthService {
     private userService: UserService,
     private jwtService: JwtService,
     private configService: ConfigService,
+    private mailgunService: MailgunService,
   ) {}
 
   async validateUser(email: string, secret: string): Promise<User> {
@@ -133,16 +133,22 @@ export class AuthService {
     }
   }
 
-  async recoverPasswordRequest(email?: string) {
+  async recoverPasswordRequest(email?: string): Promise<HttpException | void> {
     const existingUser = await this.userService.findOneByEmail(email);
     if (!existingUser) {
       return new HttpException('Email not found', 400);
     }
 
-    const forgotSecretToken = await this.jwtService.signAsync(email);
-    await this.userService.editUser(existingUser.id, { forgotSecretToken });
-
-    return true;
+    try {
+      // Generate recovery token and persist
+      const forgotSecretToken = await this.jwtService.signAsync(email);
+      await this.userService.editUser(existingUser.id, { forgotSecretToken });
+      // Send e-mail with recovery token
+      await this.mailgunService.sendEmailWithRecoverPasswordToken(email, forgotSecretToken);
+    } catch (e) {
+      // TODO --> Handle error
+      console.log(e);
+    }
   }
 
   async refreshToken(user: User) {

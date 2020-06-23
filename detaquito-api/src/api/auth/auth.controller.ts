@@ -8,6 +8,7 @@ import {
   Req,
   Res,
   Body,
+  Query,
 } from '@nestjs/common';
 import { ServerResponse } from 'http';
 import { FastifyReply } from 'fastify';
@@ -73,7 +74,6 @@ export class AuthController {
   @UseGuards(GoogleAuthGuard)
   @Get('/google')
   googleLogin() {
-    console.log('google flow...');
     // Initiates the Google OAuth2 login flow
   }
 
@@ -98,8 +98,16 @@ export class AuthController {
     return this.authService.refreshToken(req.user);
   }
 
-  @Post('/forgot/request')
-  recoverPasswordRequest(@Body() recoverPasswordRequestDto: RecoverPasswordRequestDto) {
+  @Get('/forgot')
+  async recoverPassword(
+    @Query('token') recoveryToken: string,
+    @Res() response: FastifyReply<ServerResponse>,
+  ) {
+    return response.redirect(302, `/session/forgot?token=${recoveryToken}`);
+  }
+
+  @Post('/forgot')
+  async recoverPasswordRequest(@Body() recoverPasswordRequestDto: RecoverPasswordRequestDto) {
     return this.authService.recoverPasswordRequest(recoverPasswordRequestDto.email);
   }
 }
