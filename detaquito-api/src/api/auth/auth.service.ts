@@ -103,7 +103,7 @@ export class AuthService {
   }
 
   async socialAuthentication(profile: any): Promise<User | boolean | void> {
-    const { provider, id, displayName, name } = profile;
+    const { provider, id, displayName } = profile;
     const { value: email } = profile.emails[0];
 
     if (provider === 'google') {
@@ -115,7 +115,6 @@ export class AuthService {
 
       /* If it exists and has a secret, it means user already registered with local
        strategy. Link Google ID to account and login */
-      // TODO --> Test this
       if (existingUser?.secret) {
         return await this.userService.editUser(existingUser.id, {
           googleId: id,
