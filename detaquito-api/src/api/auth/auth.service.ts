@@ -176,8 +176,7 @@ export class AuthService {
   }
 
   async emitToken(user: User, expiresIn: number): Promise<string> {
-    // TODO --> use async method
-    return this.jwtService.sign(
+    return await this.jwtService.signAsync(
       {
         email: user.email,
         avatar: user.avatarUrl,
