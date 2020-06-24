@@ -33,7 +33,6 @@ export class UserController {
     @Query('alias') alias: string,
     @Query('resetToken') passwordResetToken: string,
   ): Promise<boolean | User | NotFoundException> {
-    // TODO --> Refactor to always return a not found exception
     if (!email && !alias && !passwordResetToken) {
       return;
     }
@@ -50,9 +49,9 @@ export class UserController {
         forgotSecretToken: passwordResetToken,
       });
 
-      return foundUser ? foundUser : new NotFoundException();
+      if (foundUser) return foundUser;
     }
 
-    return false;
+    return new NotFoundException();
   }
 }
