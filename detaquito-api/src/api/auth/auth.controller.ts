@@ -1,14 +1,14 @@
 import {
+  Body,
   Controller,
   Get,
   Post,
+  Query,
+  Req,
+  Res,
   UseGuards,
   UsePipes,
   ValidationPipe,
-  Req,
-  Res,
-  Body,
-  Query,
 } from '@nestjs/common';
 import { ServerResponse } from 'http';
 import { FastifyReply } from 'fastify';
@@ -31,7 +31,10 @@ import { User as UserEntity } from '../user/user.entity';
 // DTOs
 import { CreateUserDtoLocalStrategy } from '../user/dto/create.user.dto.local';
 import { RecoverPasswordRequestDto } from './dto/recover.password.request.dto';
-import { TokenAuthorizationPayload } from 'src/typings';
+import { ReplaceForgottenPasswordtDto } from './dto/replace.password.dto';
+
+// Types
+import { TokenAuthorizationPayload } from '../../typings';
 
 @Controller('/auth')
 export class AuthController {
@@ -109,5 +112,13 @@ export class AuthController {
   @Post('/forgot')
   async recoverPasswordRequest(@Body() recoverPasswordRequestDto: RecoverPasswordRequestDto) {
     return this.authService.recoverPasswordRequest(recoverPasswordRequestDto.email);
+  }
+
+  @Post('/forgot/replace')
+  async replaceForgottenPassword(@Body() replacePasswordDto: ReplaceForgottenPasswordtDto) {
+    return await this.authService.replaceForgottenPassword(
+      replacePasswordDto.id,
+      replacePasswordDto.secret,
+    );
   }
 }

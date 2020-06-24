@@ -38,6 +38,15 @@ const authSlice = createSlice({
 			error: null,
 			loading: false,
 		} as StoreSliceAction,
+		passwordResetTokenValidation: {
+			error: null,
+			loading: false,
+			data: null,
+		} as StoreSliceAction,
+		passwordResetReplacement: {
+			error: null,
+			loading: false,
+		} as StoreSliceAction,
 	},
 	reducers: {
 		// Token management
@@ -103,7 +112,7 @@ const authSlice = createSlice({
 
 			return state;
 		},
-		// Reset Password
+		// Reset Password Request (Step One)
 		resetPasswordRequest: ({ passwordReset }, { payload }) => {
 			delete passwordReset.success;
 			passwordReset.loading = true;
@@ -112,9 +121,35 @@ const authSlice = createSlice({
 			passwordReset.loading = false;
 			passwordReset.error = payload;
 		},
-		resetPasswordSuccess: ({ passwordReset }, { payload }) => {
+		resetPasswordSuccess: ({ passwordReset }) => {
 			passwordReset.loading = false;
 			passwordReset.success = true;
+		},
+		// Reset Password Token Validation (Step Two)
+		passwordResetTokenValidationRequest: ({ passwordResetTokenValidation }, { payload }) => {
+			delete passwordResetTokenValidation.success;
+			passwordResetTokenValidation.loading = true;
+		},
+		passwordResetTokenValidationFailure: ({ passwordResetTokenValidation }, { payload }) => {
+			passwordResetTokenValidation.loading = false;
+			passwordResetTokenValidation.error = payload;
+		},
+		passwordResetTokenValidationSuccess: ({ passwordResetTokenValidation }, { payload }) => {
+			passwordResetTokenValidation.loading = false;
+			passwordResetTokenValidation.success = true;
+			passwordResetTokenValidation.data = payload;
+		},
+		passwordResetReplacementRequest: ({ passwordResetReplacement }, { payload }) => {
+			delete passwordResetReplacement.success;
+			passwordResetReplacement.loading = true;
+		},
+		passwordResetReplacementFailure: ({ passwordResetReplacement }, { payload }) => {
+			passwordResetReplacement.loading = false;
+			passwordResetReplacement.error = payload;
+		},
+		passwordResetReplacementSuccess: ({ passwordResetReplacement }) => {
+			passwordResetReplacement.loading = false;
+			passwordResetReplacement.success = true;
 		},
 	},
 });

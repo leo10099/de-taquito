@@ -4,6 +4,8 @@ import {
   UnauthorizedException,
   ConflictException,
   HttpException,
+  BadRequestException,
+  InternalServerErrorException,
 } from '@nestjs/common';
 
 // Services
@@ -23,7 +25,7 @@ import { UserErrors } from '../user/user.errors';
 
 // Typings
 import { MainConfig } from '../../config/configuration';
-import { TokenAuthorizationPayload } from '../../typings';
+import { TokenAuthorizationPayload, HashedPassword } from '../../typings';
 
 @Injectable()
 export class AuthService {
@@ -141,7 +143,7 @@ export class AuthService {
 
     try {
       // Generate recovery token and persist
-      const forgotSecretToken = await this.jwtService.signAsync(email);
+      const forgotSecretToken = await this.jwtService.signAsync(email + Date.now());
       await this.userService.editUser(existingUser.id, { forgotSecretToken });
       // Send e-mail with recovery token
       await this.mailgunService.sendEmailWithRecoverPasswordToken(email, forgotSecretToken);
@@ -151,6 +153,22 @@ export class AuthService {
       // TODO --> Handle error
       console.log(e);
     }
+  }
+
+  async replaceForgottenPassword(id: number, newPassword: string) {
+    // If secret present, hash password
+    const { hashedPassword: secret, salt }: HashedPassword = await this.userService.hashPassword(
+      newPassword,
+      32,
+    );
+
+    const updatedUser = await this.userService.editUser(id, {
+      secret,
+      salt,
+      forgotSecretToken: null,
+    });
+
+    return updatedUser ? '' : new InternalServerErrorException();
   }
 
   async refreshToken(user: User) {

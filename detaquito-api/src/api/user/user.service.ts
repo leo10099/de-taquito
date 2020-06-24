@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { randomBytes } from 'crypto';
 import * as argon2 from 'argon2';
 
@@ -15,7 +16,7 @@ import { HashedPassword, Salt } from '../../typings';
 
 @Injectable()
 export class UserService {
-  constructor(public userRepo: UserRepository) {}
+  constructor(@InjectRepository(UserRepository) private userRepo: UserRepository) {}
 
   async findOneByAttribute(filterCondition: { [key: string]: any }): Promise<User> {
     const user = await this.userRepo.findOne({
@@ -58,7 +59,7 @@ export class UserService {
 
   // Helpers
 
-  private async hashPassword(password: string, saltWith: number): Promise<HashedPassword> {
+  async hashPassword(password: string, saltWith: number): Promise<HashedPassword> {
     const salt: Salt = randomBytes(saltWith);
     const hashedPassword = await argon2.hash(password, { salt });
 
@@ -66,7 +67,6 @@ export class UserService {
   }
 
   async verifyPassword(userPassword: string, passToVerify: string) {
-    console.log(userPassword);
     return await argon2.verify(userPassword, passToVerify);
   }
 }

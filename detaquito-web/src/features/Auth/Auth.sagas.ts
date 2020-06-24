@@ -11,7 +11,7 @@ import Auth from './Auth.reducer';
 import { BaseAction } from 'typings';
 
 // Helpers
-import { serverNotResponding } from 'utils';
+import { invalidToken, serverNotResponding } from 'utils';
 
 const { actions } = Auth;
 
@@ -79,7 +79,7 @@ function* trySignUp({ payload }: BaseAction) {
 				return yield put(actions.registrationFailure(response.data));
 			}
 			// TODO --> Handle this globally adding general app level alert
-			return yield put(actions.registrationFailure(serverNotResponding));
+			return yield put(actions.registrationFailure(invalidToken));
 		}
 
 		return yield put(actions.registrationSuccess(data));
@@ -88,7 +88,7 @@ function* trySignUp({ payload }: BaseAction) {
 	}
 }
 
-// Reset Password
+// Reset Password Request (Step One)
 function* tryResetPassword({ payload }: BaseAction) {
 	try {
 		const { data, response } = yield Api('auth/forgot', {
@@ -104,9 +104,49 @@ function* tryResetPassword({ payload }: BaseAction) {
 			return yield put(actions.resetPasswordFailure(serverNotResponding));
 		}
 
-		return yield put(actions.resetPasswordSuccess(data));
+		return yield put(actions.resetPasswordSuccess());
 	} catch (e) {
 		return yield put(actions.resetPasswordFailure(e));
+	}
+}
+
+// Reset Password Token Validation (Step Two)
+function* checkResetToken({ payload }: BaseAction) {
+	try {
+		const { data, response } = yield Api(`/user/existing?resetToken=${payload}`);
+
+		if (!data) {
+			if (response?.data) {
+				return yield put(actions.passwordResetTokenValidationFailure(response.data));
+			}
+			// TODO --> Handle this globally adding general app level alert
+			return yield put(actions.passwordResetTokenValidationFailure(serverNotResponding));
+		}
+
+		if (data.response?.statusCode === 404) {
+			return yield put(actions.passwordResetTokenValidationFailure(invalidToken));
+		}
+
+		return yield put(actions.passwordResetTokenValidationSuccess(data));
+	} catch (e) {
+		return yield put(actions.passwordResetTokenValidationFailure(e));
+	}
+}
+
+function* replaceForgottenPassword({ payload }: BaseAction) {
+	try {
+		const { status, response } = yield Api(`/auth/forgot/replace`, {
+			method: 'POST',
+			data: payload,
+		});
+
+		if (status !== 201) {
+			return yield put(actions.passwordResetReplacementFailure(response?.data ?? ''));
+		}
+
+		return yield put(actions.passwordResetReplacementSuccess());
+	} catch (e) {
+		return yield put(actions.passwordResetReplacementFailure(e));
 	}
 }
 
@@ -115,4 +155,6 @@ export default [
 	takeLatest(actions.loginRequest, tryLogIn),
 	takeLatest(actions.registrationRequest, trySignUp),
 	takeLatest(actions.resetPasswordRequest, tryResetPassword),
+	takeLatest(actions.passwordResetTokenValidationRequest, checkResetToken),
+	takeLatest(actions.passwordResetReplacementRequest, replaceForgottenPassword),
 ];

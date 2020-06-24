@@ -25,7 +25,7 @@ import Auth from 'features/Auth/Auth.reducer';
 
 // Selectors
 import { selectRegistration } from 'features/Auth/Auth.selectors';
-import { serverNotResponding } from 'utils';
+import { serverNotResponding, passwordsDoNotMatch } from 'utils';
 
 export const SignUp: React.FC = () => {
 	// Hooks
@@ -99,7 +99,7 @@ export const SignUp: React.FC = () => {
 			// Perform pre-submit validations
 			if (shouldDisableSubmitButton) return false;
 			if (password !== passwordConfirmation) {
-				setPasswordError('La contraseñas que ingresaste no coinciden');
+				setPasswordError(passwordsDoNotMatch.message);
 				return false;
 			}
 
@@ -197,7 +197,7 @@ export const SignUp: React.FC = () => {
 						hasError={passwordHasError}
 						id="SignUp-Password"
 						label="Tu contraseña"
-						name="alias"
+						name="password"
 						onBlur={validatePassword}
 						onChange={setPassword}
 						placeholder="Contraseña"
@@ -211,7 +211,7 @@ export const SignUp: React.FC = () => {
 						hasError={passwordConfirmationHasError}
 						id="SignUp-PasswordConfirmation"
 						label="Confirma tu contraseña"
-						name="aliasConfirm"
+						name="passwordConfirm"
 						onBlur={validatePasswordConfirm}
 						onChange={setPasswordConfirmation}
 						placeholder="Contraseña"

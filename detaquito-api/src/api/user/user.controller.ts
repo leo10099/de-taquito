@@ -6,6 +6,7 @@ import {
   UseInterceptors,
   Query,
   ClassSerializerInterceptor,
+  NotFoundException,
 } from '@nestjs/common';
 
 // Guards
@@ -31,7 +32,8 @@ export class UserController {
     @Query('email') email: string,
     @Query('alias') alias: string,
     @Query('resetToken') passwordResetToken: string,
-  ): Promise<boolean | User> {
+  ): Promise<boolean | User | NotFoundException> {
+    // TODO --> Refactor to always return a not found exception
     if (!email && !alias && !passwordResetToken) {
       return;
     }
@@ -48,7 +50,7 @@ export class UserController {
         forgotSecretToken: passwordResetToken,
       });
 
-      return foundUser;
+      return foundUser ? foundUser : new NotFoundException();
     }
 
     return false;

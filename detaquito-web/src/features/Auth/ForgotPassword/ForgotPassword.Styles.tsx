@@ -9,7 +9,7 @@ export const ForgotPasswordContainer = styled.section.attrs(() => ({
 	margin-top: 4rem;
 `;
 
-export const ForgotPasswordStepContainer = styled.div.attrs(({ id }) => ({
+export const ForgotPasswordStepContainer = styled.section.attrs(({ id }) => ({
 	id,
 }))`
 	margin-top: 2rem;
