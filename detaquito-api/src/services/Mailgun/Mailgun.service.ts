@@ -1,7 +1,7 @@
 import { NodeMailgun } from 'ts-mailgun';
 
 // Services
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 // Templates
 import { buildPasswordRecoveryTemplate } from './templates';
@@ -12,10 +12,7 @@ import { MainConfig } from '../../config/configuration';
 
 @Injectable()
 export class MailgunService {
-  constructor(
-    @Inject('NodeMailgun') private mailgun: NodeMailgun,
-    @Inject('ConfigService') private configService: ConfigService,
-  ) {}
+  constructor(private mailgun: NodeMailgun, private configService: ConfigService) {}
 
   async sendEmailWithRecoverPasswordToken(email: string, token: string) {
     try {
