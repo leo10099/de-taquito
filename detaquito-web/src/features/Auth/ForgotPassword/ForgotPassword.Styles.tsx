@@ -9,7 +9,7 @@ export const ForgotPasswordContainer = styled.section.attrs(() => ({
 	margin-top: 4rem;
 `;
 
-export const ForgotPasswordStepContainer = styled.form.attrs(({ id }) => ({
+export const ForgotPasswordStepContainer = styled.div.attrs(({ id }) => ({
 	id,
 }))`
 	margin-top: 2rem;
@@ -22,7 +22,13 @@ export const ForgotPasswordForm = styled.form.attrs(({ id }) => ({
 	${FlexColumnCentered()};
 `;
 
+// NotRegistered
+export const NotRegistered = styled.span`
+	margin: 2rem auto;
+`;
+
 // Display Names
 ForgotPasswordContainer.displayName = 'ForgotPassword-Container';
 ForgotPasswordForm.displayName = 'ForgotPassword-ForgotPasswordForm';
 ForgotPasswordStepContainer.displayName = 'ForgotPassword-StepContainer';
+NotRegistered.displayName = 'ForgotPassword-NotRegistered';

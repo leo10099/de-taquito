@@ -73,7 +73,7 @@ export const LogIn: React.FC = () => {
 
 	return (
 		<LogInContainer>
-			<Image alt="De Taquito" margin="0 0 2rem 0" src={Logo} width="120px" />
+			<Image alt="De Taquito" margin="0 0 4rem 0" src={Logo} width="120px" />
 			<Card title="Inicia sesión" subTitle="para continuar">
 				<LogInForm>
 					<Button

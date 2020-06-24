@@ -54,10 +54,10 @@ function* tryLogIn({ payload }: BaseAction) {
 
 		if (!data) {
 			if (response?.data) {
-				return yield put(actions.registrationFailure(response.data));
+				return yield put(actions.loginFailure(response.data));
 			}
 			// TODO --> Handle this globally adding general app level alert
-			return yield put(actions.registrationFailure(serverNotResponding));
+			return yield put(actions.loginFailure(serverNotResponding));
 		}
 
 		return yield put(actions.loginSuccess(data));
@@ -88,8 +88,31 @@ function* trySignUp({ payload }: BaseAction) {
 	}
 }
 
+// Reset Password
+function* tryResetPassword({ payload }: BaseAction) {
+	try {
+		const { data, response } = yield Api('auth/forgot', {
+			method: 'POST',
+			data: payload,
+		});
+
+		if (!data) {
+			if (response?.data) {
+				return yield put(actions.resetPasswordFailure(response.data));
+			}
+			// TODO --> Handle this globally adding general app level alert
+			return yield put(actions.resetPasswordFailure(serverNotResponding));
+		}
+
+		return yield put(actions.resetPasswordSuccess(data));
+	} catch (e) {
+		return yield put(actions.resetPasswordFailure(e));
+	}
+}
+
 export default [
 	takeLatest(actions.tryRefreshToken, tryRefreshToken),
 	takeLatest(actions.loginRequest, tryLogIn),
 	takeLatest(actions.registrationRequest, trySignUp),
+	takeLatest(actions.resetPasswordRequest, tryResetPassword),
 ];

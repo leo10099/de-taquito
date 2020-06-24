@@ -149,7 +149,7 @@ export const SignUp: React.FC = () => {
 
 	return (
 		<SignUpContainer>
-			<Image alt="De Taquito" margin="0 0 2rem 0" src={Logo} width="120px" />
+			<Image alt="De Taquito" margin="0 0 4rem 0" src={Logo} width="120px" />
 			<Card subTitle="para poder jugar" title="Registrate">
 				<SignUpForm>
 					<Button

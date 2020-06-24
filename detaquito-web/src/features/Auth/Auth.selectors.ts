@@ -13,5 +13,8 @@ export const selectLogin = (state: RootState): StoreSliceAction => state.auth.lo
 // Registration
 export const selectRegistration = (state: RootState): StoreSliceAction => state.auth.registration;
 
+// Password reset
+export const selectPasswordReset = (state: RootState): StoreSliceAction => state.auth.passwordReset;
+
 // User Session
 export const selectCurrentUser = (state: RootState) => state.auth.user;

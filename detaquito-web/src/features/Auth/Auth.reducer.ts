@@ -34,6 +34,10 @@ const authSlice = createSlice({
 			email: '',
 			id: -1,
 		},
+		passwordReset: {
+			error: null,
+			loading: false,
+		} as StoreSliceAction,
 	},
 	reducers: {
 		// Token management
@@ -98,6 +102,19 @@ const authSlice = createSlice({
 			state.registration.success = true;
 
 			return state;
+		},
+		// Reset Password
+		resetPasswordRequest: ({ passwordReset }, { payload }) => {
+			delete passwordReset.success;
+			passwordReset.loading = true;
+		},
+		resetPasswordFailure: ({ passwordReset }, { payload }) => {
+			passwordReset.loading = false;
+			passwordReset.error = payload;
+		},
+		resetPasswordSuccess: ({ passwordReset }, { payload }) => {
+			passwordReset.loading = false;
+			passwordReset.success = true;
 		},
 	},
 });
