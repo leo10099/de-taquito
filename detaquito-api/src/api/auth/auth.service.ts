@@ -133,7 +133,7 @@ export class AuthService {
     }
   }
 
-  async recoverPasswordRequest(email?: string): Promise<HttpException | void> {
+  async recoverPasswordRequest(email?: string): Promise<HttpException | boolean> {
     const existingUser = await this.userService.findOneByEmail(email);
     if (!existingUser) {
       return new HttpException('Email not found', 400);
@@ -145,6 +145,8 @@ export class AuthService {
       await this.userService.editUser(existingUser.id, { forgotSecretToken });
       // Send e-mail with recovery token
       await this.mailgunService.sendEmailWithRecoverPasswordToken(email, forgotSecretToken);
+
+      return true;
     } catch (e) {
       // TODO --> Handle error
       console.log(e);
