@@ -26,16 +26,6 @@ export class UserRepository extends Repository<User> {
     return user;
   }
 
-  async findOneByAttribute(filterCondition: { [key: string]: any }): Promise<User> {
-    const user = await this.findOne({
-      where: {
-        ...filterCondition,
-      },
-    });
-
-    return user;
-  }
-
   async updateUser(userId: number, updatePayload: Partial<User>) {
     await this.update(userId, {
       ...updatePayload,
@@ -46,6 +36,6 @@ export class UserRepository extends Repository<User> {
       throw e.message;
     });
 
-    return await this.findOneByAttribute({ id: userId });
+    return await this.findOne({ id: userId });
   }
 }

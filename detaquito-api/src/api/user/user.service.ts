@@ -17,12 +17,22 @@ import { HashedPassword, Salt } from '../../typings';
 export class UserService {
   constructor(public userRepo: UserRepository) {}
 
+  async findOneByAttribute(filterCondition: { [key: string]: any }): Promise<User> {
+    const user = await this.userRepo.findOne({
+      where: {
+        ...filterCondition,
+      },
+    });
+
+    return user;
+  }
+
   async findOneByEmail(emailAddress: string): Promise<User> {
-    return await this.userRepo.findOneByAttribute({ email: emailAddress });
+    return await this.findOneByAttribute({ email: emailAddress });
   }
 
   async findOneByAlias(alias: string): Promise<User> {
-    return await this.userRepo.findOneByAttribute({ alias });
+    return await this.findOneByAttribute({ alias });
   }
 
   async createUserLocalStrategy(createUserDto: CreateUserDtoLocalStrategy): Promise<User> {
