@@ -21,19 +21,19 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   public fullName?: string;
 
-  @Exclude({ toPlainOnly: true })
+  @Exclude()
   @Column({ type: 'varchar', nullable: true })
   public salt?: string;
 
-  @Exclude({ toPlainOnly: true })
+  @Exclude()
   @Column({ nullable: true })
   public secret?: string;
 
-  @Exclude({ toPlainOnly: true })
+  @Exclude()
   @Column({ nullable: true })
   public googleId?: string;
 
-  @Exclude({ toPlainOnly: true })
+  @Exclude()
   @Column({ type: 'varchar', nullable: true })
   public forgotSecretToken?;
 
