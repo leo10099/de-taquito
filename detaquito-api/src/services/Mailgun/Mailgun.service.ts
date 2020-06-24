@@ -1,7 +1,7 @@
 import { NodeMailgun } from 'ts-mailgun';
 
 // Services
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 
 // Templates
 import { buildPasswordRecoveryTemplate } from './templates';
@@ -24,7 +24,7 @@ export class MailgunService {
 
       await this.mailgun.sendFromTemplate(email, template);
     } catch (e) {
-      return e;
+      throw new InternalServerErrorException(e);
     }
   }
 }

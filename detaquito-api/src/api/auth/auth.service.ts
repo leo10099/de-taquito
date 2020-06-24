@@ -4,8 +4,8 @@ import {
   UnauthorizedException,
   ConflictException,
   HttpException,
-  BadRequestException,
   InternalServerErrorException,
+  Logger,
 } from '@nestjs/common';
 
 // Services
@@ -150,8 +150,8 @@ export class AuthService {
 
       return true;
     } catch (e) {
-      // TODO --> Handle error
-      console.log(e);
+      Logger.error(e, 'Mailgun');
+      return new InternalServerErrorException();
     }
   }
 
