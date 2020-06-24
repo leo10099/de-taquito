@@ -151,7 +151,7 @@ export const Input: React.FC<InputProps> = React.memo(function Input({
 			<InputContainer isBlock={isBlock} width={width} windowWidth={windowWidth}>
 				<Label id={id}>{label}</Label>
 				<BaseInput
-					autoComplete={type === 'password' ? 'new-password' : 'none'}
+					autoComplete={type === 'password' ? 'none' : ''}
 					hasError={hasError}
 					id={id}
 					isBlock={isBlock}
@@ -189,7 +189,7 @@ export const Input: React.FC<InputProps> = React.memo(function Input({
 		<InputContainer isBlock={isBlock} width={width} windowWidth={windowWidth}>
 			<Label id={id}>{label}</Label>
 			<BaseInput
-				autoComplete={type === 'password' ? 'new-password' : 'none'}
+				autoComplete={type === 'password' ? 'none' : ''}
 				hasError={hasError}
 				id={id}
 				isBlock={isBlock}
