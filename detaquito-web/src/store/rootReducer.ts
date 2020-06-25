@@ -1,12 +1,14 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
 // Reducers
-import Layout from 'features/Layout/Layout.reducer';
 import Auth from 'features/Auth/Auth.reducer';
+import Connection from 'features/Connection/Connection.reducer';
+import Layout from 'features/Layout/Layout.reducer';
 
 const rootReducer = combineReducers({
-	layout: Layout.reducer,
 	auth: Auth.reducer,
+	connection: Connection.reducer,
+	layout: Layout.reducer,
 });
 
 export default rootReducer;

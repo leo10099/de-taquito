@@ -1,4 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
+import store from 'store';
+import Connection, { ConnectionStatus } from 'features/Connection/Connection.reducer';
 
 const Api: AxiosInstance = axios.create({
 	baseURL: process.env.REACT_APP_API_BASE_URL,
@@ -8,8 +10,14 @@ const Api: AxiosInstance = axios.create({
 Api.interceptors.response.use(
 	response => response,
 	async error => {
+		if (error.message === 'Network Error') {
+			const { connection } = store.getState();
+
+			if (connection.status !== ConnectionStatus.down)
+				store.dispatch(Connection.actions.setConnectionState(ConnectionStatus.down));
+		}
+
 		if (error.response?.status === 401) {
-			console.log(error.response);
 			if (window.location.pathname !== '/session/login') window.location.assign('/session/login');
 		}
 		return error;

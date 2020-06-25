@@ -56,7 +56,6 @@ function* tryLogIn({ payload }: BaseAction) {
 			if (response?.data) {
 				return yield put(actions.loginFailure(response.data));
 			}
-			// TODO --> Handle this globally adding general app level alert
 			return yield put(actions.loginFailure(serverNotResponding));
 		}
 
@@ -78,7 +77,6 @@ function* trySignUp({ payload }: BaseAction) {
 			if (response?.data) {
 				return yield put(actions.registrationFailure(response.data));
 			}
-			// TODO --> Handle this globally adding general app level alert
 			return yield put(actions.registrationFailure(invalidToken));
 		}
 
@@ -100,7 +98,6 @@ function* tryResetPassword({ payload }: BaseAction) {
 			if (response?.data) {
 				return yield put(actions.resetPasswordFailure(response.data));
 			}
-			// TODO --> Handle this globally adding general app level alert
 			return yield put(actions.resetPasswordFailure(serverNotResponding));
 		}
 
@@ -119,7 +116,6 @@ function* checkResetToken({ payload }: BaseAction) {
 			if (response?.data) {
 				return yield put(actions.passwordResetTokenValidationFailure(response.data));
 			}
-			// TODO --> Handle this globally adding general app level alert
 			return yield put(actions.passwordResetTokenValidationFailure(serverNotResponding));
 		}
 
