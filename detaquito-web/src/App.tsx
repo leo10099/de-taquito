@@ -26,6 +26,9 @@ import Layout from 'features/Layout/Layout.reducer';
 // Types
 import { Theme } from 'typings';
 
+// Components
+import { Alert } from 'components';
+
 const App = () => {
 	// Hooks
 	const dispatch = useDispatch();
@@ -45,6 +48,7 @@ const App = () => {
 		<ThemeProvider theme={theme}>
 			<ResetStyles />
 			<GlobalStyles />
+			<Alert />
 			<Router />
 		</ThemeProvider>
 	);
