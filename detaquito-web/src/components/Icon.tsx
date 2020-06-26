@@ -3,7 +3,14 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // Icons
-import { FaGoogle, FaGooglePlus } from 'react-icons/fa';
+import {
+	FaGoogle,
+	FaGooglePlus,
+	FaInfoCircle,
+	FaCheckCircle,
+	FaExclamationTriangle,
+	FaTimes,
+} from 'react-icons/fa';
 
 // Typings
 import { IconTypes } from 'typings';
@@ -15,26 +22,128 @@ import { gray } from 'theme/Theme';
 import { selectCurrentTheme } from 'features/Layout/Layout.selector';
 
 type IconProps = {
-	type: 'Google' | 'GooglePlus';
+	size?: number;
+	positionTop?: string;
+	positionRight?: string;
+	type: 'Google' | 'GooglePlus' | 'Exclamation' | 'Check' | 'Info' | 'Close';
+	isPointer?: boolean;
+	onClick?: () => void;
 };
 
-const IconStyles: CSSProperties = { position: 'relative', top: '2.2px', right: '8px' };
-
-export const Icon: React.FC<IconProps> = ({ type }: IconProps) => {
+export const Icon: React.FC<IconProps> = ({
+	isPointer,
+	onClick,
+	positionRight,
+	positionTop,
+	size,
+	type,
+}: IconProps) => {
 	//Selectors
 	const theme = useSelector(selectCurrentTheme);
 
 	// Helpers
-	const fill = useMemo(() => (theme === 'dark' ? gray.gray800 : gray.gray100), [theme]);
+	const fill = useMemo(() => (theme === 'dark' ? gray.gray700 : gray.gray100), [theme]);
+	const iconStyles = useMemo((): CSSProperties => {
+		return {
+			position: 'relative',
+			right: positionRight,
+			top: positionTop,
+		};
+	}, [positionRight, positionTop]);
 
 	if (type === 'GooglePlus') {
-		return <FaGooglePlus style={IconStyles} fill={fill} />;
+		return (
+			<FaGooglePlus
+				cursor={isPointer ? 'pointer' : 'default'}
+				fill={fill}
+				onClick={onClick}
+				size={size}
+				style={iconStyles}
+			/>
+		);
 	}
-	return <FaGoogle style={IconStyles} fill={fill} />;
+
+	if (type === 'Close') {
+		return (
+			<FaTimes
+				cursor={isPointer ? 'pointer' : 'default'}
+				fill={fill}
+				onClick={onClick}
+				size={size}
+				style={iconStyles}
+			/>
+		);
+	}
+
+	if (type === 'Check') {
+		return (
+			<FaCheckCircle
+				cursor={isPointer ? 'pointer' : 'default'}
+				fill={fill}
+				onClick={onClick}
+				size={size}
+				style={iconStyles}
+			/>
+		);
+	}
+
+	if (type === 'Exclamation') {
+		return (
+			<FaExclamationTriangle
+				cursor={isPointer ? 'pointer' : 'default'}
+				fill={fill}
+				onClick={onClick}
+				size={size}
+				style={iconStyles}
+			/>
+		);
+	}
+
+	if (type === 'Info') {
+		return (
+			<FaInfoCircle
+				cursor={isPointer ? 'pointer' : 'default'}
+				fill={fill}
+				onClick={onClick}
+				size={size}
+				style={iconStyles}
+			/>
+		);
+	}
+
+	return (
+		<FaGoogle
+			cursor={isPointer ? 'pointer' : 'default'}
+			fill={fill}
+			onClick={onClick}
+			size={size}
+			style={iconStyles}
+		/>
+	);
 };
 
 Icon.propTypes = {
-	type: PropTypes.oneOf([IconTypes.GOOGLE, IconTypes.GOOGLE_PLUS]).isRequired,
+	isPointer: PropTypes.bool,
+	onClick: PropTypes.func,
+	positionRight: PropTypes.string,
+	positionTop: PropTypes.string,
+	size: PropTypes.number,
+	type: PropTypes.oneOf([
+		IconTypes.GOOGLE,
+		IconTypes.GOOGLE_PLUS,
+		IconTypes.CHECK,
+		IconTypes.CLOSE,
+		IconTypes.EXCLAMATION,
+		IconTypes.INFO,
+	]).isRequired,
+};
+
+Icon.defaultProps = {
+	isPointer: false,
+	onClick: () => {},
+	positionRight: '0px',
+	positionTop: '0px',
+	size: 16,
 };
 
 Icon.displayName = 'Icon';

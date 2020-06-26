@@ -23,6 +23,9 @@ import Logo from 'assets/img/logo.png';
 // Auth Slice
 import Auth from 'features/Auth/Auth.reducer';
 
+// Notification Slice
+import Notification from 'features/Notification/Notification.reducer';
+
 // Selectors
 import { selectRegistration } from 'features/Auth/Auth.selectors';
 import { serverNotResponding, passwordsDoNotMatch } from 'utils';
@@ -147,6 +150,15 @@ export const SignUp: React.FC = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [error]);
 
+	useEffect(() => {
+		dispatch(
+			Notification.actions.openAlert({
+				text: 'Esta es una prueba con un texto corto',
+				type: 'error',
+			})
+		);
+	}, [dispatch]);
+
 	return (
 		<SignUpContainer>
 			<Image alt="De Taquito" margin="0 0 4rem 0" src={Logo} width="120px" />
@@ -159,7 +171,7 @@ export const SignUp: React.FC = () => {
 						variant="primary"
 					>
 						<>
-							<Icon type="Google" />
+							<Icon type="Google" positionRight="8px" positionTop="2.2px" />
 							Registrate con Google
 						</>
 					</Button>

@@ -83,7 +83,7 @@ export const LogIn: React.FC = () => {
 						variant="primary"
 					>
 						<>
-							<Icon type="Google" />
+							<Icon type="Google" positionRight="8px" positionTop="2.2px" />
 							Ingresa con Google
 						</>
 					</Button>
