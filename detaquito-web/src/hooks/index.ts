@@ -1,3 +1,4 @@
+export * from './useDebounce';
 export * from './useFormInput';
 export * from './useInterval';
 export * from './useLocalStorage';
