@@ -69,9 +69,9 @@ export const gray = {
 	gray300: '#BDBDBD',
 	gray400: '#9E9E9E',
 	gray500: '#757575',
-	gray600: '#292929',
-	gray700: '#252525',
-	gray800: '#232323',
+	gray600: '#404040',
+	gray700: '#353535',
+	gray800: '#303030',
 	gray900: '#1E1E1E',
 	gray950: '#121212',
 };
@@ -171,8 +171,8 @@ export interface ThemeInterface {
 
 export const dark: ThemeInterface = {
 	name: Theme.DARK,
-	error: error.error200,
-	success: success.success200,
+	error: error.error300,
+	success: success.success300,
 	primaryLight: primary.primary200,
 	primaryMain: primary.primary400,
 	primaryDark: primary.primary700,
@@ -209,8 +209,8 @@ export const dark: ThemeInterface = {
 
 export const light: ThemeInterface = {
 	name: Theme.LIGHT,
-	error: error.error700,
-	success: success.success700,
+	error: error.error500,
+	success: success.success500,
 	primaryLight: primary.primary300,
 	primaryMain: primary.primary500,
 	primaryDark: primary.primary800,
