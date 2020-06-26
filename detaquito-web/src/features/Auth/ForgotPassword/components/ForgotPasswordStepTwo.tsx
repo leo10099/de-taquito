@@ -19,7 +19,7 @@ import Notification from 'features/Notification/Notification.reducer';
 import { selectForgottenPasswordReplacement } from 'features/Auth/Auth.selectors';
 
 // Validation helpers
-import { passwordValidation } from 'features/Auth/SignUp/SignUp.Validations';
+import { passwordValidation } from 'features/Auth/Auth.validations';
 
 // Styles
 import { ForgotPasswordStepContainer, ForgotPasswordForm } from '../ForgotPassword.Styles';

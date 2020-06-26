@@ -29,7 +29,7 @@ import styled from 'styles';
 const domElement = document.getElementById('alert') as HTMLElement;
 
 // Config Options
-const notificationDuration = 5 * 1000;
+const notificationDuration = 200 * 1000;
 
 type AlertContainerProps = {
 	closeHandler: () => void;

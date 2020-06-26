@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useFormInput } from 'hooks';
 
 // Validation helpers
-import { emailValidation } from 'features/Auth/SignUp/SignUp.Validations';
+import { emailValidation } from 'features/Auth/Auth.validations';
 
 // Selectors
 import { selectPasswordReset } from 'features/Auth/Auth.selectors';

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import jsonwebtoken from 'jsonwebtoken';
 
 // Components
-import { Loader } from 'components/Loader';
+import { FullScreenSpinner } from 'components';
 
 // Hooks
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,9 +17,6 @@ import { selectAccessToken, selectAccessTokenExpiry } from 'features/Auth/Auth.s
 
 // Types
 import { DecodedUserToken } from 'typings';
-
-// Styles
-import { centeredOnFullHeight } from 'utils';
 
 export const AuthGuard: React.FC = ({ children }) => {
 	// Hooks
@@ -53,12 +50,7 @@ export const AuthGuard: React.FC = ({ children }) => {
 		}
 	}, aMinuteBeforeTokenExpiry ?? 60000000);
 
-	if (!accessToken)
-		return (
-			<div style={centeredOnFullHeight}>
-				<Loader />
-			</div>
-		);
+	if (!accessToken) return <FullScreenSpinner />;
 
 	return <>{children} </>;
 };

@@ -11,7 +11,7 @@ import { ForgotPasswordContainer, NotRegistered } from './ForgotPassword.Styles'
 import Logo from 'assets/img/logo.png';
 
 // Common Components
-import { Card, Image } from 'components';
+import { Card, Image, FullScreenSpinner } from 'components';
 
 // Components
 import { ForgotPasswordStepOne } from './components/ForgotPasswordStepOne';
@@ -35,8 +35,7 @@ export const ForgotPassword: React.FC = () => {
 	const [queryString] = useSearchParams();
 	const token = queryString.get('token');
 	const dispatch = useDispatch();
-	// TODO --> Add full screen loader while loading
-	const { data: userData, error } = useSelector(selectPasswordTokenValidation);
+	const { data: userData, error, loading } = useSelector(selectPasswordTokenValidation);
 
 	useEffect(() => {
 		if (token) {
@@ -53,6 +52,7 @@ export const ForgotPassword: React.FC = () => {
 
 	return (
 		<ForgotPasswordContainer>
+			{loading && <FullScreenSpinner />}
 			<Image alt="De Taquito" margin="0 0 4rem 0" src={Logo} width="120px" />
 			<Card title="Tu Cuenta" subTitle="Genera una nueva clave">
 				{currentStep === 1 && <ForgotPasswordStepOne />}

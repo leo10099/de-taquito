@@ -12,7 +12,11 @@ import { Button, Card, Icon, Image, Input, Separator } from 'components';
 import { AlreadyRegistered, SignUpForm, SignUpContainer } from './SignUp.Styles';
 
 // Validation helpers
-import { aliasValidation, emailValidation, passwordValidation } from './SignUp.Validations';
+import {
+	aliasValidation,
+	emailValidation,
+	passwordValidation,
+} from 'features/Auth/Auth.validations';
 
 // Error messages
 import { conflictingAlias, conflictingEmail } from 'features/Auth/Auth.errors';

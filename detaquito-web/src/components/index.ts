@@ -1,6 +1,7 @@
 export * from './Alert';
 export * from './Button';
 export * from './Card';
+export * from './FullScreenSpinner';
 export * from './Icon';
 export * from './Image';
 export * from './Input';
