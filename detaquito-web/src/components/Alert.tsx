@@ -28,6 +28,9 @@ import styled from 'styles';
 // Element to mount the alert on
 const domElement = document.getElementById('alert') as HTMLElement;
 
+// Config Options
+const notificationDuration = 5 * 1000;
+
 type AlertContainerProps = {
 	closeHandler: () => void;
 	isOpen: boolean;
@@ -72,10 +75,13 @@ const ErrorAlert = styled(BaseBox)`
 
 const Content = styled.div<BoxProps>`
 	display: flex;
-	justify-content: space-space-between;
+	justify-content: center;
+	font-size: 1.5rem;
+	align-items: center;
+	line-break: normal;
 	margin: 0.5rem 1rem;
+	max-width: ${({ width }) => (width < 768 ? '300px' : '500px')};
 	text-align: center;
-	max-width: ${({ width }) => (width < 768 ? '300px' : '400px')};
 `;
 
 const Container: React.FC<AlertContainerProps> = ({ closeHandler, isOpen, text, type, width }) => {
@@ -85,7 +91,7 @@ const Container: React.FC<AlertContainerProps> = ({ closeHandler, isOpen, text, 
 		return (
 			<ErrorAlert width={width}>
 				<Content width={width}>
-					<Icon type="Exclamation" size={24} positionRight="1rem" positionTop="0px" />
+					<Icon type="Exclamation" size={24} positionRight="1rem" />
 					{text}
 				</Content>
 				<Icon
@@ -104,7 +110,7 @@ const Container: React.FC<AlertContainerProps> = ({ closeHandler, isOpen, text, 
 		return (
 			<SuccessAlert width={width}>
 				<Content width={width}>
-					<Icon type="Check" size={24} positionRight="1rem" positionTop="0px" />
+					<Icon type="Check" size={24} positionRight="1rem" />
 					{text}
 				</Content>
 				<Icon
@@ -119,28 +125,12 @@ const Container: React.FC<AlertContainerProps> = ({ closeHandler, isOpen, text, 
 		);
 	}
 
-	if (type === AlertType.info) {
-		return (
-			<InfoAlert width={width}>
-				<Content width={width}>
-					<Icon type="Info" size={24} positionRight="1rem" positionTop="0px" />
-					{text}
-				</Content>
-				<Icon
-					isPointer
-					onClick={closeHandler}
-					positionRight="0px"
-					positionTop="0px"
-					size={20}
-					type="Close"
-				/>
-			</InfoAlert>
-		);
-	}
-
 	return (
 		<InfoAlert width={width}>
-			<Content width={width}>{text}</Content>
+			<Content width={width}>
+				<Icon type="Info" size={24} positionRight="1rem" />
+				{text}
+			</Content>
 			<Icon
 				isPointer
 				onClick={closeHandler}
@@ -159,7 +149,7 @@ export const Alert: React.FC = () => {
 	const width = useWindowWidth();
 
 	// Selectors
-	const type = useSelector(selectNotificationType) as AlertContainerProps['type'];
+	const type = (useSelector(selectNotificationType) as AlertContainerProps['type']) || 'info';
 	const text = useSelector(selectNotificationText);
 	const isOpen = useSelector(selectNotificationStatus);
 
@@ -171,7 +161,7 @@ export const Alert: React.FC = () => {
 		if (isOpen) {
 			const timeOut = setTimeout(() => {
 				dispatch(Notification.actions.closeAlert());
-			}, 15000);
+			}, notificationDuration);
 			return () => clearTimeout(timeOut);
 		}
 		return () => {};

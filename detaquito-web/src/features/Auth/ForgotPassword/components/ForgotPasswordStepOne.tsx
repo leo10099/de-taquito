@@ -19,6 +19,9 @@ import { selectPasswordReset } from 'features/Auth/Auth.selectors';
 // Auth Slice
 import Auth from 'features/Auth/Auth.reducer';
 
+// Notification Slice
+import Notification from 'features/Notification/Notification.reducer';
+
 // Helpers
 import { serverNotResponding, emailNotFound } from 'utils';
 
@@ -60,10 +63,14 @@ export const ForgotPasswordStepOne: React.FC = () => {
 	useEffect(() => {
 		if (success) {
 			setEmailError('');
-			console.log('success', success);
-			// TODO --> Add global notification to suggest user to check inbox
+			dispatch(
+				Notification.actions.openAlert({
+					type: 'success',
+					text: 'Te enviamos un enlace a tu correo para generar una nueva contraseña.',
+				})
+			);
 		}
-	}, [success, setEmailError]);
+	}, [success, setEmailError, dispatch]);
 
 	return (
 		<ForgotPasswordStepContainer id="ForgotPasswordStepOne-Container">

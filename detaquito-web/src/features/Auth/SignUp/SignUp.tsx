@@ -128,12 +128,20 @@ export const SignUp: React.FC = () => {
 	);
 
 	//Effects
+
 	// Handle successful registration
 	useEffect(() => {
 		if (createdUser) {
+			dispatch(
+				Notification.actions.openAlert({
+					text: 'Te registraste correctamente. ¡Éxitos!',
+					type: 'success',
+				})
+			);
+
 			navigate('/app/dashboard');
 		}
-	}, [createdUser, navigate]);
+	}, [createdUser, dispatch, navigate]);
 
 	// Handle unsuccesful registration
 	useEffect(() => {
@@ -149,15 +157,6 @@ export const SignUp: React.FC = () => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [error]);
-
-	useEffect(() => {
-		dispatch(
-			Notification.actions.openAlert({
-				text: 'Esta es una prueba con un texto corto',
-				type: 'error',
-			})
-		);
-	}, [dispatch]);
 
 	return (
 		<SignUpContainer>

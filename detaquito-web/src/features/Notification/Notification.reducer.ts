@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+type NotificationPayload = {
+	text: string;
+	type: 'error' | 'info' | 'success';
+};
+
 export default createSlice({
 	name: 'notification',
 	initialState: {
@@ -9,7 +14,7 @@ export default createSlice({
 		isOpen: false,
 	},
 	reducers: {
-		openAlert: (state, { payload }: PayloadAction<any>) => {
+		openAlert: (state, { payload }: PayloadAction<NotificationPayload>) => {
 			state.alertText = payload.text;
 			state.alertType = payload.type;
 			state.isOpen = true;

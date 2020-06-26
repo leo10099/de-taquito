@@ -9,8 +9,11 @@ import { useNavigate } from 'react-router-dom';
 // Components
 import { Button, Input } from 'components';
 
-// AuthSlice
+// Auth Slice
 import Auth from 'features/Auth/Auth.reducer';
+
+// Notification Slice
+import Notification from 'features/Notification/Notification.reducer';
 
 // Selectors
 import { selectForgottenPasswordReplacement } from 'features/Auth/Auth.selectors';
@@ -22,7 +25,7 @@ import { passwordValidation } from 'features/Auth/SignUp/SignUp.Validations';
 import { ForgotPasswordStepContainer, ForgotPasswordForm } from '../ForgotPassword.Styles';
 
 // Helpers
-import { passwordsDoNotMatch } from 'utils';
+import { passwordsDoNotMatch, unkownErrorOnAction } from 'utils';
 
 type ForgotPasswordStepTwoProps = {
 	hasInvalidToken: boolean;
@@ -82,11 +85,15 @@ export const ForgotPasswordStepTwo: React.FC<ForgotPasswordStepTwoProps> = ({
 	};
 
 	useEffect(() => {
-		// TODO -> Use global error alert
 		if (error) {
-			console.log(error);
+			dispatch(
+				Notification.actions.openAlert({
+					type: 'error',
+					text: unkownErrorOnAction,
+				})
+			);
 		}
-	}, [error]);
+	}, [dispatch, error]);
 
 	useEffect(() => {
 		if (success) {

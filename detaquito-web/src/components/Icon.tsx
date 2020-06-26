@@ -22,21 +22,25 @@ import { gray } from 'theme/Theme';
 import { selectCurrentTheme } from 'features/Layout/Layout.selector';
 
 type IconProps = {
-	size?: number;
-	positionTop?: string;
-	positionRight?: string;
-	type: 'Google' | 'GooglePlus' | 'Exclamation' | 'Check' | 'Info' | 'Close';
+	height?: string;
 	isPointer?: boolean;
 	onClick?: () => void;
+	positionRight?: string;
+	positionTop?: string;
+	size?: number;
+	type: 'Google' | 'GooglePlus' | 'Exclamation' | 'Check' | 'Info' | 'Close';
+	width?: string;
 };
 
 export const Icon: React.FC<IconProps> = ({
 	isPointer,
+	height,
 	onClick,
 	positionRight,
 	positionTop,
 	size,
 	type,
+	width,
 }: IconProps) => {
 	//Selectors
 	const theme = useSelector(selectCurrentTheme);
@@ -45,11 +49,13 @@ export const Icon: React.FC<IconProps> = ({
 	const fill = useMemo(() => (theme === 'dark' ? gray.gray700 : gray.gray100), [theme]);
 	const iconStyles = useMemo((): CSSProperties => {
 		return {
+			width: width,
 			position: 'relative',
 			right: positionRight,
 			top: positionTop,
+			height: height,
 		};
-	}, [positionRight, positionTop]);
+	}, [height, positionRight, positionTop, width]);
 
 	if (type === 'GooglePlus') {
 		return (
@@ -123,6 +129,7 @@ export const Icon: React.FC<IconProps> = ({
 };
 
 Icon.propTypes = {
+	height: PropTypes.string,
 	isPointer: PropTypes.bool,
 	onClick: PropTypes.func,
 	positionRight: PropTypes.string,
@@ -136,14 +143,17 @@ Icon.propTypes = {
 		IconTypes.EXCLAMATION,
 		IconTypes.INFO,
 	]).isRequired,
+	width: PropTypes.string,
 };
 
 Icon.defaultProps = {
+	height: 'auto',
 	isPointer: false,
 	onClick: () => {},
 	positionRight: '0px',
 	positionTop: '0px',
 	size: 16,
+	width: 'auto',
 };
 
 Icon.displayName = 'Icon';

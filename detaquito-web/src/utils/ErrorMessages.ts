@@ -6,6 +6,8 @@ export const serverNotResponding = {
 	message: 'Error desconocido al intentar enviar los datos.',
 };
 
+export const unkownErrorOnAction = 'Error inesperado. Intenta nuevamente';
+
 // Auth
 export const shouldLoginWithGoogle = {
 	message: 'User should authenticate using Google Sign-In',
