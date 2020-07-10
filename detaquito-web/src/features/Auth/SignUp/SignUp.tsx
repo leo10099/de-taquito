@@ -20,6 +20,7 @@ import {
 
 // Error messages
 import { conflictingAlias, conflictingEmail } from 'features/Auth/Auth.errors';
+import { serverNotResponding, passwordsDoNotMatch } from 'utils';
 
 // Assets
 import Logo from 'assets/img/logo.png';
@@ -32,7 +33,6 @@ import Notification from 'features/Notification/Notification.reducer';
 
 // Selectors
 import { selectRegistration } from 'features/Auth/Auth.selectors';
-import { serverNotResponding, passwordsDoNotMatch } from 'utils';
 
 export const SignUp: React.FC = () => {
 	// Hooks
