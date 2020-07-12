@@ -36,12 +36,14 @@ function* tryRefreshToken() {
 
 	const accessTokenExpiry = accessTokenExpiryInSeconds * 1000;
 
-	return yield put(
+	yield put(
 		actions.setAccessToken({
 			accessToken,
 			accessTokenExpiry,
 		})
 	);
+
+	return yield put(actions.setUserInfoFromCookie(response.data));
 }
 
 // Login

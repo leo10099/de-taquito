@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import jsonwebtoken from 'jsonwebtoken';
 
 // Components
 import { FullScreenSpinner } from 'components';
@@ -13,18 +12,15 @@ import { useInterval } from 'hooks';
 import Auth from 'features/Auth/Auth.reducer';
 
 // Selectors
-import { selectAccessToken, selectAccessTokenExpiry } from 'features/Auth/Auth.selectors';
-
-// Types
-import { DecodedUserToken } from 'typings';
+import { selectAccessTokenExpiry, selectCurrentUser } from 'features/Auth/Auth.selectors';
 
 export const AuthGuard: React.FC = ({ children }) => {
 	// Hooks
 	const dispatch = useDispatch();
 
 	// Selectors
-	const accessToken = useSelector(selectAccessToken);
 	const accessTokenExpiry = useSelector(selectAccessTokenExpiry);
+	const currentUser = useSelector(selectCurrentUser);
 
 	// Helpers
 	const aMinuteBeforeTokenExpiry = useMemo(
@@ -34,13 +30,10 @@ export const AuthGuard: React.FC = ({ children }) => {
 
 	// Effects
 	useEffect(() => {
-		if (accessToken) {
-			const userInfo = jsonwebtoken.decode(accessToken) as DecodedUserToken;
-			dispatch(Auth.actions.setUserInfo(userInfo));
-		} else {
+		if (!currentUser.id) {
 			dispatch(Auth.actions.tryRefreshToken());
 		}
-	}, [dispatch, accessToken]);
+	}, [dispatch, currentUser.id]);
 
 	useInterval(() => {
 		console.log('started interval...');
@@ -50,7 +43,7 @@ export const AuthGuard: React.FC = ({ children }) => {
 		}
 	}, aMinuteBeforeTokenExpiry ?? 60000000);
 
-	if (!accessToken) return <FullScreenSpinner />;
+	if (!currentUser.id) return <FullScreenSpinner />;
 
 	return <>{children} </>;
 };

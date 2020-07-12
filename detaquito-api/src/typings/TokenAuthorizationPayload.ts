@@ -4,4 +4,8 @@ export interface TokenAuthorizationPayload {
   cookieExpiry: number;
   accessTokenExpiryInSeconds: number;
   refreshTokenExpiryInSeconds: number;
+  id: number;
+  alias: string;
+  email: string;
+  avatar: string;
 }

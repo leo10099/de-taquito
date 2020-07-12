@@ -103,6 +103,10 @@ export class AuthService {
       cookieExpiry,
       accessTokenExpiryInSeconds,
       refreshTokenExpiryInSeconds,
+      id: user.id,
+      alias: user.alias,
+      avatar: user.avatarUrl,
+      email: user.email,
     } as TokenAuthorizationPayload;
   }
 

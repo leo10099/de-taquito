@@ -69,8 +69,10 @@ export class AuthController {
     return response.send({
       accessToken: tokenPayload.accessToken,
       accessTokenExpiry: tokenPayload.accessTokenExpiryInSeconds,
-      refreshToken: tokenPayload.refreshToken,
-      refreshTokenExpiry: tokenPayload.refreshTokenExpiryInSeconds,
+      id: user.id,
+      alias: user.alias,
+      avatar: user.avatarUrl,
+      email: user.email,
     });
   }
 

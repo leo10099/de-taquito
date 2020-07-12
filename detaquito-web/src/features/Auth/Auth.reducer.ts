@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// JWT
-import { decode } from 'jsonwebtoken';
-
 // Typings
-import { StoreSliceAction, DecodedUserToken } from 'typings';
+import { StoreSliceAction, SuccessfulAuthenticationPayload } from 'typings';
 
 // Action Types
 export type SetAccessTokenPayload = { accessToken: string; accessTokenExpiry?: number };
@@ -32,7 +29,7 @@ const authSlice = createSlice({
 			alias: '',
 			avatar: '',
 			email: '',
-			id: -1,
+			id: 0,
 		},
 		passwordReset: {
 			error: null,
@@ -56,14 +53,12 @@ const authSlice = createSlice({
 			state.token.accessTokenExpiry = payload.accessTokenExpiry;
 			return state;
 		},
-		// User Session
-		setUserInfo: (state, { payload }) => {
-			const { alias, avatar, email, sub }: DecodedUserToken = payload;
-
-			state.user.id = parseInt(sub);
-			state.user.alias = alias;
-			state.user.avatar = avatar;
-			state.user.email = email;
+		//	User Session
+		setUserInfoFromCookie: (state, { payload }) => {
+			state.user.alias = payload.alias;
+			state.user.avatar = payload.avatar;
+			state.user.email = payload.email;
+			state.user.id = payload.id;
 			return state;
 		},
 		// Login
@@ -76,11 +71,10 @@ const authSlice = createSlice({
 			login.error = payload;
 		},
 		loginSuccess: (state, { payload }) => {
-			const decodedToken = decode(payload.accessToken) as DecodedUserToken;
-			state.user.alias = decodedToken.alias;
-			state.user.avatar = decodedToken.avatar;
-			state.user.email = decodedToken.email;
-			state.user.id = parseInt(decodedToken.sub);
+			state.user.alias = payload.alias;
+			state.user.avatar = payload.avatar;
+			state.user.email = payload.email;
+			state.user.id = payload.id;
 
 			// state.token.accessToken = payload.accessToken;
 			// state.token.accessTokenExpiry = payload.accessTokenExpiry;
@@ -97,12 +91,11 @@ const authSlice = createSlice({
 			registration.loading = false;
 			registration.error = payload;
 		},
-		registrationSuccess: (state, { payload }) => {
-			const decodedToken = decode(payload.accessToken) as DecodedUserToken;
-			state.user.alias = decodedToken.alias;
-			state.user.avatar = decodedToken.avatar;
-			state.user.email = decodedToken.email;
-			state.user.id = parseInt(decodedToken.sub);
+		registrationSuccess: (state, { payload }: PayloadAction<SuccessfulAuthenticationPayload>) => {
+			state.user.alias = payload.alias;
+			state.user.avatar = payload.avatar;
+			state.user.email = payload.email;
+			state.user.id = payload.id;
 
 			// state.token.accessToken = payload.accessToken;
 			// state.token.accessTokenExpiry = payload.accessTokenExpiry;

@@ -19,11 +19,11 @@ export interface Validation {
 	errorMsg: string;
 }
 
-export interface DecodedUserToken {
+export interface SuccessfulAuthenticationPayload {
+	id: number;
 	alias: string;
 	avatar: string;
 	email: string;
-	exp: number;
-	iat: number;
-	sub: string;
+	accessToken: string;
+	acessTokenExpiry: string;
 }
