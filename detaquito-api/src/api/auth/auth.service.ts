@@ -111,8 +111,9 @@ export class AuthService {
   }
 
   async socialAuthentication(profile: any): Promise<User | boolean | void> {
-    const { provider, id, displayName } = profile;
+    const { provider, id, displayName, photos } = profile;
     const { value: email } = profile.emails[0];
+    const avatar = photos[0] && photos[0].value;
 
     if (provider === 'google') {
       // Check if user exists in database
@@ -125,6 +126,7 @@ export class AuthService {
        strategy. Link Google ID to account and login */
       if (existingUser?.secret) {
         return await this.userService.editUser(existingUser.id, {
+          avatarUrl: avatar,
           googleId: id,
           alias: displayName,
         });
@@ -132,6 +134,7 @@ export class AuthService {
 
       // User is brand-new, create in database
       return await this.userService.createUserSocialStrategy({
+        avatarUrl: avatar,
         email,
         googleId: id,
         alias: displayName,

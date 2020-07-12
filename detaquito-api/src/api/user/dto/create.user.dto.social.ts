@@ -10,6 +10,9 @@ export class CreateUserDtoSocialStrategy {
   @MaxLength(50)
   fullName?: string;
 
+  @MaxLength(50)
+  avatarUrl?: string;
+
   @IsNotEmpty()
   @IsString()
   googleId: string;
