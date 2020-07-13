@@ -138,7 +138,7 @@ export const SignUp: React.FC = () => {
 		if (createdUser) {
 			dispatch(
 				Notification.actions.openAlert({
-					text: 'Te registraste correctamente. ¡Éxitos!',
+					text: 'Te registraste correctamente',
 					type: 'success',
 				})
 			);
