@@ -66,6 +66,7 @@ export class AuthService {
       // Check if user is registered with social OAuth provider
       if (existingUser.googleId) {
         // Already registered with Google. Update user to allow local authentication
+        // TODO --> Redirect user to dashboard with explaining message
         return await this.userService.editUser(existingUser.id, localRegisterDto);
       }
       // User already registered, throw error

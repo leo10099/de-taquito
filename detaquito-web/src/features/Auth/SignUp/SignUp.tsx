@@ -147,7 +147,7 @@ export const SignUp: React.FC = () => {
 		}
 	}, [createdUser, dispatch, navigate]);
 
-	// Handle unsuccesful registration
+	// Handle unsuccessful registration
 	useEffect(() => {
 		switch (error?.message) {
 			case conflictingEmail.message:
