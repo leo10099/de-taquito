@@ -97,6 +97,12 @@ export class AuthController {
     return response.redirect(302, '/app/dashboard');
   }
 
+  @Post('/google/mobile')
+  async googleMobileAuthentication(@Body() body): Promise<TokenAuthorizationPayload> {
+    const user = (await this.authService.socialAuthentication(body)) as UserEntity;
+    return await this.authService.logUserIn(user);
+  }
+
   @UseGuards(CookieGuard)
   @Post('/refresh')
   refreshToken(@Req() req) {
