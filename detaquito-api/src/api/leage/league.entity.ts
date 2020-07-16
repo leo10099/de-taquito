@@ -13,10 +13,10 @@ export class League extends BaseEntity {
   @Column({ type: 'varchar', length: '100', unique: true })
   public name: string;
 
-  @Column({ type: 'varchar', length: '100' })
-  public countryCode: string;
+  @Column({ type: 'varchar', length: '50' })
+  public country: string;
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: 'varchar', nullable: true, length: '100' })
   public logoUrl?: string;
 
   @Column({ type: 'jsonb', nullable: true })
