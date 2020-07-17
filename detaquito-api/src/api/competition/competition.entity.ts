@@ -1,5 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, BaseEntity, OneToMany } from 'typeorm';
 
+// Entities
+import { Club } from '../club/club.entity';
 export interface CompetitionExtServiceData {
   extSeviceName: 'Api-Football';
   id: number;
@@ -21,4 +23,10 @@ export class Competition extends BaseEntity {
 
   @Column({ type: 'jsonb', nullable: true })
   public extService?: CompetitionExtServiceData;
+
+  @OneToMany(
+    () => Club,
+    club => club.competition,
+  )
+  clubs: Club[];
 }

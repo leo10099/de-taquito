@@ -1,4 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, BaseEntity, ManyToOne } from 'typeorm';
+
+// Entities
+import { Competition } from '../competition/competition.entity';
 
 export interface ClubExtServiceData {
   extSeviceName: 'Api-Football';
@@ -18,4 +21,10 @@ export class Club extends BaseEntity {
 
   @Column({ type: 'jsonb', nullable: true })
   public extService?: ClubExtServiceData;
+
+  @ManyToOne(
+    () => Competition,
+    competition => competition.clubs,
+  )
+  competition: Competition;
 }
