@@ -16,22 +16,22 @@ export class ApiFootballService {
   }
 
   async getLeague(id: string) {
-    const { data } = await this.httpService.get(`/competitions/competition/${id}`).toPromise();
+    const { data } = await this.httpService.get(`/leagues/league/${id}`).toPromise();
     return data.api;
   }
 
   async getSeason(season: string) {
-    const { data } = await this.httpService.get(`/competitions/season/${season}`).toPromise();
+    const { data } = await this.httpService.get(`/leagues/season/${season}`).toPromise();
     return data.api;
   }
 
-  async getStandings(competition: string) {
-    const { data } = await this.httpService.get(`/competitionTable/${competition}`).toPromise();
+  async getStandings(league: string) {
+    const { data } = await this.httpService.get(`/leagueTable/${league}`).toPromise();
     return data.api;
   }
 
-  async getClubs(competition: string) {
-    const { data } = await this.httpService.get(`/teams/competition/${competition}`).toPromise();
+  async getClubs(league: string) {
+    const { data } = await this.httpService.get(`/teams/league/${league}`).toPromise();
     return data.api;
   }
 }

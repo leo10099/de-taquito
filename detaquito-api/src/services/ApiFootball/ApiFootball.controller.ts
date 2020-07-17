@@ -23,9 +23,9 @@ export class ApiFootballController {
   }
 
   @UseFilters(ApiFootballErrorHandler)
-  @Get('competition/:competition')
-  async competition(@Param() param: { competition: string }) {
-    return await this.apiFootball.getLeague(param.competition);
+  @Get('league/:league')
+  async league(@Param() param: { league: string }) {
+    return await this.apiFootball.getLeague(param.league);
   }
 
   @UseFilters(ApiFootballErrorHandler)
@@ -35,14 +35,14 @@ export class ApiFootballController {
   }
 
   @UseFilters(ApiFootballErrorHandler)
-  @Get('standings/:competition')
-  async stadings(@Param() param: { competition: string }) {
-    return await this.apiFootball.getStandings(param.competition);
+  @Get('league/standings/:league')
+  async standings(@Param() param: { league: string }) {
+    return await this.apiFootball.getStandings(param.league);
   }
 
   @UseFilters(ApiFootballErrorHandler)
-  @Get('clubs/:competition')
-  async clubs(@Param() param: { competition: string }) {
-    return await this.apiFootball.getClubs(param.competition);
+  @Get('clubs/:league')
+  async clubs(@Param() param: { league: string }) {
+    return await this.apiFootball.getClubs(param.league);
   }
 }

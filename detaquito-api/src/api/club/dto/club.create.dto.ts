@@ -1,5 +1,6 @@
-import { IsString, IsNotEmpty, IsOptional, MaxLength, IsObject } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, MaxLength, IsObject, IsNumber } from 'class-validator';
 import { ClubExtServiceData } from '../club.entity';
+import { Competition } from 'src/api/competition/competition.entity';
 
 export class CreateClubDto {
   @IsNotEmpty()
@@ -22,4 +23,8 @@ export class CreateClubDto {
   @IsNotEmpty()
   @IsObject()
   extService?: ClubExtServiceData;
+
+  @IsNotEmpty()
+  @IsNumber()
+  competition: Competition;
 }
