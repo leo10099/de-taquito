@@ -39,4 +39,10 @@ export class ApiFootballController {
   async stadings(@Param() param: { league: string }) {
     return await this.apiFootball.getStandings(param.league);
   }
+
+  @UseFilters(ApiFootballErrorHandler)
+  @Get('teams/:league')
+  async teams(@Param() param: { league: string }) {
+    return await this.apiFootball.getTeams(param.league);
+  }
 }

@@ -29,4 +29,9 @@ export class ApiFootballService {
     const { data } = await this.httpService.get(`/leagueTable/${league}`).toPromise();
     return data.api;
   }
+
+  async getTeams(league: string) {
+    const { data } = await this.httpService.get(`/teams/league/${league}`).toPromise();
+    return data.api;
+  }
 }
