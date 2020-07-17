@@ -1,12 +1,12 @@
 import { Column, Entity, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
 
-export interface LeagueExtServiceData {
+export interface CompetitionExtServiceData {
   extSeviceName: 'Api-Football';
   id: number;
 }
 
-@Entity('League')
-export class League extends BaseEntity {
+@Entity('Competition')
+export class Competition extends BaseEntity {
   @PrimaryGeneratedColumn()
   public id: number;
 
@@ -20,5 +20,5 @@ export class League extends BaseEntity {
   public logoUrl?: string;
 
   @Column({ type: 'jsonb', nullable: true })
-  public extService?: LeagueExtServiceData;
+  public extService?: CompetitionExtServiceData;
 }

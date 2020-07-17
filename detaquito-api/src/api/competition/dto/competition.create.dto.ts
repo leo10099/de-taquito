@@ -1,7 +1,7 @@
 import { IsString, IsNotEmpty, IsOptional, MaxLength, IsObject } from 'class-validator';
-import { LeagueExtServiceData } from '../league.entity';
+import { CompetitionExtServiceData } from '../competition.entity';
 
-export class CreateLeagueDto {
+export class CreateCompetitionDto {
   @IsNotEmpty()
   @IsString()
   @MaxLength(100)
@@ -21,5 +21,5 @@ export class CreateLeagueDto {
   @IsOptional()
   @IsNotEmpty()
   @IsObject()
-  extService?: LeagueExtServiceData;
+  extService?: CompetitionExtServiceData;
 }
