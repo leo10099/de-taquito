@@ -12,4 +12,4 @@ import { ClubRepository } from './club.repository';
   controllers: [ClubController],
   exports: [ClubService],
 })
-export class LeagueModule {}
+export class ClubModule {}
