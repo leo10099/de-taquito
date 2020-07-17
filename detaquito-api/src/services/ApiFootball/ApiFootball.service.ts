@@ -1,57 +1,32 @@
 // Services
-import { HttpService, Injectable, HttpException } from '@nestjs/common';
+import { HttpService, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ApiFootballService {
   constructor(private httpService: HttpService) {}
 
   async getCountries() {
-    try {
-      const { data } = await this.httpService.get('/countries').toPromise();
-      return data.api;
-    } catch (e) {
-      const errorMessage = e.response.data?.message || e.response.statusText;
-      throw new HttpException(errorMessage, e.response.status);
-    }
+    const { data } = await this.httpService.get('/countries').toPromise();
+    return data.api;
   }
 
   async getSeasons() {
-    try {
-      const { data } = await this.httpService.get('/seasons').toPromise();
-      return data.api;
-    } catch (e) {
-      const errorMessage = e.response.data?.message || e.response.statusText;
-      throw new HttpException(errorMessage, e.response.status);
-    }
+    const { data } = await this.httpService.get('/seasons').toPromise();
+    return data.api;
   }
 
   async getLeague(id: string) {
-    try {
-      const { data } = await this.httpService.get(`/leagues/league/${id}`).toPromise();
-      return data.api;
-    } catch (e) {
-      const errorMessage = e.response.data?.message || e.response.statusText;
-      throw new HttpException(errorMessage, e.response.status);
-    }
+    const { data } = await this.httpService.get(`/leagues/league/${id}`).toPromise();
+    return data.api;
   }
 
   async getSeason(season: string) {
-    try {
-      const { data } = await this.httpService.get(`/leagues/season/${season}`).toPromise();
-      return data.api;
-    } catch (e) {
-      const errorMessage = e.response.data?.message || e.response.statusText;
-      throw new HttpException(errorMessage, e.response.status);
-    }
+    const { data } = await this.httpService.get(`/leagues/season/${season}`).toPromise();
+    return data.api;
   }
 
   async getStandings(league: string) {
-    try {
-      const { data } = await this.httpService.get(`/leagueTable/${league}`).toPromise();
-      return data.api;
-    } catch (e) {
-      const errorMessage = e.response.data?.message || e.response.statusText;
-      throw new HttpException(errorMessage, e.response.status);
-    }
+    const { data } = await this.httpService.get(`/leagueTable/${league}`).toPromise();
+    return data.api;
   }
 }
