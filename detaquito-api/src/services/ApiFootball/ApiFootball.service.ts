@@ -30,7 +30,7 @@ export class ApiFootballService {
     return data.api;
   }
 
-  async getTeams(league: string) {
+  async getClubs(league: string) {
     const { data } = await this.httpService.get(`/teams/league/${league}`).toPromise();
     return data.api;
   }
