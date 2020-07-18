@@ -8,11 +8,6 @@ export class CreateClubDto {
   @MaxLength(100)
   name: string;
 
-  @IsNotEmpty()
-  @IsString()
-  @MaxLength(50)
-  country: string;
-
   @IsOptional()
   @IsNotEmpty()
   @IsString()
