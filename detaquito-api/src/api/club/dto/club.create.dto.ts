@@ -11,7 +11,7 @@ export class CreateClubDto {
   @IsOptional()
   @IsNotEmpty()
   @IsString()
-  @MaxLength(100)
+  @MaxLength(150)
   logoUrl?: string;
 
   @IsOptional()

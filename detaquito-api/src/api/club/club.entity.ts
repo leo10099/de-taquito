@@ -16,7 +16,7 @@ export class Club extends BaseEntity {
   @Column({ type: 'varchar', length: '100', unique: true })
   public name: string;
 
-  @Column({ type: 'varchar', length: '100', nullable: true })
+  @Column({ type: 'varchar', length: '150', nullable: true })
   public logoUrl?: string;
 
   @Column({ type: 'jsonb', nullable: true })
