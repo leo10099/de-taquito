@@ -1,4 +1,5 @@
 import { NestFastifyApplication } from '@nestjs/platform-fastify';
+import { ValidationPipe } from '@nestjs/common';
 import * as helmet from 'helmet';
 import * as rateLimit from 'fastify-rate-limit';
 
@@ -8,7 +9,9 @@ export class SecurityMiddleware {
       origin: process.env.ALLOWED_CORS?.split(',') ?? 'http://localhost:3000',
       credentials: true,
     });
+
     app.use(helmet());
+
     app.register(rateLimit, {
       max: 100,
       timeWindow: '1 minute',
@@ -19,5 +22,13 @@ export class SecurityMiddleware {
         'retry-after': false,
       },
     });
+
+    app.useGlobalPipes(
+      new ValidationPipe({
+        transform: true,
+        whitelist: true,
+        forbidNonWhitelisted: true,
+      }),
+    );
   }
 }
