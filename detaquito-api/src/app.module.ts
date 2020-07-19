@@ -12,14 +12,15 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './api/auth/auth.module';
+import { UserModule } from './api/user/user.module';
 import { CompetitionModule } from './api/competition/competition.module';
+import { CompetitionFixtureModule } from './api/competition-fixture/competition-fixture.module';
 import { ClubModule } from './api/club/club.module';
 import { ApiFootballModule } from './services/ApiFootball/ApiFootball.module';
 
 // Components
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './api/user/user.module';
 
 // Types
 import { Config, DatabaseConfig, MainConfig } from './config/configuration';
@@ -50,6 +51,7 @@ import { Config, DatabaseConfig, MainConfig } from './config/configuration';
     ApiFootballModule,
     AuthModule,
     CompetitionModule,
+    CompetitionFixtureModule,
     ClubModule,
     UserModule,
   ],
