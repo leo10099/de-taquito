@@ -1,7 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn, BaseEntity, ManyToOne } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, BaseEntity, ManyToOne, OneToMany } from 'typeorm';
 
 // Entities
 import { Competition } from '../competition/competition.entity';
+import { CompetitionMatch } from '../competition-match/competition-match.entity';
 
 export interface ClubExtServiceData {
   extSeviceName: 'Api-Football';
@@ -27,4 +28,16 @@ export class Club extends BaseEntity {
     competition => competition.clubs,
   )
   competition: Competition;
+
+  @OneToMany(
+    () => CompetitionMatch,
+    match => match.home,
+  )
+  hostMatches: CompetitionMatch[];
+
+  @OneToMany(
+    () => CompetitionMatch,
+    competition => competition.visit,
+  )
+  visitingMatches: CompetitionMatch[];
 }

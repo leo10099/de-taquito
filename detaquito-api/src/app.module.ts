@@ -14,7 +14,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './api/auth/auth.module';
 import { UserModule } from './api/user/user.module';
 import { CompetitionModule } from './api/competition/competition.module';
-import { CompetitionFixtureModule } from './api/competition-fixture/competition-fixture.module';
+import { CompetitionMatchweekModule } from './api/competition-matchweek/competition-matchweek.module';
 import { ClubModule } from './api/club/club.module';
 import { ApiFootballModule } from './services/ApiFootball/ApiFootball.module';
 
@@ -51,7 +51,7 @@ import { Config, DatabaseConfig, MainConfig } from './config/configuration';
     ApiFootballModule,
     AuthModule,
     CompetitionModule,
-    CompetitionFixtureModule,
+    CompetitionMatchweekModule,
     ClubModule,
     UserModule,
   ],
