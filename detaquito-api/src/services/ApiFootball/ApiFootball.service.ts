@@ -40,7 +40,7 @@ export class ApiFootballService {
     return data.api;
   }
 
-  async getNextMatchesForLeague(league: string, amountOfNextMatches: string) {
+  async getNextMatchesForLeague(league: string | number, amountOfNextMatches: string | number) {
     const { data } = await this.httpService
       .get(`/fixtures/league/${league}/next/${amountOfNextMatches}`)
       .toPromise();

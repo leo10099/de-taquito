@@ -1,14 +1,23 @@
-import { IsNotEmpty, IsOptional, IsObject, Max, IsNumber, IsBoolean } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsOptional,
+  IsObject,
+  Max,
+  IsNumber,
+  IsBoolean,
+  IsArray,
+} from 'class-validator';
 
 // Entities
-import { Competition } from 'src/api/competition/competition.entity';
+import { Competition } from '../../competition/competition.entity';
+import { CompetitionMatch } from '../../competition-match/competition-match.entity';
 import { CompetitionMatchweekExtServiceData } from '../competition-matchweek.entity';
 
 export class CreateCompetitionMatchweekDto {
   @IsNotEmpty()
   @IsNumber()
   @Max(100)
-  public number: number;
+  number: number;
 
   @IsOptional()
   @IsNotEmpty()
@@ -22,4 +31,8 @@ export class CreateCompetitionMatchweekDto {
   @IsOptional()
   @IsBoolean()
   isCurrent: boolean;
+
+  @IsNotEmpty()
+  @IsArray()
+  matches: CompetitionMatch[];
 }

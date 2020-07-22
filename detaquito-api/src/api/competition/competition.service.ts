@@ -15,6 +15,10 @@ export class CompetitionService {
     return await this.competitionRepo.find();
   }
 
+  async findOneById(competitionId: number): Promise<Competition | null> {
+    return await this.competitionRepo.getById(competitionId);
+  }
+
   async create(createCompetitionDto: CreateCompetitionDto): Promise<Competition> {
     return await this.competitionRepo.create(createCompetitionDto).save();
   }

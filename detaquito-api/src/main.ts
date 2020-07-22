@@ -26,6 +26,8 @@ async function bootstrap() {
   HttpMiddleware.apply(app);
   SecurityMiddleware.apply(app);
 
-  await app.listen(PORT, '0.0.0.0', () => Logger.log(`De Taquito corriendo en el puerto ${PORT}`));
+  await app.listen(PORT, '127.0.0.1', () => {
+    Logger.log(`De Taquito corriendo en el puerto ${PORT}`);
+  });
 }
-bootstrap();
+bootstrap().catch(e => console.log(e));

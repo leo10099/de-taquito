@@ -27,6 +27,6 @@ import { AxiosRequestConfig } from 'axios';
   ],
   controllers: [ApiFootballController],
   providers: [ApiFootballService],
-  exports: [ApiFootballService],
+  exports: [ApiFootballService, HttpModule],
 })
 export class ApiFootballModule {}

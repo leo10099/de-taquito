@@ -15,6 +15,10 @@ export class ClubService {
     return await this.clubRepo.find();
   }
 
+  async findByExternalServiceId(id: number) {
+    return await this.clubRepo.selectByField({ extService: id });
+  }
+
   async create(createClubDto: CreateClubDto): Promise<Club> {
     return await this.clubRepo.create(createClubDto).save();
   }

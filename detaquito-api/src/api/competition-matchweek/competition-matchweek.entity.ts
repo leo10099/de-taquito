@@ -32,6 +32,7 @@ export class CompetitionMatchweek extends BaseEntity {
   @OneToMany(
     () => CompetitionMatch,
     competitionMatch => competitionMatch.matchweek,
+    { cascade: ['insert', 'update'] },
   )
   matches: CompetitionMatch[];
 }
