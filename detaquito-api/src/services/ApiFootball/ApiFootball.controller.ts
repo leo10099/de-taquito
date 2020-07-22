@@ -45,4 +45,16 @@ export class ApiFootballController {
   async clubs(@Param() param: { league: string }) {
     return await this.apiFootball.getClubs(param.league);
   }
+
+  @UseFilters(ApiFootballErrorHandler)
+  @Get('league/:league/matchweeks')
+  async matchweeks(@Param() param: { league: string }) {
+    return await this.apiFootball.getMatchweeksForLeague(param.league);
+  }
+
+  @UseFilters(ApiFootballErrorHandler)
+  @Get('league/:league/next/:amountOfMatches')
+  async nextMatchweek(@Param() param: { league: string; amountOfMatches: string }) {
+    return await this.apiFootball.getNextMatchesForLeague(param.league, param.amountOfMatches);
+  }
 }

@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsOptional, MaxLength, IsObject } from 'class-validator';
+import { IsString, IsNumber, IsNotEmpty, IsOptional, MaxLength, IsObject } from 'class-validator';
 import { CompetitionExtServiceData } from '../competition.entity';
 
 export class CreateCompetitionDto {
@@ -17,6 +17,10 @@ export class CreateCompetitionDto {
   @IsString()
   @MaxLength(100)
   logoUrl?: string;
+
+  @IsNotEmpty()
+  @IsNumber()
+  matchesPerMatchweek?: number;
 
   @IsOptional()
   @IsNotEmpty()

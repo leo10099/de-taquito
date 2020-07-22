@@ -23,6 +23,9 @@ export class Competition extends BaseEntity {
   @Column({ type: 'varchar', nullable: true, length: '100' })
   public logoUrl?: string;
 
+  @Column({ type: 'smallint' })
+  public matchesPerMatchweek: number;
+
   @Column({ type: 'jsonb', nullable: true })
   public extService?: CompetitionExtServiceData;
 

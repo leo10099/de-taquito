@@ -34,4 +34,16 @@ export class ApiFootballService {
     const { data } = await this.httpService.get(`/teams/league/${league}`).toPromise();
     return data.api;
   }
+
+  async getMatchweeksForLeague(league: string) {
+    const { data } = await this.httpService.get(`/fixtures/league/${league}`).toPromise();
+    return data.api;
+  }
+
+  async getNextMatchesForLeague(league: string, amountOfNextMatches: string) {
+    const { data } = await this.httpService
+      .get(`/fixtures/league/${league}/next/${amountOfNextMatches}`)
+      .toPromise();
+    return data.api;
+  }
 }
