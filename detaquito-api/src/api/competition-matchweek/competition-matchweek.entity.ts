@@ -17,6 +17,9 @@ export class CompetitionMatchweek extends BaseEntity {
   @Column({ type: 'smallint' })
   public number: number;
 
+  @Column({ type: 'bool', default: false })
+  public isCurrent: boolean;
+
   @Column({ type: 'jsonb', nullable: true })
   public extService?: CompetitionMatchweekExtServiceData;
 

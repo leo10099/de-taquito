@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsObject, Max, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsObject, Max, IsNumber, IsBoolean } from 'class-validator';
 
 // Entities
 import { Competition } from 'src/api/competition/competition.entity';
@@ -18,4 +18,8 @@ export class CreateCompetitionMatchweekDto {
   @IsNotEmpty()
   @IsNumber()
   competition: Competition;
+
+  @IsOptional()
+  @IsBoolean()
+  isCurrent: boolean;
 }
