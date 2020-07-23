@@ -1,4 +1,4 @@
-import { Controller, Get, Post, UseGuards, Body, Query } from '@nestjs/common';
+import { Controller, Get, Post, UseGuards, Body, Param } from '@nestjs/common';
 
 // Guards
 import { JwtAuthGuard } from '../auth/auth.guard.jwt';
@@ -18,9 +18,9 @@ export class ClubController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get()
-  async getOneByExternalServiceId(@Query() externalServiceId: number) {
-    return await this.clubService.findByExternalServiceId(externalServiceId);
+  @Get('/external/:externalServiceId')
+  async getOneByExternalServiceId(@Param() param: { externalServiceId: string }) {
+    return await this.clubService.findByExternalServiceId(param.externalServiceId);
   }
 
   @UseGuards(JwtAuthGuard)

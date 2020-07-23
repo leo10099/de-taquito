@@ -14,20 +14,17 @@ export class CompetitionMatch extends BaseEntity {
   @PrimaryGeneratedColumn()
   public id: number;
 
-  @Column({ type: 'smallint' })
-  public number: number;
-
   @Column({ type: 'jsonb', nullable: true })
   public extService?: CompetitionMatchExtServiceData;
 
   @Column({ type: 'boolean', default: false })
-  public hasBeenPlayed: boolean;
+  public hasBeenPlayed?: boolean;
 
   @Column({ type: 'smallint', default: 0 })
-  public homeGoals: number;
+  public homeGoals?: number;
 
   @Column({ type: 'smallint', default: 0 })
-  public awayGoals: number;
+  public awayGoals?: number;
 
   @ManyToOne(
     () => Club,

@@ -14,7 +14,7 @@ export class CompetitionMatchweek extends BaseEntity {
   @PrimaryGeneratedColumn()
   public id: number;
 
-  @Column({ type: 'smallint' })
+  @Column({ type: 'smallint', unique: true })
   public number: number;
 
   @Column({ type: 'bool', default: false })

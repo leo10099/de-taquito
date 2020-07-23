@@ -30,4 +30,4 @@ async function bootstrap() {
     Logger.log(`De Taquito corriendo en el puerto ${PORT}`);
   });
 }
-bootstrap().catch(e => console.log(e));
+bootstrap();
