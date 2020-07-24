@@ -1,7 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, BaseEntity, JoinColumn, OneToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  BaseEntity,
+  JoinColumn,
+  OneToOne,
+  OneToMany,
+} from 'typeorm';
 
 // Entities
 import { User } from '../user/user.entity';
+import { Prediction } from '../prediction/prediction.entity';
 
 @Entity('Player')
 export class Player extends BaseEntity {
@@ -11,4 +19,11 @@ export class Player extends BaseEntity {
   @OneToOne(() => User)
   @JoinColumn()
   user: User;
+
+  @OneToMany(
+    () => Prediction,
+    prediction => prediction.player,
+    { cascade: ['insert', 'update'] },
+  )
+  predictions: Prediction[];
 }

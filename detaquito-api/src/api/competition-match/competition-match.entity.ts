@@ -3,6 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn, BaseEntity, ManyToOne, OneToMan
 // Entities
 import { CompetitionMatchweek } from '../competition-matchweek/competition-matchweek.entity';
 import { Club } from '../club/club.entity';
+import { Prediction } from '../prediction/prediction.entity';
 
 export interface CompetitionMatchExtServiceData {
   extSeviceName: 'Api-Football';
@@ -43,4 +44,10 @@ export class CompetitionMatch extends BaseEntity {
     competitionMatchweek => competitionMatchweek.matches,
   )
   matchweek: CompetitionMatchweek;
+
+  @OneToMany(
+    () => Prediction,
+    prediction => prediction.competitionMatch,
+  )
+  predictions: Prediction[];
 }
