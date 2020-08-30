@@ -1,5 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, BaseEntity, OneToOne } from 'typeorm';
 import { Exclude } from 'class-transformer';
+
+// Entities
+import { Player } from '../player/player.entity';
 
 @Entity('User')
 export class User extends BaseEntity {
@@ -36,6 +39,13 @@ export class User extends BaseEntity {
   @Exclude()
   @Column({ type: 'varchar', nullable: true })
   public forgotSecretToken?;
+
+  @OneToOne(
+    () => Player,
+    player => player.user,
+    { nullable: true },
+  )
+  player?: User;
 
   constructor(partial: Partial<User>) {
     super();

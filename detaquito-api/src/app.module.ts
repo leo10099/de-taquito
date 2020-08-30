@@ -13,6 +13,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './api/auth/auth.module';
 import { UserModule } from './api/user/user.module';
+import { PlayerModule } from './api/player/player.module';
 import { CompetitionModule } from './api/competition/competition.module';
 import { CompetitionMatchweekModule } from './api/competition-matchweek/competition-matchweek.module';
 import { ClubModule } from './api/club/club.module';
@@ -54,6 +55,7 @@ import { Config, DatabaseConfig, MainConfig } from './config/configuration';
     CompetitionMatchweekModule,
     ClubModule,
     UserModule,
+    PlayerModule,
   ],
   controllers: [AppController],
   providers: [AppService, { provide: APP_INTERCEPTOR, useClass: CacheInterceptor }],
