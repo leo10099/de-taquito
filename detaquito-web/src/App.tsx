@@ -1,57 +1,33 @@
-import React, { useEffect, useMemo } from 'react';
-
-// Hot Reload
-import { hot } from 'react-hot-loader';
-
-// Router
-import { Router } from 'router/Router';
-
-// Themes
-import * as Themes from 'theme/Theme';
+import React, { useMemo } from "react";
 
 // Styled-Components Theme Provider
-import { ThemeProvider } from 'styled-components';
-
-// Styles
-import { ResetStyles, GlobalStyles } from 'styles';
-import 'rc-tooltip/assets/bootstrap.css';
+import { ThemeProvider } from "styled-components/macro";
 
 // Hooks
-import { useTheme } from 'hooks';
-import { useDispatch } from 'react-redux';
+import { useTheme } from "hooks";
 
-// Store
-import Layout from 'features/Layout/Layout.reducer';
+// Styles
+import { ResetStyles, GlobalStyles } from "style";
 
 // Types
-import { Theme } from 'typings';
+import { Theme, dark, light } from "theme";
 
-// Components
-import { Alert } from 'components';
-
-const App = () => {
+function App() {
 	// Hooks
-	const dispatch = useDispatch();
 	const [currentTheme] = useTheme();
 
-	// Helpers
+	// Memos
 	const theme = useMemo(() => {
-		return currentTheme === Theme.DARK ? Themes.dark : Themes.light;
+		return currentTheme === Theme.DARK ? dark : light;
 	}, [currentTheme]);
-
-	// Effects
-	useEffect(() => {
-		dispatch(Layout.actions.setTheme(currentTheme));
-	}, [currentTheme, dispatch]);
 
 	return (
 		<ThemeProvider theme={theme}>
 			<ResetStyles />
 			<GlobalStyles />
-			<Alert />
-			<Router />
+			<div className="App">APP</div>
 		</ThemeProvider>
 	);
-};
+}
 
-export default hot(module)(App);
+export default App;

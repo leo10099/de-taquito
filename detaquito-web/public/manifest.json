@@ -1,6 +1,6 @@
 {
-  "short_name": "De Taquito",
-  "name": "De Taquito - El Prode del Siglo XXI",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "favicon.ico",

@@ -1,79 +1,78 @@
-// Enums
-import { Theme } from 'typings';
+import { style } from "../utils";
+const { rgba } = style;
 
-// Helpers
-import { rgba } from 'utils';
+// Base Colors
+const violet = "#4458f3";
+const yellow = "#ffc30f";
+const green = "#63b449";
+const red = "#ef5743";
 
-const violet = '#4458f3';
-const yellow = '#ffc30f';
-const green = '#63b449';
-const red = '#ef5743';
-
+// Color shades
 export const primary = {
-	primary050: '#ebecfe',
-	primary100: '#ebecfe',
-	primary200: '#a7b0fb',
-	primary300: '#818ffa',
-	primary400: '#6374f7',
+	primary050: "#ebecfe",
+	primary100: "#ebecfe",
+	primary200: "#a7b0fb",
+	primary300: "#818ffa",
+	primary400: "#6374f7",
 	primary500: violet,
-	primary600: '#3f4fe7',
-	primary700: '#3444da',
-	primary800: '#2b38cf',
-	primary900: '#181fbd',
+	primary600: "#3f4fe7",
+	primary700: "#3444da",
+	primary800: "#2b38cf",
+	primary900: "#181fbd",
 };
 
 const secondary = {
-	secondary050: '#fff8e1',
-	secondary100: '#ffedb4',
-	secondary200: '#ffe183',
-	secondary300: '#ffd751',
-	secondary400: '#ffcc2b',
+	secondary050: "#fff8e1",
+	secondary100: "#ffedb4",
+	secondary200: "#ffe183",
+	secondary300: "#ffd751",
+	secondary400: "#ffcc2b",
 	secondary500: yellow,
-	secondary600: '#ffb507',
-	secondary700: '#ffa205',
-	secondary800: '#ff9104',
-	secondary900: '#ff7202',
+	secondary600: "#ffb507",
+	secondary700: "#ffa205",
+	secondary800: "#ff9104",
+	secondary900: "#ff7202",
 };
 
 const success = {
-	success050: '#eaf6e8',
-	success100: '#cee7c8',
-	success200: '#afd9a5',
-	success300: '#90cb80',
-	success400: '#79bf65',
+	success050: "#eaf6e8",
+	success100: "#cee7c8",
+	success200: "#afd9a5",
+	success300: "#90cb80",
+	success400: "#79bf65",
 	success500: green,
-	success600: '#5aa540',
-	success700: '#4d9336',
-	success800: '#4d9336',
-	success900: '#2d631b',
+	success600: "#5aa540",
+	success700: "#4d9336",
+	success800: "#4d9336",
+	success900: "#2d631b",
 };
 
 const error = {
-	error050: '#feecef',
-	error100: '#fcd1d4',
-	error200: '#eba19f',
-	error300: '#e07d7b',
-	error400: '#ea625a',
+	error050: "#feecef",
+	error100: "#fcd1d4",
+	error200: "#eba19f",
+	error300: "#e07d7b",
+	error400: "#ea625a",
 	error500: red,
-	error600: '#e04e41',
-	error700: '#ce453b',
-	error800: '#c03f34',
-	error900: '#b0372a',
+	error600: "#e04e41",
+	error700: "#ce453b",
+	error800: "#c03f34",
+	error900: "#b0372a",
 };
 
 export const gray = {
-	gray010: '#FAFAFA',
-	gray050: '#F5F5F5',
-	gray100: '#EEEEEE',
-	gray200: '#E0E0E0',
-	gray300: '#BDBDBD',
-	gray400: '#9E9E9E',
-	gray500: '#757575',
-	gray600: '#404040',
-	gray700: '#353535',
-	gray800: '#303030',
-	gray900: '#1E1E1E',
-	gray950: '#121212',
+	gray010: "#FAFAFA",
+	gray050: "#F5F5F5",
+	gray100: "#EEEEEE",
+	gray200: "#E0E0E0",
+	gray300: "#BDBDBD",
+	gray400: "#9E9E9E",
+	gray500: "#757575",
+	gray600: "#404040",
+	gray700: "#353535",
+	gray800: "#303030",
+	gray900: "#1E1E1E",
+	gray950: "#121212",
 };
 
 const opacity = { umbra: 0.2, penumbra: 0.14, ambient: 0.12 };
@@ -131,46 +130,8 @@ export const shadow = {
 	0 24px 38px  3px ${rgba(error.error500, opacity.ambient)};`,
 };
 
-export interface ThemeInterface {
-	name: Theme;
-	error: string;
-	success: string;
-	primaryLight: string;
-	primaryMain: string;
-	primaryDark: string;
-	secondaryLight: string;
-	secondaryMain: string;
-	secondaryDark: string;
-	background: string;
-	color: string;
-	elevation0: string;
-	elevation1: string;
-	elevation2: string;
-	elevation3: string;
-	elevation4: string;
-	elevation5: string;
-	elevation6: string;
-	elevation7: string;
-	elevation8: string;
-	elevation9: string;
-	shadowElevation1: string;
-	shadowElevation2: string;
-	shadowElevation3: string;
-	shadowElevation4: string;
-	shadowElevation5: string;
-	shadowElevation6: string;
-	shadowElevation7: string;
-	errorShadowElevation1: string;
-	errorShadowElevation2: string;
-	errorShadowElevation3: string;
-	errorShadowElevation4: string;
-	errorShadowElevation5: string;
-	errorShadowElevation6: string;
-	errorShadowElevation7: string;
-}
-
-export const dark: ThemeInterface = {
-	name: Theme.DARK,
+export const dark = {
+	name: "dark",
 	error: error.error300,
 	success: success.success300,
 	primaryLight: primary.primary200,
@@ -207,8 +168,8 @@ export const dark: ThemeInterface = {
 	errorShadowElevation7: shadow.error060,
 };
 
-export const light: ThemeInterface = {
-	name: Theme.LIGHT,
+export const light = {
+	name: "light",
 	error: error.error500,
 	success: success.success500,
 	primaryLight: primary.primary300,
@@ -244,3 +205,10 @@ export const light: ThemeInterface = {
 	errorShadowElevation6: shadow.error050,
 	errorShadowElevation7: shadow.error060,
 };
+
+export enum Theme {
+	DARK = "dark",
+	LIGHT = "LIGHT",
+}
+
+export type ThemeType = typeof light & typeof dark;

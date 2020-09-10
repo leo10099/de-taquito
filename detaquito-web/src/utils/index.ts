@@ -1,3 +1,3 @@
-export * from './ErrorMessages';
-export * from './Styling';
-export * from './Validation';
+import * as style from "./styles";
+
+export { style };
