@@ -3,6 +3,9 @@ import React, { useMemo } from "react";
 // Styled-Components Theme Provider
 import { ThemeProvider } from "styled-components/macro";
 
+// Router
+import Router from "router";
+
 // Hooks
 import { useTheme } from "hooks";
 
@@ -25,7 +28,7 @@ function App() {
 		<ThemeProvider theme={theme}>
 			<ResetStyles />
 			<GlobalStyles />
-			<div className="App">APP</div>
+			<Router />
 		</ThemeProvider>
 	);
 }
