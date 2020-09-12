@@ -40,7 +40,7 @@
 		// React hooks
 		"react-hooks/exhaustive-deps": "warn",
 		"react-hooks/rules-of-hooks": "error",
-		"react/require-default-props": "warn",
+		"react/prop-types": "off",
 		"react/self-closing-comp": [
 			"error",
 			{

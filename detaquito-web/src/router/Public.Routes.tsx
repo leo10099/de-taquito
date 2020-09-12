@@ -1,17 +1,21 @@
 import React, { Suspense, lazy } from "react";
-import { Routes, Route } from "react-router-dom";
+
+// Providers
+import { AnimatedRoutes } from "providers";
 
 // Public Routes
 const Home = lazy(() => import("features/Home"));
 const NotFound = lazy(() => import("features/NotFound"));
 
+const publicRoutes = [
+	{ component: Home, path: "/", name: "Home" },
+	{ component: NotFound, path: "*", name: "NotFound" },
+];
+
 export const Public = () => {
 	return (
-		<Suspense fallback={<div>Loading...</div>}>
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="*" element={<NotFound />} />
-			</Routes>
+		<Suspense fallback={false}>
+			<AnimatedRoutes exitBeforeEnter={true} routes={publicRoutes} />
 		</Suspense>
 	);
 };
