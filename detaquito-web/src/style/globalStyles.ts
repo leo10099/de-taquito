@@ -27,10 +27,10 @@ export type ResponsiveConfigOptions = {
 };
 
 export const responsiveOptions = {
-	mobile: { breakpoint: 0, baseFontSize: 1.5 },
-	tablet: { breakpoint: 500, baseFontSize: 2 },
-	notebook: { breakpoint: 900, baseFontSize: 2.5 },
-	desktop: { breakpoint: 1300, baseFontSize: 3 },
+	mobile: { breakpoint: 0, baseFontSize: 1.75 },
+	tablet: { breakpoint: 500, baseFontSize: 1.85 },
+	notebook: { breakpoint: 900, baseFontSize: 2 },
+	desktop: { breakpoint: 1300, baseFontSize: 2.25 },
 };
 
 const globalStyles = createGlobalStyle(
