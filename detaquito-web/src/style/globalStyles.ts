@@ -1,13 +1,39 @@
 import { css, createGlobalStyle } from "style";
 import { primary, ThemeType } from "theme";
+import { style } from "utils";
+
+const { generateResponsiveText } = style;
 
 interface Props {
 	theme: ThemeType;
 }
+export type ResponsiveConfigOptions = {
+	mobile: {
+		breakpoint: number;
+		baseFontSize: number;
+	};
+	tablet: {
+		breakpoint: number;
+		baseFontSize: number;
+	};
+	notebook: {
+		breakpoint: number;
+		baseFontSize: number;
+	};
+	desktop: {
+		breakpoint: number;
+		baseFontSize: number;
+	};
+};
 
-const basefontSize = 1.5; // 15px
+export const responsiveOptions = {
+	mobile: { breakpoint: 0, baseFontSize: 1.5 },
+	tablet: { breakpoint: 500, baseFontSize: 2 },
+	notebook: { breakpoint: 900, baseFontSize: 2.5 },
+	desktop: { breakpoint: 1300, baseFontSize: 3 },
+};
 
-export default createGlobalStyle(
+const globalStyles = createGlobalStyle(
 	(props: Props) => css`
 		html {
 			font-size: 62.5%;
@@ -17,10 +43,9 @@ export default createGlobalStyle(
 			background-color: ${() => props.theme.background};
 			color: ${() => props.theme.elevation8};
 			font-family: "Open Sans", sans-serif;
-			font-size: ${basefontSize}rem;
-			letter-spacing: 0.08rem;
-			line-height: ${basefontSize * 1.5}rem;
 			padding: 0;
+
+			${generateResponsiveText(responsiveOptions)};
 
 			a {
 				text-decoration: none;
@@ -37,3 +62,5 @@ export default createGlobalStyle(
 		}
 	`
 );
+
+export default globalStyles;

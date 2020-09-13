@@ -1,4 +1,5 @@
 import { CSSProperties } from "react";
+import type { ResponsiveConfigOptions } from "style/globalStyles";
 
 // Helper Functions
 
@@ -12,6 +13,18 @@ export function rgba(hex: string, alpha = 1) {
 	} else {
 		return "rgb(" + r + ", " + g + ", " + b + ")";
 	}
+}
+
+export function generateResponsiveText(options: ResponsiveConfigOptions) {
+	let resultingMediaQuery = "";
+	Object.entries(options).forEach(([_breakpoint, { breakpoint, baseFontSize }]) => {
+		resultingMediaQuery += `@media only screen and (min-width: ${breakpoint}px) {
+			line-height: ${baseFontSize * 1.5}rem;
+			font-size: ${baseFontSize}rem;
+		}`;
+	});
+
+	return resultingMediaQuery;
 }
 
 // CSS Style Objects
