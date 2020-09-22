@@ -9,7 +9,7 @@ interface RoutesProps {
 	exitBeforeEnter?: boolean;
 	initial?: boolean;
 	routes: Array<{
-		component: LazyExoticComponent<React.FC>;
+		component: LazyExoticComponent<React.FC<any>>;
 		path: string;
 		name: string;
 	}>;

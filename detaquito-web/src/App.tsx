@@ -10,6 +10,7 @@ import Router from "router";
 import { useTheme } from "hooks";
 
 // Styles
+import "rc-tooltip/assets/bootstrap.css";
 import { ResetStyles, GlobalStyles } from "style";
 
 // Types

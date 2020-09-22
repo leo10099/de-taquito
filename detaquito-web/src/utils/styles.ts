@@ -1,5 +1,6 @@
 import { CSSProperties } from "react";
 import type { ResponsiveConfigOptions } from "style/globalStyles";
+import { css } from "style";
 
 // Helper Functions
 
@@ -42,30 +43,30 @@ export const centeredOnFullHeight: CSSProperties = {
 
 // Styled-Components CSS Mixins
 
-// export const CenterAbsolutely = () => css`
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-// `;
+export const CenterAbsolutely = () => css`
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+`;
 
-// export const FlexRow = () => css`
-//   display: flex;
-// `;
+export const FlexRow = () => css`
+	display: flex;
+`;
 
-// export const FlexColumn = () => css`
-//   display: flex;
-//   flex-direction: column;
-// `;
+export const FlexColumn = () => css`
+	display: flex;
+	flex-direction: column;
+`;
 
-// export const FlexColumnCentered = () => css`
-//   ${FlexColumn};
-//   align-items: center;
-//   justify-content: center;
-// `;
+export const FlexColumnCentered = () => css`
+	${FlexColumn};
+	align-items: center;
+	justify-content: center;
+`;
 
-// export const FlexRowCentered = () => css`
-//   ${FlexRow};
-//   align-items: center;
-//   justify-content: center;
-// `;
+export const FlexRowCentered = () => css`
+	${FlexRow};
+	align-items: center;
+	justify-content: center;
+`;
