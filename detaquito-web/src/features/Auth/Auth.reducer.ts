@@ -98,9 +98,6 @@ const authSlice = createSlice({
 			state.user.email = payload.email;
 			state.user.id = payload.id;
 
-			// state.token.accessToken = payload.accessToken;
-			// state.token.accessTokenExpiry = payload.accessTokenExpiry;
-
 			state.registration.loading = false;
 			state.registration.success = true;
 

@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import styled from "styled-components/macro";
+import styled, { css } from "styled-components/macro";
 
 // Helpers
 import { FlexColumn } from "utils/styles";
@@ -7,6 +7,8 @@ import { FlexColumn } from "utils/styles";
 interface CardProps {
 	children: ReactNode;
 	footer?: ReactNode;
+	mb?: number;
+	mt?: number;
 	subTitle?: string;
 	title?: string;
 	vw?: number;
@@ -16,6 +18,14 @@ const CardContainer = styled.div<CardProps>`
 	background: ${({ theme }) => theme.elevation1};
 	border-radius: 0.5rem;
 	box-shadow: ${({ theme }) => theme.shadowElevation1};
+	${({ mt }) =>
+		css`
+			margin-top: ${mt ?? 0}rem;
+		`};
+	${({ mb }) =>
+		css`
+			margin-bottom: ${mb ?? 0}rem;
+		`};
 	position: relative;
 	padding: 1rem;
 	width: calc(100vw - 20px);
@@ -42,7 +52,7 @@ const SubTitle = styled.h3`
 	font-size: 1.7rem;
 	font-weight: normal;
 	letter-spacing: 1px;
-	margin-top: 1.4rem;
+	margin: 1.5rem auto;
 `;
 
 const CardContent = styled.div`
@@ -57,9 +67,9 @@ const CardFooter = styled.footer`
 	margin-bottom: 1.5rem;
 `;
 
-const Card: React.FC<CardProps> = ({ children, title, subTitle, footer }) => {
+const Card: React.FC<CardProps> = ({ children, mb, mt, title, subTitle, footer }) => {
 	return (
-		<CardContainer id="Card">
+		<CardContainer id="Card" mb={mb} mt={mt}>
 			{title && (
 				<Header>
 					<Title>{title}</Title>

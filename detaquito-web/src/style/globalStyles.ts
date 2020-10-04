@@ -1,8 +1,6 @@
 import { css, createGlobalStyle } from "style";
 import { primary, ThemeType } from "theme";
-import { style } from "utils";
-
-const { generateResponsiveText } = style;
+import { generateResponsiveText } from "utils/styles";
 
 interface Props {
 	theme: ThemeType;

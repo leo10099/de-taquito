@@ -9,5 +9,4 @@ export const SignUpContainer = styled.main`
 export const SignUpFormContent = styled.div`
 	display: flex;
 	${FlexColumnCentered()};
-	gap: 2rem;
 `;

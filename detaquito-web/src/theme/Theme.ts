@@ -1,5 +1,4 @@
-import { style } from "../utils";
-const { rgba } = style;
+import { rgba } from "utils/styles";
 
 // Base Colors
 const violet = "#4458f3";

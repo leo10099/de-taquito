@@ -1,9 +1,12 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
+
+// Hooks
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 
 // Components
-import { Button, Card, Image, TextInput } from "components";
+import { Button, Card, Image, Separator, TextInput } from "components";
 
 // Helpers
 import { emailPattern } from "utils/validation";
@@ -16,16 +19,26 @@ import { selectRegistration } from "features/Auth/Auth.selectors";
 
 // Assets
 import Logo from "assets/img/logo.png";
+import { ReactComponent as GoogleIcon } from "assets/icons/google.svg";
 
 // Slice
 import Auth from "../Auth.reducer";
+
+// Typings
+import { SignUpFormData } from "features/Auth/Auth.types";
+
+// Error messages
+import { conflictingAlias, conflictingEmail } from "features/Auth/Auth.errors";
+import { serverNotResponding } from "utils/errorMessages";
 
 // Styles
 import { SignUpContainer, SignUpFormContent } from "./Signup.Styles";
 
 const SignUp: React.FC<{}> = () => {
 	const dispatch = useDispatch();
-	const { register, handleSubmit, getValues, errors } = useForm({
+	const navigate = useNavigate();
+
+	const { register, handleSubmit, getValues, errors, setError } = useForm({
 		mode: "onTouched",
 		reValidateMode: "onChange",
 		criteriaMode: "firstError",
@@ -36,20 +49,68 @@ const SignUp: React.FC<{}> = () => {
 	const { success: createdUser, error, loading } = useSelector(selectRegistration);
 
 	// Handlers
-	const onSubmit = (data: any) => {
-		// Put together new user data object
-		const newUserData = {
-			alias: data.alias,
-			email: data.email.trim(),
-			secret: data.password,
-		};
-		dispatch(Auth.actions.registrationRequest(newUserData));
+	const onSubmit = useCallback(
+		({ alias, email, password }: SignUpFormData) => {
+			// Put together new user data object
+			const newUserData = {
+				alias,
+				email: email.trim(),
+				secret: password,
+			};
+
+			dispatch(Auth.actions.registrationRequest(newUserData));
+		},
+		[dispatch]
+	);
+
+	// Handlers
+	const signUpWithGoogle = () => {
+		window.location.replace("/api/auth/google");
 	};
+
+	// Handle successful registration
+	useEffect(() => {
+		if (createdUser) {
+			navigate("/app/dashboard");
+		}
+	}, [createdUser, navigate]);
+
+	// Handle unsuccessful registration
+	useEffect(() => {
+		switch (error?.message) {
+			case conflictingEmail.message:
+				return setError("email", { type: "manual", message: conflictingEmail.friendlyMessage });
+			case conflictingAlias.message:
+				return setError("alias", { type: "manual", message: conflictingAlias.friendlyMessage });
+			case serverNotResponding.message:
+				return setError("passwordConfirm", {
+					type: "manual",
+					message: serverNotResponding.message,
+				});
+			default:
+				return () => {};
+		}
+	}, [error, setError]);
 
 	return (
 		<SignUpContainer>
 			<Image alt="De Taquito" margin="4rem auto" src={Logo} width="130px" />
-			<Card title="Registrate" subTitle="para poder jugar">
+
+			<Button
+				icon={<GoogleIcon />}
+				margin="2rem auto"
+				onClick={signUpWithGoogle}
+				size="normal"
+				variant="primary"
+			>
+				Registrate con Google
+			</Button>
+
+			<Separator mt={2} mb={4}>
+				O
+			</Separator>
+
+			<Card title="Registrate" subTitle="con usuario y contraseña" mb={4}>
 				<form onSubmit={handleSubmit(onSubmit)} id="Signup-Form">
 					<SignUpFormContent>
 						<TextInput

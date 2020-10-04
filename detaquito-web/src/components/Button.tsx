@@ -6,7 +6,7 @@ import { Theme, gray } from "theme";
 
 interface ButtonProps {
 	children: string | React.ReactChild;
-	icon?: "Google" | "GooglePlus";
+	icon?: React.ReactElement;
 	isBlock?: boolean;
 	isDisabled?: boolean;
 	isLoading?: boolean;
@@ -63,6 +63,16 @@ const PrimaryButton = styled(BaseButton).attrs((props: ButtonProps) => ({ type: 
 	height: 4.8rem;
 	letter-spacing: 0.6px;
 
+	svg {
+		display: inline-block;
+		fill: ${({ theme }) => theme.elevation1};
+		height: 18px;
+		margin-right: 8px;
+		position: relative;
+		vertical-align: text-top;
+		width: 18px;
+	}
+
 	&:disabled {
 		background-color: ${({ theme }) =>
 			theme.name === "dark" ? theme.elevation5 : theme.elevation3};
@@ -92,22 +102,24 @@ const Button: React.FC<ButtonProps> = ({
 
 	const spinnerColor = useMemo(() => {
 		if (variant === Variant.PRIMARY) {
-			return currentTheme === Theme.DARK ? gray.gray600 : gray.gray300;
+			return currentTheme === Theme.DARK ? gray.gray800 : gray.gray200;
 		}
 		return gray.gray300;
 	}, [currentTheme, variant]);
 
 	const buttonContent = useMemo(() => {
 		if (isLoading) return <Spinner color={spinnerColor} />;
-		if (icon)
+		if (icon) {
 			return (
-				<>
-					{/* <Icon type={icon} /> */}
+				<span>
+					{icon}
 					{children}
-				</>
+				</span>
 			);
+		}
+
 		return children;
-	}, [children, icon, isLoading]);
+	}, [children, icon, isLoading, spinnerColor]);
 
 	switch (variant) {
 		case Variant.PRIMARY:

@@ -42,6 +42,7 @@ const TextInputContainer = styled.div<TextInputCustomProps>`
 	flex-wrap: wrap;
 	height: 100%;
 	justify-content: space-between;
+	position: relative;
 
 	width: ${({ isFullWidth }) => (isFullWidth ? "100%" : "50%")};
 
@@ -64,6 +65,7 @@ const Input = styled.input<TextInputCustomProps>`
 	color: ${({ theme }) => theme.elevation7};
 	height: 4.8rem;
 	outline: 0;
+	margin-bottom: 2rem;
 	padding: 0 2rem 0 1rem;
 	position: relative;
 	transition: 400ms all ease;
@@ -87,9 +89,10 @@ export const Label = styled.label.attrs(({ id }) => ({
 const ErrorMessage = styled.p<TextInputCustomProps>`
 	color: ${props => props.theme.error};
 	letter-spacing: 0.5px;
-	padding-top: 6px;
+	margin-top: -1rem;
+	margin-bottom: 2rem;
 	text-align: left;
-	font-size: 66%;
+	font-size: 75%;
 	font-weight: bold;
 	line-height: 1.5em;
 	visibility: ${({ hasError }) => (hasError ? "visible" : "hidden")};
@@ -108,9 +111,9 @@ const tooltipOverlayStyle: CSSProperties = {
 };
 
 const IconContainer = styled.span<IconContainerProps>`
-	display: inline-block;
-	position: relative;
-	top: 3px;
+	position: absolute;
+	top: 47%;
+	right: 0;
 `;
 
 const TextInput = forwardRef<HTMLInputElement, TextInputBaseProps & TextInputCustomProps>(
@@ -145,9 +148,8 @@ const TextInput = forwardRef<HTMLInputElement, TextInputBaseProps & TextInputCus
 						</IconContainer>
 					</Tooltip>
 				)}
-				{hasError && errorMessage && (
-					<ErrorMessage hasError={hasError}>{errorMessage}</ErrorMessage>
-				)}
+
+				<ErrorMessage hasError={hasError}>{errorMessage}</ErrorMessage>
 			</TextInputContainer>
 		);
 	}
