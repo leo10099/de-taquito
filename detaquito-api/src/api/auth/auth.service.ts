@@ -45,7 +45,7 @@ export class AuthService {
     }
 
     if (!existingUser.secret && existingUser.googleId) {
-      throw new HttpException('User should authenticate using Google Sign-In', 400);
+      throw new HttpException(UserErrors.USER_SHOULD_AUTHENTICATE_WITH_GOOGLE, 401);
     }
 
     // We check if the given password is correct
@@ -65,9 +65,8 @@ export class AuthService {
     if (existingUser) {
       // Check if user is registered with social OAuth provider
       if (existingUser.googleId) {
-        // Already registered with Google. Update user to allow local authentication
-        // TODO --> Redirect user to dashboard with explaining message
-        return await this.userService.editUser(existingUser.id, localRegisterDto);
+        // Already registered with Google. Suggest user to log-in with Google
+        throw new ConflictException(UserErrors.USER_ERROR_ALREADY_REGISTERED_WITH_GOOGLE);
       }
       // User already registered, throw error
       throw new ConflictException(UserErrors.USER_ERROR_EMAIL_EXISTS);

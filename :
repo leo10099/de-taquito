@@ -1,0 +1,13 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch web-v2
+# Changes to be committed:
+#	modified:   detaquito-api/src/api/auth/auth.service.ts
+#	modified:   detaquito-api/src/api/user/user.errors.ts
+#	modified:   detaquito-web/src/features/Auth/Auth.errors.ts
+#	modified:   detaquito-web/src/features/Auth/LogIn/LogIn.tsx
+#	modified:   detaquito-web/src/features/Auth/SignUp/SignUp.tsx
+#	modified:   detaquito-web/src/utils/errorMessages.ts
+#

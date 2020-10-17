@@ -19,8 +19,8 @@ import Logo from "assets/img/logo.png";
 import { ReactComponent as GoogleIcon } from "assets/icons/google.svg";
 
 // Helpers
-import { incorrectLogInCredentials, serverNotResponding } from "utils/errorMessages";
-
+import { incorrectCredentials, userShouldAuthenticateWithGoogle } from "../Auth.errors";
+import { serverNotResponding } from "utils/errorMessages";
 import { emailPattern } from "utils/validation";
 
 // Validations
@@ -53,11 +53,22 @@ const LogIn = () => {
 
 	// Effects
 	useEffect(() => {
-		if (error?.message === incorrectLogInCredentials.message) {
-			setError("password", { message: incorrectLogInCredentials.friendlyMessage });
-		}
-		if (error?.message === serverNotResponding.message) {
-			setError("password", { message: incorrectLogInCredentials.friendlyMessage });
+		console.log(error?.message);
+		switch (error?.message) {
+			case incorrectCredentials.message:
+				return setError("password", {
+					type: "manual",
+					message: incorrectCredentials.friendlyMessage,
+				});
+			case userShouldAuthenticateWithGoogle.message:
+				return setError("email", {
+					type: "manual",
+					message: userShouldAuthenticateWithGoogle.friendlyMessage,
+				});
+			case serverNotResponding.message:
+				return setError("password", { type: "manual", message: serverNotResponding.message });
+			default:
+				return () => {};
 		}
 	}, [error, setError]);
 

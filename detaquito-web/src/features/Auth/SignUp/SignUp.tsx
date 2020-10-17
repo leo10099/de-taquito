@@ -28,7 +28,11 @@ import Auth from "../Auth.reducer";
 import { SignUpFormData } from "features/Auth/Auth.types";
 
 // Error messages
-import { conflictingAlias, conflictingEmail } from "features/Auth/Auth.errors";
+import {
+	conflictingAlias,
+	conflictingEmail,
+	conflictUserAlreadyRegisteredWithGoogle,
+} from "features/Auth/Auth.errors";
 import { serverNotResponding } from "utils/errorMessages";
 
 // Styles
@@ -82,6 +86,11 @@ const SignUp: React.FC<{}> = () => {
 				return setError("email", { type: "manual", message: conflictingEmail.friendlyMessage });
 			case conflictingAlias.message:
 				return setError("alias", { type: "manual", message: conflictingAlias.friendlyMessage });
+			case conflictUserAlreadyRegisteredWithGoogle.message:
+				return setError("email", {
+					type: "manual",
+					message: conflictUserAlreadyRegisteredWithGoogle.friendlyMessage,
+				});
 			case serverNotResponding.message:
 				return setError("passwordConfirm", {
 					type: "manual",
