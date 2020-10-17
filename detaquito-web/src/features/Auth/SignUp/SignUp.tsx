@@ -32,7 +32,7 @@ import { conflictingAlias, conflictingEmail } from "features/Auth/Auth.errors";
 import { serverNotResponding } from "utils/errorMessages";
 
 // Styles
-import { SignUpContainer, SignUpFormContent } from "./Signup.Styles";
+import { SignUpContainer, SignUpFormContent } from "./SignUp.Styles";
 
 const SignUp: React.FC<{}> = () => {
 	const dispatch = useDispatch();

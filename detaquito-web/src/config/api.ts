@@ -18,7 +18,7 @@ Api.interceptors.response.use(
 		}
 
 		if (error.response?.status === 401) {
-			if (window.location.pathname !== "/session/login") window.location.assign("/session/login");
+			if (window.location.pathname !== "/auth/login") window.location.assign("/auth/login");
 		}
 		return error;
 	}

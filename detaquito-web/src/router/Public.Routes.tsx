@@ -7,9 +7,11 @@ import { AnimatedRoutes } from "providers";
 const Home = lazy(() => import("features/Home"));
 const NotFound = lazy(() => import("features/NotFound"));
 const SignUp = lazy(() => import("features/Auth/SignUp"));
+const LogIn = lazy(() => import("features/Auth/LogIn"));
 
 const publicRoutes = [
 	{ component: Home, path: "/", name: "Home" },
+	{ component: LogIn, path: "/auth/login", name: "LogIn" },
 	{ component: SignUp, path: "/auth/signup", name: "SignUp" },
 	{ component: NotFound, path: "*", name: "NotFound" },
 ];
