@@ -57,7 +57,6 @@ const LogIn = () => {
 
 	// Effects
 	useEffect(() => {
-		console.log(error?.message);
 		switch (error?.message) {
 			case incorrectCredentials.message:
 				return setError("password", {

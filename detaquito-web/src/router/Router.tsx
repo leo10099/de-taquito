@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 
-import { Public } from "./Public.Routes";
+import Public from "./Public.Routes";
 
 const Router: React.FC = () => (
 	<BrowserRouter>
@@ -9,4 +9,4 @@ const Router: React.FC = () => (
 	</BrowserRouter>
 );
 
-export default Router;
+export default React.memo(Router);

@@ -1,5 +1,5 @@
 // Config
-import { Api } from "config/api";
+import { Api, updateAccessTokenInCommonHeaders } from "config/api";
 
 // Redux Sagas
 import { put, takeLatest } from "redux-saga/effects";
@@ -14,6 +14,37 @@ import { BaseAction } from "store";
 import { serverNotResponding } from "utils/errorMessages";
 
 const { actions } = Auth;
+
+// Token management
+function* tryRefreshToken() {
+	const response = yield Api("/auth/refresh", {
+		method: "POST",
+	}).catch(e => e.response);
+
+	if (response?.status !== 201) {
+		return false;
+	}
+	const {
+		accessToken,
+		accessTokenExpiryInSeconds,
+	}: {
+		accessToken: string;
+		accessTokenExpiryInSeconds: number;
+	} = response.data;
+
+	yield updateAccessTokenInCommonHeaders(accessToken);
+
+	const accessTokenExpiry = accessTokenExpiryInSeconds * 1000;
+
+	yield put(
+		actions.setAccessToken({
+			accessToken,
+			accessTokenExpiry,
+		})
+	);
+
+	return yield put(actions.setUserInfoFromCookie(response.data));
+}
 
 // Registration
 function* trySignUp({ payload }: BaseAction) {
@@ -58,6 +89,7 @@ function* tryLogIn({ payload }: BaseAction) {
 }
 
 export default [
+	takeLatest(actions.tryRefreshToken, tryRefreshToken),
 	takeLatest(actions.registrationRequest, trySignUp),
 	takeLatest(actions.loginRequest, tryLogIn),
 ];
