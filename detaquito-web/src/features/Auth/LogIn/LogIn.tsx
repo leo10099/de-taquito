@@ -44,6 +44,10 @@ const LogIn = () => {
 	const { success, error, loading } = useSelector(selectLogin);
 
 	// Handlers
+	const logInWithGoogle = () => {
+		window.location.replace("/api/auth/google");
+	};
+
 	const onSubmit = useCallback(
 		({ email, password }: any) => {
 			dispatch(Auth.actions.loginRequest({ email, secret: password }));
@@ -83,7 +87,7 @@ const LogIn = () => {
 			<Button
 				icon={<GoogleIcon />}
 				margin="2rem auto"
-				onClick={() => {}}
+				onClick={logInWithGoogle}
 				size="normal"
 				variant="primary"
 			>
