@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 
 // Components
-import { Button, Card, Image, Separator, TextInput } from "components";
+import { Button, Card, Image, Link, Separator, TextInput } from "components";
 
 // Helpers
 import { emailPattern } from "utils/validation";
@@ -36,7 +36,7 @@ import {
 import { serverNotResponding } from "utils/errorMessages";
 
 // Styles
-import { SignUpContainer, SignUpFormContent } from "./SignUp.Styles";
+import { SignUpContainer, SignUpFormContent, AlreadyRegistered } from "./SignUp.Styles";
 
 const SignUp: React.FC<{}> = () => {
 	const dispatch = useDispatch();
@@ -222,6 +222,9 @@ const SignUp: React.FC<{}> = () => {
 					</SignUpFormContent>
 				</form>
 			</Card>
+			<AlreadyRegistered>
+				¿Ya tienes cuenta? <Link to="/auth/login">Ingresar.</Link>
+			</AlreadyRegistered>
 		</SignUpContainer>
 	);
 };

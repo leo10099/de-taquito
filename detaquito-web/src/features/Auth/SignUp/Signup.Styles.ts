@@ -10,3 +10,7 @@ export const SignUpFormContent = styled.div`
 	display: flex;
 	${FlexColumnCentered()};
 `;
+
+export const AlreadyRegistered = styled.span`
+	margin: 2rem auto;
+`;

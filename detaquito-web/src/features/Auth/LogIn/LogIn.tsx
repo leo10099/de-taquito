@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 // Components
-import { Button, Card, Image, Separator, TextInput } from "components";
+import { Button, Card, Image, Link, Separator, TextInput } from "components";
 
 // Slice
 import Auth from "../Auth.reducer";
@@ -27,7 +27,7 @@ import { emailPattern } from "utils/validation";
 import validation from "../SignUp/SignUp.validations";
 
 // Styles
-import { LogInContainer, LogInFormContent } from "./LogIn.Styles";
+import { LogInContainer, LogInFormContent, NotRegistered } from "./LogIn.Styles";
 
 const LogIn = () => {
 	const dispatch = useDispatch();
@@ -142,6 +142,9 @@ const LogIn = () => {
 					</LogInFormContent>
 				</form>
 			</Card>
+			<NotRegistered>
+				¿No tienes cuenta? <Link to="/auth/signup">Registrate.</Link>
+			</NotRegistered>
 		</LogInContainer>
 	);
 };

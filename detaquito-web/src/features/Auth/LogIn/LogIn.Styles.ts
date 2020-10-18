@@ -10,3 +10,7 @@ export const LogInFormContent = styled.div`
 	display: flex;
 	${FlexColumnCentered()};
 `;
+
+export const NotRegistered = styled.span`
+	margin: 2rem auto;
+`;
