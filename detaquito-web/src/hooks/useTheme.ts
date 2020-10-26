@@ -1,11 +1,11 @@
 import { useMedia, useLocalStorage } from "hooks";
 
-function usePrefersDarkMode() {
+function usePrefersDarkMode(): any {
 	return useMedia(["(prefers-color-scheme: dark)"], ["dark"], "light");
 }
 
-export function useTheme() {
-	const [enabledState, setEnabledState] = useLocalStorage("preferred-theme");
+export function useTheme(): [string, () => void] {
+	const [enabledState, setEnabledState] = useLocalStorage("preferred-theme", true);
 
 	// See if user has set a browser or OS preference for dark mode.
 	const prefersDarkMode = usePrefersDarkMode();

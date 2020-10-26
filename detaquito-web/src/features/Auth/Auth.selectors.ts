@@ -1,5 +1,6 @@
 // Typings
 import { RootState, StoreSliceAction } from "store";
+import { UserData } from "./Auth.reducer";
 
 // Token management
 export const selectAccessToken = (state: RootState): string => state.auth.token.accessToken;
@@ -20,4 +21,4 @@ export const selectForgottenPasswordReplacement = (state: RootState): StoreSlice
 	state.auth.passwordResetReplacement;
 
 // User Session
-export const selectCurrentUser = (state: RootState) => state.auth.user;
+export const selectCurrentUser = (state: RootState): UserData => state.auth.user;

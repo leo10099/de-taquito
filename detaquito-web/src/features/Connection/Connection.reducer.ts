@@ -13,6 +13,7 @@ export default createSlice({
 	},
 	reducers: {
 		setConnectionState: (state, _payload: PayloadAction<ConnectionStatus>) => {
+			console.log("[setConnectionState]", _payload);
 			return state;
 		},
 	},

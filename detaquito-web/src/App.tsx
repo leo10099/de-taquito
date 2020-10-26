@@ -16,7 +16,7 @@ import { ResetStyles, GlobalStyles } from "style";
 // Types
 import { Theme, dark, light } from "theme";
 
-function App() {
+const App: React.FC = () => {
 	// Hooks
 	const [currentTheme] = useTheme();
 
@@ -32,6 +32,6 @@ function App() {
 			<Router />
 		</ThemeProvider>
 	);
-}
+};
 
 export default App;

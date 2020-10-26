@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const FadeInFadeOutProvider: React.FunctionComponent<{}> = ({ children }) => {
+const FadeInFadeOutProvider: React.FC = ({ children }) => {
 	return (
 		<motion.div
 			exit={{ opacity: 0, height: "100vh", overflow: "hidden" }}

@@ -6,7 +6,7 @@ export function useMedia(
 	queries: Array<useMediaData>,
 	values: Array<useMediaData>,
 	defaultValue: useMediaData
-) {
+): useMediaData {
 	// Array containing a media query list for each query
 	const mediaQueryLists = queries.map(q => window.matchMedia(q as string));
 

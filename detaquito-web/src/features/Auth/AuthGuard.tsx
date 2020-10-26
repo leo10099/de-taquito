@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 
 // Hooks
 import { useDispatch, useSelector } from "react-redux";
@@ -14,10 +14,10 @@ import { Spinner } from "components";
 import { selectAccessTokenExpiry, selectCurrentUser } from "features/Auth/Auth.selectors";
 
 interface AuthGuardProps {
-	children: React.ReactNode;
+	children: React.ReactElement[];
 }
 
-const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
+const AuthGuard: React.FC<AuthGuardProps> = ({ children }: AuthGuardProps) => {
 	// Hooks
 	const dispatch = useDispatch();
 

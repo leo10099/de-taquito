@@ -29,7 +29,7 @@ import validation from "../SignUp/SignUp.validations";
 // Styles
 import { LogInContainer, LogInFormContent, NotRegistered } from "./LogIn.Styles";
 
-const LogIn = () => {
+const LogIn: React.FC = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
