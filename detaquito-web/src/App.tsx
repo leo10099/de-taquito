@@ -3,6 +3,9 @@ import React, { useMemo } from "react";
 // Styled-Components Theme Provider
 import { ThemeProvider } from "styled-components/macro";
 
+// Components
+import { Alert } from "components";
+
 // Router
 import Router from "router";
 
@@ -29,6 +32,7 @@ const App: React.FC = () => {
 		<ThemeProvider theme={theme}>
 			<ResetStyles />
 			<GlobalStyles />
+			<Alert />
 			<Router />
 		</ThemeProvider>
 	);

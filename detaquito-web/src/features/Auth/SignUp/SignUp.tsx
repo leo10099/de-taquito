@@ -21,8 +21,9 @@ import { selectRegistration } from "features/Auth/Auth.selectors";
 import Logo from "assets/img/logo.png";
 import { ReactComponent as GoogleIcon } from "assets/icons/google.svg";
 
-// Slice
+// Slices
 import Auth from "../Auth.reducer";
+import Notification from "features/Notification/Notification.reducer";
 
 // Typings
 import { SignUpFormData } from "features/Auth/Auth.types";
@@ -75,9 +76,16 @@ const SignUp: React.FC = () => {
 	// Handle successful registration
 	useEffect(() => {
 		if (createdUser) {
+			dispatch(
+				Notification.actions.openAlert({
+					text: "Te registraste correctamente",
+					type: "success",
+				})
+			);
+
 			navigate("/app/dashboard");
 		}
-	}, [createdUser, navigate]);
+	}, [createdUser, dispatch, navigate]);
 
 	// Handle unsuccessful registration
 	useEffect(() => {

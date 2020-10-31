@@ -58,6 +58,14 @@ const globalStyles = createGlobalStyle(
 				}
 			}
 		}
+
+		// Utility classes
+		.pointer {
+			cursor: pointer;
+		}
+		.fixed {
+			position: fixed;
+		}
 	`
 );
 
