@@ -48,6 +48,8 @@ const LogIn: React.FC = () => {
 		window.location.replace("/api/auth/google");
 	};
 
+	const handlePasswordForgotten = () => navigate("/auth/forgot");
+
 	const onSubmit = useCallback(
 		({ email, password }: any) => {
 			dispatch(Auth.actions.loginRequest({ email, secret: password }));
@@ -136,11 +138,13 @@ const LogIn: React.FC = () => {
 							isLoading={loading}
 							isDisabled={!!Object.keys(errors).length}
 							margin="2rem auto"
-							size="normal"
 							variant="primary"
 							type="submit"
 						>
 							Continuar
+						</Button>
+						<Button variant="primary_ghost" isBlock onClick={handlePasswordForgotten}>
+							<Link to="/auth/forgot">¿No recuerdas tu clave?</Link>
 						</Button>
 					</LogInFormContent>
 				</form>

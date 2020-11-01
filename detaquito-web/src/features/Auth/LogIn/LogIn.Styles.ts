@@ -7,7 +7,6 @@ export const LogInContainer = styled.main`
 `;
 
 export const LogInFormContent = styled.div`
-	display: flex;
 	${FlexColumnCentered()};
 `;
 

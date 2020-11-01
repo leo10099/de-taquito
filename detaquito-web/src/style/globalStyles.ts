@@ -47,14 +47,14 @@ const globalStyles = createGlobalStyle(
 
 			a {
 				text-decoration: none;
-				color: ${() => primary.primary400};
+				color: ${primary.primary400};
 
 				&:visited {
-					color: ${() => primary.primary400};
+					color: ${primary.primary400};
 				}
 
 				&:hover {
-					color: ${() => primary.primary200};
+					color: ${primary.primary200};
 				}
 			}
 		}

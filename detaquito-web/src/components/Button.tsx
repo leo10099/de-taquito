@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import styled from "styled-components/macro";
 import Spinner from "./Spinner";
 import { useTheme } from "hooks";
-import { Theme, gray } from "theme";
+import { Theme, gray, primary } from "theme";
 
 interface ButtonProps {
 	children: string | React.ReactChild;
@@ -13,15 +13,16 @@ interface ButtonProps {
 	margin?: string;
 	onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	rounded?: boolean;
-	size: string;
+	size?: string;
 	type?: "button" | "submit" | "reset" | undefined;
 	variant: Variants;
 }
 
-type Variants = "default" | "primary";
+type Variants = "default" | "primary" | "primary_ghost";
 enum Variant {
 	DEFAULT = "default",
 	PRIMARY = "primary",
+	PRIMARY_GHOST = "primary_ghost",
 }
 
 const BaseButton = styled.button.attrs((props: ButtonProps) => ({ type: props.type }))<ButtonProps>`
@@ -85,6 +86,29 @@ const PrimaryButton = styled(BaseButton).attrs((props: ButtonProps) => ({ type: 
 	}
 `;
 
+const PrimaryGhost = styled(PrimaryButton)`
+	background: transparent;
+	border: 0;
+	box-shadow: none;
+	outline: 0;
+
+	&:hover {
+		background-color: ${primary.primary050};
+		cursor: pointer;
+		transform: none;
+	}
+
+	&:active {
+		border-style: solid;
+		box-shadow: none;
+		transform: translateY(0.5px);
+	}
+
+	a:hover {
+		color: ${primary.primary400};
+	}
+`;
+
 const Button: React.FC<ButtonProps> = ({
 	children,
 	icon,
@@ -94,7 +118,7 @@ const Button: React.FC<ButtonProps> = ({
 	margin,
 	onClick,
 	rounded,
-	size,
+	size = "normal",
 	type,
 	variant,
 }) => {
@@ -138,6 +162,23 @@ const Button: React.FC<ButtonProps> = ({
 				>
 					{buttonContent}
 				</PrimaryButton>
+			);
+		case Variant.PRIMARY_GHOST:
+			return (
+				<PrimaryGhost
+					disabled={isDisabled}
+					icon={icon}
+					isBlock={isBlock}
+					isLoading={isLoading}
+					margin={margin}
+					onClick={onClick}
+					rounded={rounded}
+					size={size}
+					type={type}
+					variant={variant}
+				>
+					{buttonContent}
+				</PrimaryGhost>
 			);
 		default:
 			return (
