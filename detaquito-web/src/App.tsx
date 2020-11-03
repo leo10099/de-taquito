@@ -24,9 +24,7 @@ const App: React.FC = () => {
 	const [currentTheme] = useTheme();
 
 	// Memos
-	const theme = useMemo(() => {
-		return currentTheme === Theme.DARK ? dark : light;
-	}, [currentTheme]);
+	const theme = useMemo(() => (currentTheme === Theme.DARK ? dark : light), [currentTheme]);
 
 	return (
 		<ThemeProvider theme={theme}>

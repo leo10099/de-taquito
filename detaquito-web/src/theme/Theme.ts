@@ -207,7 +207,7 @@ export const light = {
 
 export enum Theme {
 	DARK = "dark",
-	LIGHT = "LIGHT",
+	LIGHT = "light",
 }
 
 export type ThemeType = typeof light & typeof dark;
