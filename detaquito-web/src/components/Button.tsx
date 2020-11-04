@@ -76,11 +76,11 @@ const PrimaryButton = styled(BaseButton).attrs((props: ButtonProps) => ({ type: 
 
 	&:disabled {
 		background-color: ${({ theme }) =>
-			theme.name === "dark" ? theme.elevation5 : theme.elevation3};
+			theme.name === Theme.DARK ? theme.elevation5 : theme.elevation3};
 		box-shadow: none;
-		color: ${({ theme }) => (theme.name === "dark" ? theme.elevation7 : theme.elevation4)};
+		color: ${({ theme }) => (theme.name === Theme.DARK ? theme.elevation7 : theme.elevation4)};
 		cursor: default;
-		opacity: ${({ theme }) => (theme.name === "dark" ? 0.4 : 0.9)};
+		opacity: ${({ theme }) => (theme.name === Theme.DARK ? 0.4 : 0.9)};
 		transform: none;
 		transition: 300ms all ease-in-out;
 	}
@@ -93,7 +93,8 @@ const PrimaryGhost = styled(PrimaryButton)`
 	outline: 0;
 
 	&:hover {
-		background-color: ${primary.primary050};
+		background-color: ${({ theme }) =>
+			theme.name === Theme.DARK ? gray.gray700 : primary.primary050};
 		cursor: pointer;
 		transform: none;
 	}
