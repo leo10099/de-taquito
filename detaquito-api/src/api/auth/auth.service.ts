@@ -22,6 +22,7 @@ import { CreateUserDtoLocalStrategy } from '../user/dto/create.user.dto.local';
 
 // Errors
 import { UserErrors } from '../user/user.errors';
+import { AUTH_FORGOT_PASSWORD_EMAIL_NOT_FOUND } from './auth.errors';
 
 // Typings
 import { MainConfig } from '../../config/configuration';
@@ -145,7 +146,7 @@ export class AuthService {
   async recoverPasswordRequest(email?: string): Promise<HttpException | boolean> {
     const existingUser = await this.userService.findOneByEmail(email);
     if (!existingUser) {
-      return new HttpException('Email not found', 400);
+      return new HttpException(AUTH_FORGOT_PASSWORD_EMAIL_NOT_FOUND, 400);
     }
 
     try {

@@ -133,7 +133,7 @@ const Button: React.FC<ButtonProps> = ({
 	}, [currentTheme, variant]);
 
 	const buttonContent = useMemo(() => {
-		if (isLoading) return <Spinner color={spinnerColor} />;
+		if (isLoading) return <Spinner color={spinnerColor} size={2} sizeUnit="px" />;
 		if (icon) {
 			return (
 				<span>

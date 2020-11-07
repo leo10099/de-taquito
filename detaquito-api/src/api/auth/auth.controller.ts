@@ -114,7 +114,7 @@ export class AuthController {
     @Query('token') recoveryToken: string,
     @Res() response: FastifyReply<ServerResponse>,
   ) {
-    return response.redirect(302, `/session/forgot?token=${recoveryToken}`);
+    return response.redirect(302, `/auth/forgot?token=${recoveryToken}`);
   }
 
   @Post('/forgot')

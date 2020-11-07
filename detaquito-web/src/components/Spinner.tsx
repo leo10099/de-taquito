@@ -40,6 +40,7 @@ const EllipsisSpinner = styled.div<SpinnerProps>`
 	height: calc(50% - 5px);
 	left: calc(50% - 33px);
 	position: relative;
+	width: fit-content;
 
 	div {
 		position: absolute;

@@ -135,7 +135,6 @@ const SignUp: React.FC = () => {
 							errorMessage={errors.email?.message}
 							hasError={!!errors.email}
 							id="SignUp-Email"
-							isFullWidth
 							label="Tu e-mail"
 							name="email"
 							ref={register({
@@ -158,7 +157,6 @@ const SignUp: React.FC = () => {
 							errorMessage={errors.alias?.message}
 							hasError={!!errors.alias}
 							id="SignUp-Alias"
-							isFullWidth
 							label="Tu nombre de usuario"
 							name="alias"
 							placeholder="Nombre"
@@ -177,7 +175,6 @@ const SignUp: React.FC = () => {
 							defaultValue=""
 							hasError={!!errors.password}
 							id="SignUp-Password"
-							isFullWidth
 							name="password"
 							errorMessage={errors.password?.message}
 							type="password"
