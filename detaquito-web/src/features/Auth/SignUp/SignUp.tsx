@@ -37,7 +37,7 @@ import {
 import { serverNotResponding } from "utils/errorMessages";
 
 // Styles
-import { SignUpContainer, SignUpFormContent, AlreadyRegistered } from "./SignUp.Styles";
+import { SignUpContainer, SignUpFormContent, AlreadyRegistered } from "./Signup.Styles";
 
 const SignUp: React.FC = () => {
 	const dispatch = useDispatch();
