@@ -7,6 +7,7 @@ import {
   Query,
   ClassSerializerInterceptor,
   NotFoundException,
+  Patch,
 } from '@nestjs/common';
 
 // Guards
@@ -15,6 +16,9 @@ import { JwtAuthGuard } from '../auth/auth.guard.jwt';
 // Components
 import { UserService } from './user.service';
 import { User } from './user.entity';
+
+// User Decorator
+import { User as UserData } from './user.decorator';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('/user')
@@ -53,5 +57,12 @@ export class UserController {
     }
 
     return new NotFoundException();
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch()
+  async UpdateUser(@Request() req, @UserData('id') userId) {
+    console.log('ID', userId);
+    this.userService.editUser(userId, req);
   }
 }
