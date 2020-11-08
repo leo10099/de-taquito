@@ -16,9 +16,8 @@ export class MailgunService {
 
   async sendEmailWithRecoverPasswordToken(email: string, token: string) {
     try {
-      const host = this.configService.get(MainConfig.HOST);
-      const port = this.configService.get(MainConfig.PORT);
-      const link = `${host}:${port}/api/auth/forgot?token=${token}`;
+      const webUrl = this.configService.get(MainConfig.WEB_URL);
+      const link = `${webUrl}/auth/forgot?token=${token}`;
       this.mailgun.unsubscribeLink = false;
       const template = buildPasswordRecoveryTemplate(link);
 

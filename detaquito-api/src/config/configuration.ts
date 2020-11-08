@@ -1,6 +1,7 @@
 export const Config = () => ({
   HOST: process.env.HOST ?? 'http://localhost',
   PORT: process.env.PORT ?? 7777,
+  WEB_URL: process.env.WEB_URL,
   IS_DEV: process.env.NODE_ENV === 'development',
   JTW_SECRET: process.env.JWT_TOKEN_SECRET,
   JWT_ACCESS_TOKEN_EXPIRY: process.env.JWT_ACCESS_TOKEN_EXPIRY,
@@ -29,6 +30,7 @@ export enum MainConfig {
   JWT_REFRESH_TOKEN_EXPIRY = 'JWT_REFRESH_TOKEN_EXPIRY',
   PORT = 'PORT',
   HOST = 'HOST',
+  WEB_URL = 'WEB_URL',
   IS_DEV = 'IS_DEV',
 }
 
