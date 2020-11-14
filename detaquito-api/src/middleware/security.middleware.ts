@@ -1,7 +1,7 @@
 import { NestFastifyApplication } from '@nestjs/platform-fastify';
 import { ValidationPipe } from '@nestjs/common';
-import * as helmet from 'helmet';
-import * as rateLimit from 'fastify-rate-limit';
+import helmet from 'helmet';
+import rateLimit from 'fastify-rate-limit';
 
 export class SecurityMiddleware {
   static apply(app: NestFastifyApplication) {
@@ -12,7 +12,7 @@ export class SecurityMiddleware {
 
     app.use(helmet());
 
-    app.register(rateLimit, {
+    app.register(rateLimit as any, {
       max: 100,
       timeWindow: '1 minute',
       addHeaders: {

@@ -22,6 +22,11 @@ export const Config = () => ({
     MAILGUN_API_KEY: process.env.MAILGUN_API_KEY,
     MAILGUN_DOMAIN: process.env.MAILGUN_DOMAIN,
   },
+  CLOUDINARY: {
+    CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
+    CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
+    CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
+  },
 });
 
 export enum MainConfig {
@@ -57,4 +62,10 @@ export enum RapidApiConfig {
 export enum MailgunConfig {
   MAILGUN_API_KEY = 'MAILGUN_API_KEY',
   MAILGUN_DOMAIN = 'MAILGUN_DOMAIN',
+}
+
+export enum CloudinaryConfig {
+  CLOUDINARY_CLOUD_NAME = 'CLOUDINARY_CLOUD_NAME',
+  CLOUDINARY_API_KEY = 'CLOUDINARY_API_KEY',
+  CLOUDINARY_API_SECRET = 'CLOUDINARY_API_SECRET',
 }

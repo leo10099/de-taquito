@@ -10,7 +10,6 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { ServerResponse } from 'http';
 import { FastifyReply } from 'fastify';
 
 // Guards
@@ -45,7 +44,7 @@ export class AuthController {
   @TransformClassToPlain()
   async localRegister(
     @Body() localRegisterDto: CreateUserDtoLocalStrategy,
-    @Res() response: FastifyReply<ServerResponse>,
+    @Res() response: FastifyReply,
   ) {
     const createdUser = await this.authService.localSignUp(localRegisterDto);
     return await this.login(createdUser, response);
@@ -53,10 +52,7 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('/local/login')
-  async login(
-    @User() user: UserEntity,
-    @Res() response: FastifyReply<ServerResponse>,
-  ): Promise<FastifyReply<ServerResponse>> {
+  async login(@User() user: UserEntity, @Res() response: FastifyReply): Promise<FastifyReply> {
     const tokenPayload: TokenAuthorizationPayload = await this.authService.logUserIn(user);
 
     response.setCookie('token', tokenPayload.refreshToken, {
@@ -84,7 +80,7 @@ export class AuthController {
 
   @UseGuards(GoogleAuthGuard)
   @Get('/google/callback')
-  async googleLoginCallback(@Req() request, @Res() response: FastifyReply<ServerResponse>) {
+  async googleLoginCallback(@Req() request, @Res() response: FastifyReply) {
     const tokenPayload: TokenAuthorizationPayload = await this.authService.logUserIn(request.user);
 
     response.setCookie('token', tokenPayload.refreshToken, {
@@ -110,10 +106,7 @@ export class AuthController {
   }
 
   @Get('/forgot')
-  async recoverPassword(
-    @Query('token') recoveryToken: string,
-    @Res() response: FastifyReply<ServerResponse>,
-  ) {
+  async recoverPassword(@Query('token') recoveryToken: string, @Res() response: FastifyReply) {
     return response.redirect(302, `/auth/forgot?token=${recoveryToken}`);
   }
 

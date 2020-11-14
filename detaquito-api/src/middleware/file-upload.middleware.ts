@@ -1,9 +1,9 @@
-import * as fastifyCookie from 'fastify-cookie';
+import * as fastifyMulter from 'fastify-multer';
 import { NestFastifyApplication } from '@nestjs/platform-fastify';
 
-export class HttpMiddleware {
+export class FileUploadMiddleware {
   static apply(app: NestFastifyApplication) {
-    app.register(fastifyCookie as any);
+    app.register(fastifyMulter.contentParser);
     return app;
   }
 }

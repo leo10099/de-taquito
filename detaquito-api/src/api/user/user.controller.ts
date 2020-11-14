@@ -8,10 +8,19 @@ import {
   ClassSerializerInterceptor,
   NotFoundException,
   Patch,
+  Body,
+  UploadedFile,
 } from '@nestjs/common';
+import { FileInterceptor } from '@webundsoehne/nest-fastify-file-upload';
 
 // Guards
 import { JwtAuthGuard } from '../auth/auth.guard.jwt';
+
+// DTOs
+import { EditUserDto } from './dto/edit.user.dto';
+
+// Interceptors
+import { FileUploadValidationInterceptor } from '../../interceptors/file-upload.interceptor';
 
 // Components
 import { UserService } from './user.service';
@@ -19,6 +28,9 @@ import { User } from './user.entity';
 
 // User Decorator
 import { User as UserData } from './user.decorator';
+
+// Types
+import { FormDataFileMetadata } from '../../typings';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('/user')
@@ -60,9 +72,13 @@ export class UserController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @UseInterceptors(FileInterceptor('file'), FileUploadValidationInterceptor)
   @Patch()
-  async UpdateUser(@Request() req, @UserData('id') userId) {
-    console.log('ID', userId);
-    this.userService.editUser(userId, req);
+  async updateUser(
+    @UserData('sub') id,
+    @Body() editUserDto: EditUserDto,
+    @UploadedFile() file?: FormDataFileMetadata,
+  ) {
+    this.userService.editUser(id, editUserDto, file);
   }
 }

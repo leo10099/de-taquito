@@ -1,6 +1,6 @@
 import { IsString, IsEmail, IsOptional, MinLength, MaxLength } from 'class-validator';
 
-export class CreateUserDtoLocalStrategy {
+export class EditUserDto {
   @IsOptional()
   @IsString()
   @IsEmail()
@@ -10,7 +10,7 @@ export class CreateUserDtoLocalStrategy {
   @IsString()
   @MinLength(6)
   @MaxLength(50)
-  secret: string;
+  secret?: string;
 
   @IsOptional()
   @IsString()
@@ -23,5 +23,5 @@ export class CreateUserDtoLocalStrategy {
   favTeam?: string;
 
   @IsOptional()
-  avatar: any;
+  avatarUrl?: any;
 }

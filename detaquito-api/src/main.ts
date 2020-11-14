@@ -13,6 +13,7 @@ import { MainConfig } from './config/configuration';
 // Middleware
 import { HttpMiddleware } from './middleware/http.middleware';
 import { SecurityMiddleware } from './middleware/security.middleware';
+import { FileUploadMiddleware } from './middleware/file-upload.middleware';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter(), {
@@ -25,6 +26,7 @@ async function bootstrap() {
 
   HttpMiddleware.apply(app);
   SecurityMiddleware.apply(app);
+  FileUploadMiddleware.apply(app);
 
   await app.listen(PORT, '0.0.0.0', () => {
     Logger.log(`De Taquito corriendo en el puerto ${PORT}`);
