@@ -1,10 +1,10 @@
-import Alert from "./Alert";
-import Button from "./Button";
-import Card from "./Card";
-import Image from "./Image";
-import Link from "./Link";
-import Separator from "./Separator";
-import Spinner from "./Spinner";
-import TextInput from "./TextInput";
+import Alert from "./UI/Alert";
+import Button from "./UI/Button";
+import Card from "./UI/Card";
+import Image from "./UI/Image";
+import Link from "./UI/Link";
+import Separator from "./UI/Separator";
+import Spinner from "./UI/Spinner";
+import TextInput from "./UI/TextInput";
 
 export { Alert, Button, Card, Image, Separator, Spinner, TextInput, Link };
