@@ -1,5 +1,5 @@
 import { css, createGlobalStyle } from "style";
-import { primary, ThemeType } from "theme";
+import { primary, ThemeType, breakpoints } from "theme";
 import { generateResponsiveText } from "utils/styles";
 
 interface Props {
@@ -24,14 +24,6 @@ export type ResponsiveConfigOptions = {
 	};
 };
 
-export const responsiveOptions = {
-	mobile: { breakpoint: 0, baseFontSize: 1.4 },
-	tablet: { breakpoint: 560, baseFontSize: 1.5 },
-	notebook: { breakpoint: 1200, baseFontSize: 1.75 },
-	desktop: { breakpoint: 1440, baseFontSize: 2 },
-	fullHd: { breakpoint: 1920, baseFontSize: 2.25 },
-};
-
 const globalStyles = createGlobalStyle(
 	(props: Props) => css`
 		html {
@@ -44,7 +36,7 @@ const globalStyles = createGlobalStyle(
 			font-family: "Open Sans", sans-serif;
 			padding: 0;
 
-			${generateResponsiveText(responsiveOptions)};
+			${generateResponsiveText(breakpoints)};
 
 			a {
 				text-decoration: none;
@@ -69,5 +61,12 @@ const globalStyles = createGlobalStyle(
 		}
 	`
 );
+
+export const mediaQueries = {
+	minTablet: `@media screen and (min-width: ${breakpoints.tablet.breakpoint})px`,
+	minNotebook: `@media screen and (min-width: ${breakpoints.notebook.breakpoint})px`,
+	minDesktop: `@media screen and (min-width: ${breakpoints.desktop.breakpoint})px`,
+	minFullHd: `@media screen and (min-width: ${breakpoints.fullHd.breakpoint})px`,
+};
 
 export default globalStyles;

@@ -74,6 +74,7 @@ export const gray = {
 	gray950: "#121212",
 };
 
+// Shadows
 const opacity = { umbra: 0.2, penumbra: 0.14, ambient: 0.12 };
 
 export const shadow = {
@@ -129,6 +130,16 @@ export const shadow = {
 	0 24px 38px  3px ${rgba(error.error500, opacity.ambient)};`,
 };
 
+// Breakpoints
+export const breakpoints = {
+	mobile: { breakpoint: 0, baseFontSize: 1.4 },
+	tablet: { breakpoint: 560, baseFontSize: 1.5 },
+	notebook: { breakpoint: 1200, baseFontSize: 1.75 },
+	desktop: { breakpoint: 1440, baseFontSize: 2 },
+	fullHd: { breakpoint: 1920, baseFontSize: 2.25 },
+};
+
+// Themes
 export const dark = {
 	name: "dark",
 	error: error.error300,

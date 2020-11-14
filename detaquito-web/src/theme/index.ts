@@ -1,5 +1,5 @@
-import { dark, light, gray, primary, shadow, Theme } from "./Theme";
+import { dark, light, gray, primary, shadow, breakpoints, Theme } from "./Theme";
 import type { ThemeType } from "./Theme";
 
-export { Theme, dark, light, gray, primary, shadow };
+export { Theme, dark, light, gray, primary, shadow, breakpoints };
 export type { ThemeType };
