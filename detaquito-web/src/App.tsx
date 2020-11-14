@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 import { ThemeProvider } from "styled-components/macro";
 
 // Components
-import { Alert } from "components";
+import { Layout, Alert } from "components";
 
 // Router
 import Router from "router";
@@ -31,7 +31,9 @@ const App: React.FC = () => {
 			<ResetStyles />
 			<GlobalStyles />
 			<Alert />
-			<Router />
+			<Layout>
+				<Router />
+			</Layout>
 		</ThemeProvider>
 	);
 };

@@ -9,9 +9,11 @@ interface RouteTransitionProps {
 
 const RouteTransition: React.FC<RouteTransitionProps> = ({ path, component: Component }) => {
 	return (
-		<FadeInFadeOutProvider>
-			<Route path={path} element={<Component />} />
-		</FadeInFadeOutProvider>
+		<main id="Main">
+			<FadeInFadeOutProvider>
+				<Route path={path} element={<Component />} />
+			</FadeInFadeOutProvider>
+		</main>
 	);
 };
 

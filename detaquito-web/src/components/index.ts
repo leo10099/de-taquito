@@ -1,3 +1,4 @@
+// UI
 import Alert from "./UI/Alert";
 import Button from "./UI/Button";
 import Card from "./UI/Card";
@@ -7,4 +8,21 @@ import Separator from "./UI/Separator";
 import Spinner from "./UI/Spinner";
 import TextInput from "./UI/TextInput";
 
-export { Alert, Button, Card, Image, Separator, Spinner, TextInput, Link };
+// Layout
+import Container from "./Container";
+import Header from "./Header";
+import Layout from "./Layout";
+
+export {
+	Alert,
+	Button,
+	Card,
+	Image,
+	Separator,
+	Spinner,
+	TextInput,
+	Link,
+	Header,
+	Layout,
+	Container,
+};
