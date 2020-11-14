@@ -29,6 +29,7 @@ export const responsiveOptions = {
 	tablet: { breakpoint: 560, baseFontSize: 1.5 },
 	notebook: { breakpoint: 1200, baseFontSize: 1.75 },
 	desktop: { breakpoint: 1440, baseFontSize: 2 },
+	fullHd: { breakpoint: 1920, baseFontSize: 2.5 },
 };
 
 const globalStyles = createGlobalStyle(
