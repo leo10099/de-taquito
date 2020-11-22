@@ -1,11 +1,16 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 
+// Components
+import { Layout } from "components";
+
 import Public from "./Public.Routes";
 
 const Router: React.FC = () => (
 	<BrowserRouter>
-		<Public />
+		<Layout>
+			<Public />
+		</Layout>
 	</BrowserRouter>
 );
 

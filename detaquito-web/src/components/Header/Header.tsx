@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { Link } from "react-router-dom";
 
 // Styles
 import { Header as HeaderContainer, Logo, Menu, MenuItem } from "./Header.Styles";
@@ -29,7 +30,10 @@ const Header: React.FC = () => {
 			isTranslucent={window.location.pathname === "/"}
 			shouldShowHeader={shouldShowHeader}
 		>
-			<Logo src={LogoImage} />
+			<Link to="/">
+				<Logo src={LogoImage} />
+			</Link>
+
 			<Menu>
 				<MenuItem>
 					<SignInIcon />
