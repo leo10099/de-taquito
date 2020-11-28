@@ -12,6 +12,7 @@ import TextInput from "./UI/TextInput";
 import Container from "./Container";
 import Header from "./Header";
 import Layout from "./Layout";
+import NavTabs from "./NavTabs";
 
 export {
 	Alert,
@@ -25,4 +26,5 @@ export {
 	Header,
 	Layout,
 	Container,
+	NavTabs,
 };

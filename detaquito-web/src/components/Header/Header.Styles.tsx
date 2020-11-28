@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components/macro";
 
 // Theme
-import { gray } from "theme";
+import { gray, Theme } from "theme";
 
 interface HeaderProps {
 	isTranslucent?: boolean;
@@ -10,7 +10,7 @@ interface HeaderProps {
 
 export const Header = styled.header<HeaderProps>`
 	align-items: center;
-	background-color: ${({ isTranslucent }) => (isTranslucent ? "transparent" : gray.gray050)};
+	background-color: ${({ isTranslucent }) => (isTranslucent ? "transparent" : gray.gray100)};
 	${({ isTranslucent, theme }) =>
 		!isTranslucent &&
 		css`
@@ -41,6 +41,7 @@ export const Menu = styled.ul`
 `;
 
 export const MenuItem = styled.li`
+	color: ${({ theme }) => (theme.name === Theme.DARK ? gray.gray010 : gray.gray400)};
 	cursor: pointer;
 	height: 48px;
 	width: 48px;
@@ -49,7 +50,7 @@ export const MenuItem = styled.li`
 	svg {
 		width: 100%;
 		height: 100%;
-		fill: ${({ theme }) => theme.color};
+		fill: ${({ theme }) => (theme.name === Theme.DARK ? gray.gray010 : gray.gray500)};
 	}
 `;
 
