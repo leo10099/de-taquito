@@ -60,12 +60,12 @@ const error = {
 };
 
 export const gray = {
-	gray010: "#FAFAFA",
-	gray050: "#F5F5F5",
-	gray100: "#EEEEEE",
+	gray010: "#FEFEFE",
+	gray050: "#FDFDFD",
+	gray100: "#F6F6F6",
 	gray200: "#E0E0E0",
 	gray300: "#BDBDBD",
-	gray400: "#9E9E9E",
+	gray400: "#9A9EB2",
 	gray500: "#757575",
 	gray600: "#404040",
 	gray700: "#353535",
@@ -132,8 +132,8 @@ export const shadow = {
 
 // Breakpoints
 export const breakpoints = {
-	mobile: { breakpoint: 0, baseFontSize: 1.4 },
-	tablet: { breakpoint: 560, baseFontSize: 1.5 },
+	mobile: { breakpoint: 0, baseFontSize: 1.2 },
+	tablet: { breakpoint: 560, baseFontSize: 1.4 },
 	notebook: { breakpoint: 1200, baseFontSize: 1.75 },
 	desktop: { breakpoint: 1440, baseFontSize: 2 },
 	fullHd: { breakpoint: 1920, baseFontSize: 2.25 },
@@ -199,7 +199,7 @@ export const light = {
 	elevation7: gray.gray600,
 	elevation8: gray.gray700,
 	elevation9: gray.gray800,
-	background: gray.gray100,
+	background: gray.gray050,
 	shadowElevation1: shadow.regular005,
 	shadowElevation2: shadow.regular010,
 	shadowElevation3: shadow.regular020,

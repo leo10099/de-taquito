@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components/macro";
 
 // Theme
-import { gray } from "theme";
+import { gray, primary, Theme } from "theme";
 
 interface HeaderProps {
 	isTranslucent?: boolean;
@@ -10,7 +10,7 @@ interface HeaderProps {
 
 export const Header = styled.header<HeaderProps>`
 	align-items: center;
-	background-color: ${({ isTranslucent }) => (isTranslucent ? "transparent" : gray.gray050)};
+	background-color: ${({ isTranslucent }) => (isTranslucent ? "transparent" : primary.primary600)};
 	${({ isTranslucent, theme }) =>
 		!isTranslucent &&
 		css`
@@ -23,7 +23,7 @@ export const Header = styled.header<HeaderProps>`
 	padding: 0 8px;
 	position: fixed;
 	width: 100vw;
-	height: 74px;
+	height: 54px;
 	transition: transform 400ms ease-in;
 	${({ shouldShowHeader }) =>
 		shouldShowHeader
@@ -40,19 +40,22 @@ export const Menu = styled.ul`
 	display: flex;
 `;
 
-export const MenuItem = styled.li`
+export const MenuItem = styled.li<{ isTranslucent: boolean }>`
+	color: ${({ theme, isTranslucent }) =>
+		isTranslucent ? (theme.name === Theme.DARK ? gray.gray100 : gray.gray600) : gray.gray010};
 	cursor: pointer;
-	height: 48px;
-	width: 48px;
+	height: 44px;
+	width: 44px;
 	padding: 12px;
 
 	svg {
 		width: 100%;
 		height: 100%;
-		fill: ${({ theme }) => theme.color};
+		fill: ${({ theme, isTranslucent }) =>
+			isTranslucent ? (theme.name === Theme.DARK ? gray.gray010 : gray.gray600) : gray.gray010};
 	}
 `;
 
 export const Logo = styled.img`
-	height: 48px;
+	height: 32px;
 `;

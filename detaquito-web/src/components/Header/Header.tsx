@@ -9,7 +9,7 @@ import { FaBars } from "react-icons/fa";
 import { SignInIcon } from "components/UI/Icon";
 
 // Assets
-import LogoImage from "assets/img/logo.png";
+import LogoText from "assets/img/logotipo.png";
 
 // Hooks
 import { useScrollDirection } from "hooks";
@@ -24,21 +24,19 @@ const Header: React.FC = () => {
 		scrollPositionAtTop,
 	]);
 
+	const isTranslucent = useMemo(() => window.location.pathname === "/", []);
+
 	return (
-		<HeaderContainer
-			id="Footer"
-			isTranslucent={window.location.pathname === "/"}
-			shouldShowHeader={shouldShowHeader}
-		>
+		<HeaderContainer id="Footer" isTranslucent={isTranslucent} shouldShowHeader={shouldShowHeader}>
 			<Link to="/">
-				<Logo src={LogoImage} />
+				<Logo src={LogoText} />
 			</Link>
 
 			<Menu>
-				<MenuItem>
+				<MenuItem isTranslucent={isTranslucent}>
 					<SignInIcon />
 				</MenuItem>
-				<MenuItem>
+				<MenuItem isTranslucent={isTranslucent}>
 					<FaBars />
 				</MenuItem>
 			</Menu>
