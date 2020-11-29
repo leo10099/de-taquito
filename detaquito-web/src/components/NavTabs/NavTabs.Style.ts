@@ -1,15 +1,29 @@
-import styled from "styled-components/macro";
+import styled, { css } from "styled-components/macro";
 import { gray, primary, Theme } from "theme";
+import { mediaQueries } from "style";
 
-export const NavTabsContainer = styled.nav`
-	background-color: ${primary.primary500};
-	position: fixed;
-	bottom: 0;
-	width: 100vw;
-	height: 60px;
+export const NavTabsContainer = styled.nav<{ shouldShowNavTabs: boolean }>`
 	// Layout Container offset
-	margin-left: -8px;
+	background-color: ${primary.primary500};
+	bottom: 0;
 	box-shadow: ${({ theme }) => theme.shadowElevation1};
+	height: 54px;
+	margin-left: -8px;
+	position: fixed;
+	transition: transform 400ms ease-in;
+	width: 100vw;
+	${({ shouldShowNavTabs }) =>
+		shouldShowNavTabs
+			? css`
+					transform: translate3d(0, 0, 0);
+			  `
+			: css`
+					transform: translate3d(0, 110%, 0);
+			  `}
+
+	${mediaQueries.minTablet} {
+		display: none;
+	}
 `;
 
 export const NavTabsTabs = styled.ul`
@@ -26,7 +40,6 @@ export const NavTabsTab = styled.li<{ isActive: boolean }>`
 	letter-spacing: 0.5px;
 	font-weight: 600;
 	text-transform: uppercase;
-	opacity: ${({ isActive }) => (isActive ? 1 : 0.75)};
 `;
 
 export const NavTabsLink = styled.a<{ isActive: boolean }>`
@@ -46,6 +59,7 @@ export const NavTabsLink = styled.a<{ isActive: boolean }>`
 	}
 `;
 
-export const NavTabsLabel = styled.p`
+export const NavTabsLabel = styled.p<{ isActive: boolean }>`
 	color: ${gray.gray100};
+	opacity: ${({ isActive }) => (isActive ? 1 : 0.75)};
 `;

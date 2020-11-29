@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useLocation } from "react-router-dom";
 
 // Components
@@ -15,6 +15,9 @@ import {
 
 // Enums
 import { RoutesList } from "router";
+
+// Hooks
+import { useScrollDirection } from "hooks";
 
 const tabs = [
 	{
@@ -42,9 +45,16 @@ const tabs = [
 const NavTabs: React.FC = () => {
 	// Hooks
 	const location = useLocation();
+	const { scrollDir, scrollPositionAtTop } = useScrollDirection();
+
+	// Memos
+	const shouldShowNavTabs = useMemo(() => scrollDir === "UP" || scrollPositionAtTop, [
+		scrollDir,
+		scrollPositionAtTop,
+	]);
 
 	return (
-		<NavTabsContainer id="NavTabs">
+		<NavTabsContainer id="NavTabs" shouldShowNavTabs={shouldShowNavTabs}>
 			<NavTabsTabs>
 				{tabs.map(({ label, icon: Icon, path }) => {
 					const isActive = location.pathname === path;
@@ -53,7 +63,7 @@ const NavTabs: React.FC = () => {
 						<NavTabsTab key={path} isActive={isActive}>
 							<NavTabsLink href={path} isActive={isActive}>
 								<Icon />
-								<NavTabsLabel>{label}</NavTabsLabel>
+								<NavTabsLabel isActive={isActive}>{label}</NavTabsLabel>
 							</NavTabsLink>
 						</NavTabsTab>
 					);
