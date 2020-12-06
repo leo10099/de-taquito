@@ -14,7 +14,11 @@ import LogoText from "assets/img/logotipo.png";
 // Hooks
 import { useScrollDirection } from "hooks";
 
-const Header: React.FC = () => {
+interface HeaderProps {
+	toggleSideDrawer: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 	// Hooks
 	const { scrollDir, scrollPositionAtTop } = useScrollDirection();
 
@@ -27,7 +31,7 @@ const Header: React.FC = () => {
 	const isTranslucent = useMemo(() => window.location.pathname === "/", []);
 
 	return (
-		<HeaderContainer id="Footer" isTranslucent={isTranslucent} shouldShowHeader={shouldShowHeader}>
+		<HeaderContainer id="Header" isTranslucent={isTranslucent} shouldShowHeader={shouldShowHeader}>
 			<Link to="/">
 				<Logo src={LogoText} />
 			</Link>
@@ -36,7 +40,7 @@ const Header: React.FC = () => {
 				<MenuItem isTranslucent={isTranslucent}>
 					<SignInIcon />
 				</MenuItem>
-				<MenuItem isTranslucent={isTranslucent}>
+				<MenuItem isTranslucent={isTranslucent} onClick={toggleSideDrawer}>
 					<FaBars />
 				</MenuItem>
 			</Menu>

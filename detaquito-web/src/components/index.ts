@@ -13,6 +13,7 @@ import Container from "./Container";
 import Header from "./Header";
 import Layout from "./Layout";
 import NavTabs from "./NavTabs";
+import SideDrawer from "./SideDrawer";
 
 export {
 	Alert,
@@ -27,4 +28,5 @@ export {
 	Layout,
 	Container,
 	NavTabs,
+	SideDrawer,
 };
