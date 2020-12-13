@@ -63,10 +63,10 @@ const globalStyles = createGlobalStyle(
 );
 
 export const mediaQueries = {
-	minTablet: `@media screen and (min-width: ${breakpoints.tablet.breakpoint})px`,
-	minNotebook: `@media screen and (min-width: ${breakpoints.notebook.breakpoint})px`,
-	minDesktop: `@media screen and (min-width: ${breakpoints.desktop.breakpoint})px`,
-	minFullHd: `@media screen and (min-width: ${breakpoints.fullHd.breakpoint})px`,
+	minTablet: `@media screen and (min-width: ${breakpoints.tablet.breakpoint}px)`,
+	minNotebook: `@media screen and (min-width: ${breakpoints.notebook.breakpoint}px)`,
+	minDesktop: `@media screen and (min-width: ${breakpoints.desktop.breakpoint}px)`,
+	minFullHd: `@media screen and (min-width: ${breakpoints.fullHd.breakpoint}px)`,
 };
 
 export default globalStyles;

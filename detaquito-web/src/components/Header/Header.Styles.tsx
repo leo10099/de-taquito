@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components/macro";
+import { mediaQueries } from "style";
 
 // Theme
 import { gray, primary, Theme } from "theme";
@@ -14,7 +15,7 @@ export const Header = styled.header<HeaderProps>`
 	${({ isTranslucent, theme }) =>
 		!isTranslucent &&
 		css`
-			box-shadow: ${theme.shadowElevation1};
+			: ${theme.shadowElevation1};
 		`};
 	display: flex;
 	justify-content: space-between;
@@ -38,6 +39,10 @@ export const Header = styled.header<HeaderProps>`
 export const Menu = styled.ul`
 	align-items: center;
 	display: flex;
+
+	${mediaQueries.minTablet} {
+		display: none;
+	}
 `;
 
 export const MenuItem = styled.li<{ isTranslucent: boolean }>`
