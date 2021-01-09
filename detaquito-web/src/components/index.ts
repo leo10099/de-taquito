@@ -9,7 +9,6 @@ import Spinner from "./UI/Spinner";
 import TextInput from "./UI/TextInput";
 
 // Layout
-import Backdrop from "./Backdrop";
 import Container from "./Container";
 import Header from "./Header";
 import Layout from "./Layout";
@@ -18,7 +17,6 @@ import SideDrawer from "./SideDrawer";
 
 export {
 	Alert,
-	Backdrop,
 	Button,
 	Card,
 	Image,

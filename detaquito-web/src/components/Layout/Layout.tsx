@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // Components
-import { Backdrop, Header, NavTabs, Container as LayoutContainer, SideDrawer } from "components";
+import { Header, NavTabs, Container as LayoutContainer, SideDrawer } from "components";
 
 interface LayoutProps {
 	children: React.ReactElement;
@@ -18,7 +18,7 @@ const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
 		<LayoutContainer>
 			<Header toggleSideDrawer={toggleSideDrawer} />
 			<SideDrawer isHidden={!isSideDrawerOpen} toggleSideDrawer={toggleSideDrawer} />
-			<Backdrop isActive={isSideDrawerOpen}>{children}</Backdrop>
+			{children}
 			<NavTabs />
 		</LayoutContainer>
 	);
