@@ -26,7 +26,7 @@ const tabs = [
 		path: RoutesList.HOME,
 	},
 	{
-		label: "Pronosticar",
+		label: "Prode",
 		icon: CalendarIcon,
 		path: RoutesList.PREDICT,
 	},

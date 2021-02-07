@@ -4,10 +4,10 @@ import { mediaQueries } from "style";
 
 export const NavTabsContainer = styled.nav<{ shouldShowNavTabs: boolean }>`
 	// Layout Container offset
-	background-color: ${primary.primary500};
+	background-color: rgba(63, 79, 231, 0.8);
 	bottom: 0;
 	box-shadow: ${({ theme }) => theme.shadowElevation1};
-	height: 54px;
+	height: 64px;
 	margin-left: -8px;
 	position: fixed;
 	transition: transform 400ms ease-in;
@@ -50,6 +50,11 @@ export const NavTabsLink = styled.a<{ isActive: boolean }>`
 	height: 100%;
 	width: 100%;
 	color: ${gray.gray010};
+	${({ theme, isActive }) =>
+		isActive &&
+		css`
+			background-color: ${theme.primaryMain};
+		`};
 
 	> svg {
 		opacity: ${({ isActive }) => (isActive ? 1 : 0.75)};

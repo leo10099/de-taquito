@@ -11,7 +11,8 @@ interface HeaderProps {
 
 export const Header = styled.header<HeaderProps>`
 	align-items: center;
-	background-color: ${({ isTranslucent }) => (isTranslucent ? "transparent" : primary.primary600)};
+	background-color: ${({ isTranslucent }) =>
+		isTranslucent ? "transparent" : "rgba(63, 79, 231, 0.8)"};
 	${({ isTranslucent, theme }) =>
 		!isTranslucent &&
 		css`
@@ -24,7 +25,7 @@ export const Header = styled.header<HeaderProps>`
 	padding: 0 8px;
 	position: fixed;
 	width: 100vw;
-	height: 54px;
+	height: 80px;
 	transition: transform 400ms ease-in;
 	${({ shouldShowHeader }) =>
 		shouldShowHeader
