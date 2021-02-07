@@ -28,7 +28,6 @@ const CardContainer = styled.div<CardProps>`
 		`};
 	position: relative;
 	padding: 1rem;
-	width: calc(100vw - 20px);
 
 	@media screen and (min-width: 768px) {
 		padding: 1.5rem;
