@@ -1,15 +1,6 @@
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
-
-// Styles
-import {
-	Header as HeaderContainer,
-	Logo,
-	MenuMobile,
-	MenuItemMobile,
-	MenuDesktop,
-	MenuItemDesktop,
-} from "./Header.Styles";
+import { useSelector } from "react-redux";
 
 // Icons
 import { FaBars } from "react-icons/fa";
@@ -21,6 +12,22 @@ import LogoText from "assets/img/logotipo.png";
 // Hooks
 import { useScrollDirection } from "hooks";
 
+// Selectors
+import { selectCurrentUser } from "features/Auth/Auth.selectors";
+
+// Providers
+import { UserProvider } from "providers";
+
+// Styles
+import {
+	Header as HeaderContainer,
+	Logo,
+	MenuMobile,
+	MenuItemMobile,
+	MenuDesktop,
+	MenuItemDesktop,
+} from "./Header.Styles";
+
 interface HeaderProps {
 	toggleSideDrawer: () => void;
 }
@@ -29,6 +36,9 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 	// Hooks
 	const { scrollDir, scrollPositionAtTop } = useScrollDirection();
 
+	// Selectors
+	const user = useSelector(selectCurrentUser);
+
 	// Memos
 	const shouldShowHeader = useMemo(() => scrollDir === "UP" || scrollPositionAtTop, [
 		scrollDir,
@@ -36,6 +46,8 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 	]);
 
 	const isTranslucent = useMemo(() => window.location.pathname === "/", []);
+
+	const isLoggedIn = useMemo(() => !!user.id, [user]);
 
 	const mobileMenu = useMemo(() => {
 		return (
@@ -53,22 +65,30 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 	const desktopMenu = useMemo(() => {
 		return (
 			<MenuDesktop>
-				<MenuItemDesktop isTranslucent={isTranslucent}>Ingresar</MenuItemDesktop>
+				<MenuItemDesktop isTranslucent={isTranslucent}>
+					{isLoggedIn ? "Salir" : "Ingresar"}
+				</MenuItemDesktop>
 			</MenuDesktop>
 		);
-	}, [isTranslucent]);
+	}, [isLoggedIn, isTranslucent]);
 
 	return (
-		<HeaderContainer id="Header" isTranslucent={isTranslucent} shouldShowHeader={shouldShowHeader}>
-			<Link to="/">
-				<Logo src={LogoText} />
-			</Link>
+		<UserProvider>
+			<HeaderContainer
+				id="Header"
+				isTranslucent={isTranslucent}
+				shouldShowHeader={shouldShowHeader}
+			>
+				<Link to="/">
+					<Logo src={LogoText} />
+				</Link>
 
-			{/* Mobile Menu */}
-			{mobileMenu}
-			{/* Desktop Menu */}
-			{desktopMenu}
-		</HeaderContainer>
+				{/* Mobile Menu */}
+				{mobileMenu}
+				{/* Desktop Menu */}
+				{desktopMenu}
+			</HeaderContainer>
+		</UserProvider>
 	);
 };
 

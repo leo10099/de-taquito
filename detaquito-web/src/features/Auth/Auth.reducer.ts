@@ -10,7 +10,7 @@ export type SetAccessTokenPayload = { accessToken: string; accessTokenExpiry?: n
 export type LoginPayload = { email: string; secret: string };
 export type RegistrationPayload = { email: string; alias: string; secret: string };
 export type UserPayload = { alias: string; avatar: string; email: string; sub: number };
-export type UserData = { id: number; alias: string; avatar: string; email: string };
+export type UserData = { id: number | null; alias: string; avatar: string; email: string };
 
 const authSlice = createSlice({
 	name: "auth",
