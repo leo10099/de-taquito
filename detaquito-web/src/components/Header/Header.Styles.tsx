@@ -36,7 +36,8 @@ export const Header = styled.header<HeaderProps>`
 			  `}
 `;
 
-export const Menu = styled.ul`
+/* Mobile version*/
+export const MenuMobile = styled.ul`
 	align-items: center;
 	display: flex;
 
@@ -45,7 +46,7 @@ export const Menu = styled.ul`
 	}
 `;
 
-export const MenuItem = styled.li<{ isTranslucent: boolean }>`
+export const MenuItemMobile = styled.li<{ isTranslucent: boolean }>`
 	color: ${({ theme, isTranslucent }) =>
 		isTranslucent ? (theme.name === Theme.DARK ? gray.gray100 : gray.gray600) : gray.gray010};
 	cursor: pointer;
@@ -59,6 +60,20 @@ export const MenuItem = styled.li<{ isTranslucent: boolean }>`
 		fill: ${({ theme, isTranslucent }) =>
 			isTranslucent ? (theme.name === Theme.DARK ? gray.gray010 : gray.gray600) : gray.gray010};
 	}
+`;
+
+/* Desktop version */
+export const MenuDesktop = styled.ul`
+	align-items: center;
+	display: none;
+
+	${mediaQueries.minTablet} {
+		display: flex;
+	}
+`;
+
+export const MenuItemDesktop = styled.li<{ isTranslucent: boolean }>`
+	padding-right: 10px;
 `;
 
 export const Logo = styled.img`

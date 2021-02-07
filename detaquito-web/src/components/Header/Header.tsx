@@ -2,7 +2,14 @@ import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 
 // Styles
-import { Header as HeaderContainer, Logo, Menu, MenuItem } from "./Header.Styles";
+import {
+	Header as HeaderContainer,
+	Logo,
+	MenuMobile,
+	MenuItemMobile,
+	MenuDesktop,
+	MenuItemDesktop,
+} from "./Header.Styles";
 
 // Icons
 import { FaBars } from "react-icons/fa";
@@ -30,20 +37,37 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 
 	const isTranslucent = useMemo(() => window.location.pathname === "/", []);
 
+	const mobileMenu = useMemo(() => {
+		return (
+			<MenuMobile>
+				<MenuItemMobile isTranslucent={isTranslucent}>
+					<SignInIcon />
+				</MenuItemMobile>
+				<MenuItemMobile isTranslucent={isTranslucent} onClick={toggleSideDrawer}>
+					<FaBars />
+				</MenuItemMobile>
+			</MenuMobile>
+		);
+	}, [isTranslucent, toggleSideDrawer]);
+
+	const desktopMenu = useMemo(() => {
+		return (
+			<MenuDesktop>
+				<MenuItemDesktop isTranslucent={isTranslucent}>Ingresar</MenuItemDesktop>
+			</MenuDesktop>
+		);
+	}, [isTranslucent]);
+
 	return (
 		<HeaderContainer id="Header" isTranslucent={isTranslucent} shouldShowHeader={shouldShowHeader}>
 			<Link to="/">
 				<Logo src={LogoText} />
 			</Link>
 
-			<Menu>
-				<MenuItem isTranslucent={isTranslucent}>
-					<SignInIcon />
-				</MenuItem>
-				<MenuItem isTranslucent={isTranslucent} onClick={toggleSideDrawer}>
-					<FaBars />
-				</MenuItem>
-			</Menu>
+			{/* Mobile Menu */}
+			{mobileMenu}
+			{/* Desktop Menu */}
+			{desktopMenu}
 		</HeaderContainer>
 	);
 };
