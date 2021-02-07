@@ -9,7 +9,7 @@ const red = "#ef5743";
 // Color shades
 export const primary = {
 	primary050: "#ebecfe",
-	primary100: "#ebecfe",
+	primary100: "#bac1fc",
 	primary200: "#a7b0fb",
 	primary300: "#818ffa",
 	primary400: "#6374f7",

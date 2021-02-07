@@ -2,7 +2,7 @@ import styled, { css } from "styled-components/macro";
 import { mediaQueries } from "style";
 
 // Theme
-import { gray, primary, Theme } from "theme";
+import { gray, Theme } from "theme";
 
 interface HeaderProps {
 	isTranslucent?: boolean;
@@ -11,13 +11,12 @@ interface HeaderProps {
 
 export const Header = styled.header<HeaderProps>`
 	align-items: center;
-	background-color: ${({ isTranslucent }) =>
-		isTranslucent ? "transparent" : "rgba(63, 79, 231, 0.8)"};
-	${({ isTranslucent, theme }) =>
-		!isTranslucent &&
-		css`
-			: ${theme.shadowElevation1};
-		`};
+	background-color: ${({ isTranslucent, theme }) =>
+		isTranslucent
+			? "transparent"
+			: theme.name === Theme.DARK
+			? "rgba(154, 160, 228, 0.8);"
+			: "rgba(63, 79, 231, 0.8);"};
 	display: flex;
 	justify-content: space-between;
 	left: 0;
