@@ -15,7 +15,7 @@ export class User extends BaseEntity {
   @Column({ type: 'varchar', length: '50', unique: true })
   public alias: string;
 
-  @Column({ default: 'http://detaquito.com/imagen.jpg' })
+  @Column({ nullable: true })
   public avatarUrl: string;
 
   @Column({ nullable: true })

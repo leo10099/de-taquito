@@ -20,8 +20,6 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ children }: AuthGuardProps) => {
 	// Selectors
 	const currentUser = useSelector(selectCurrentUser);
 
-	console.log("here");
-
 	// Effects
 	useEffect(() => {
 		if (!currentUser.id) {

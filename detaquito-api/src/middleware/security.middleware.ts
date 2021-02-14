@@ -6,7 +6,7 @@ import rateLimit from 'fastify-rate-limit';
 export class SecurityMiddleware {
   static apply(app: NestFastifyApplication) {
     app.enableCors({
-      origin: process.env.ALLOWED_CORS?.split(',') ?? 'http://localhost:3000',
+      origin: process.env.WEB_APP_URL ?? 'http://localhost:3000',
       credentials: true,
     });
 

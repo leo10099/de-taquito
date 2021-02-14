@@ -15,6 +15,9 @@ import { useScrollDirection } from "hooks";
 // Selectors
 import { selectCurrentUser } from "features/Auth/Auth.selectors";
 
+// Components
+import UserAvatar from "components/UserAvatar";
+
 // Providers
 import { UserProvider } from "providers";
 
@@ -66,11 +69,11 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 		return (
 			<MenuDesktop>
 				<MenuItemDesktop isTranslucent={isTranslucent}>
-					{isLoggedIn ? "Salir" : "Ingresar"}
+					{isLoggedIn ? <UserAvatar user={user} /> : "Ingresar"}
 				</MenuItemDesktop>
 			</MenuDesktop>
 		);
-	}, [isLoggedIn, isTranslucent]);
+	}, [isLoggedIn, isTranslucent, user]);
 
 	return (
 		<UserProvider>
