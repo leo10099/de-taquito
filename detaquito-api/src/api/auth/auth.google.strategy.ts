@@ -16,7 +16,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
   constructor(private authService: AuthService, private readonly configService: ConfigService) {
     super({
       accessType: 'offline',
-      callbackURL: 'api/auth/google/callback',
+      callbackURL: configService.get(GoogleOauthConfig.CALLBACK_URL),
       clientID: configService.get(GoogleOauthConfig.CLIENT_ID),
       clientSecret: configService.get(GoogleOauthConfig.CLIENT_SECRET),
       proxy: true,

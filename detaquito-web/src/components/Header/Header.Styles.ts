@@ -17,6 +17,7 @@ export const Header = styled.header<HeaderProps>`
 			: theme.name === Theme.DARK
 			? "rgba(154, 160, 228, 0.8);"
 			: "rgba(63, 79, 231, 0.8);"};
+	color: ${gray.gray010};
 	display: flex;
 	justify-content: space-between;
 	left: 0;

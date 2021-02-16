@@ -54,9 +54,9 @@ const BaseButton = styled.button.attrs((props: ButtonProps) => ({ type: props.ty
 `;
 
 // Variants
-const PrimaryButton = styled(BaseButton).attrs((props: ButtonProps) => ({ type: props.type }))<
-	ButtonProps
->`
+const PrimaryButton = styled(BaseButton).attrs((props: ButtonProps) => ({
+	type: props.type,
+}))<ButtonProps>`
 	background-color: ${({ theme }) =>
 		theme.name === "dark" ? theme.primaryLight : theme.primaryMain};
 	border-radius: ${({ rounded }) => (rounded ? "20px" : "4px")};
