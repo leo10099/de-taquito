@@ -1,16 +1,16 @@
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 // Icons
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaUserAlt, FaSignOutAlt } from "react-icons/fa";
 import { SignInIcon } from "components/UI/Icon";
 
 // Assets
 import LogoText from "assets/img/logotipo.png";
 
 // Hooks
-import { useScrollDirection } from "hooks";
+import { useScrollDirection, useOnClickOutside } from "hooks";
 
 // Selectors
 import { selectCurrentUser } from "features/Auth/Auth.selectors";
@@ -24,11 +24,18 @@ import { UserProvider } from "providers";
 // Styles
 import {
 	Header as HeaderContainer,
+	HeaderAvatarContainerDesktop,
+	HeaderAvatarContainerMobile,
 	Logo,
-	MenuMobile,
-	MenuItemMobile,
 	MenuDesktop,
-	MenuItemDesktop,
+	MenuDropdownDesktop,
+	MenuDropdownDesktopList,
+	MenuDropdownDesktopListItem,
+	MenuDropdownMobile,
+	MenuItemHamburgerMobile,
+	MenuDropdownMobileList,
+	MenuDropdownMobileListItem,
+	MenuMobile,
 } from "./Header.Styles";
 
 interface HeaderProps {
@@ -36,11 +43,23 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+	// Refs
+	const dropdownElementRef = useRef(null);
+
 	// Hooks
 	const { scrollDir, scrollPositionAtTop } = useScrollDirection();
+	useOnClickOutside(dropdownElementRef, () => setIsDropdownOpen(false));
 
 	// Selectors
 	const user = useSelector(selectCurrentUser);
+
+	// Handlers
+	const openDropdown = useCallback(() => {
+		if (isDropdownOpen) return;
+		setIsDropdownOpen(true);
+	}, [isDropdownOpen]);
 
 	// Memos
 	const shouldShowHeader = useMemo(() => scrollDir === "UP" || scrollPositionAtTop, [
@@ -55,25 +74,45 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 	const mobileMenu = useMemo(() => {
 		return (
 			<MenuMobile>
-				<MenuItemMobile isTranslucent={isTranslucent}>
-					<SignInIcon />
-				</MenuItemMobile>
-				<MenuItemMobile isTranslucent={isTranslucent} onClick={toggleSideDrawer}>
+				<MenuItemHamburgerMobile isTranslucent={isTranslucent} onClick={toggleSideDrawer}>
 					<FaBars />
-				</MenuItemMobile>
+				</MenuItemHamburgerMobile>
+				<HeaderAvatarContainerMobile onClick={openDropdown} ref={dropdownElementRef}>
+					{isLoggedIn ? <UserAvatar user={user} /> : <SignInIcon />}
+					<MenuDropdownMobile isTranslucent={isTranslucent} isOpen={isDropdownOpen}>
+						<MenuDropdownMobileList>
+							<MenuDropdownMobileListItem>
+								Perfil <FaUserAlt />
+							</MenuDropdownMobileListItem>
+							<MenuDropdownMobileListItem>
+								Salir <FaSignOutAlt />
+							</MenuDropdownMobileListItem>
+						</MenuDropdownMobileList>
+					</MenuDropdownMobile>
+				</HeaderAvatarContainerMobile>
 			</MenuMobile>
 		);
-	}, [isTranslucent, toggleSideDrawer]);
+	}, [isDropdownOpen, isLoggedIn, isTranslucent, openDropdown, toggleSideDrawer, user]);
 
 	const desktopMenu = useMemo(() => {
 		return (
 			<MenuDesktop>
-				<MenuItemDesktop isTranslucent={isTranslucent}>
-					{isLoggedIn ? <UserAvatar user={user} /> : "Ingresar"}
-				</MenuItemDesktop>
+				<HeaderAvatarContainerDesktop onClick={openDropdown} ref={dropdownElementRef}>
+					{isLoggedIn ? <UserAvatar user={user} /> : <SignInIcon />}
+					<MenuDropdownDesktop isTranslucent={isTranslucent} isOpen={isDropdownOpen}>
+						<MenuDropdownDesktopList>
+							<MenuDropdownDesktopListItem>
+								Perfil <FaUserAlt />
+							</MenuDropdownDesktopListItem>
+							<MenuDropdownDesktopListItem>
+								Salir <FaSignOutAlt />
+							</MenuDropdownDesktopListItem>
+						</MenuDropdownDesktopList>
+					</MenuDropdownDesktop>
+				</HeaderAvatarContainerDesktop>
 			</MenuDesktop>
 		);
-	}, [isLoggedIn, isTranslucent, user]);
+	}, [isDropdownOpen, isLoggedIn, isTranslucent, openDropdown, user]);
 
 	return (
 		<UserProvider>

@@ -50,7 +50,6 @@ const globalStyles = createGlobalStyle(
 					color: ${primary.primary200};
 				}
 			}
-		}
 
 		// Utility classes
 		.pointer {

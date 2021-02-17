@@ -1,9 +1,8 @@
 import styled from "styled-components/macro";
 import { mediaQueries } from "style";
-import { gray } from "theme";
 
 export const SideDrawerContainer = styled.nav<{ isHidden: boolean }>`
-	background-color: ${gray.gray100};
+	background-color: ${({ theme }) => theme.elevation2};
 	box-shadow: ${({ theme }) => theme.shadowElevation2};
 	display: flex;
 	height: 100vh;

@@ -40,9 +40,11 @@ const ResetStyles = createGlobalStyle(
 			line-height: 1.5;
 		}
 
-		/* Remove list styles on ul, ol elements with a class attribute */
-		ul[class],
-		ol[class] {
+		/* Remove list styles on ul, */
+		ul,
+		li {
+			padding: 0;
+			margin: 0;
 			list-style: none;
 		}
 
