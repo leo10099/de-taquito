@@ -4,16 +4,21 @@ import { Route } from "react-router-dom";
 // Providers
 import AuthGuard from "features/Auth/AuthGuard";
 
+// Providers
+import { AnimatedRoutes } from "providers";
+
 // Public Routes
+const Profile = lazy(() => import("features/Profile"));
 const Dashboard = lazy(() => import("features/Dashboard"));
 
-const privateRoutes = [{ component: Dashboard, path: "*/app/dashboard", name: "Dashboard" }];
+const privateRoutes = [
+	{ component: Profile, path: "/profile", name: "Profile" },
+	{ component: Dashboard, path: "*", name: "Dashboard" },
+];
 
 const Private: React.FC = () => (
 	<AuthGuard>
-		{privateRoutes.map(({ component: Component, path, name }) => {
-			return <Route element={<Component />} path={path} key={name} />;
-		})}
+		<AnimatedRoutes exitBeforeEnter routes={privateRoutes} />
 	</AuthGuard>
 );
 

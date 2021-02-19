@@ -48,6 +48,7 @@ export const MenuMobile = styled.ul`
 
 	${mediaQueries.minTablet} {
 		display: none;
+		pointer-events: none;
 	}
 `;
 
@@ -124,9 +125,11 @@ export const MenuDropdownMobileListItem = styled.li`
 export const MenuDesktop = styled.ul`
 	align-items: center;
 	display: none;
+	pointer-events: none;
 
 	${mediaQueries.minTablet} {
 		display: flex;
+		pointer-events: all;
 	}
 `;
 

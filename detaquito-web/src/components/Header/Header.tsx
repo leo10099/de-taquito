@@ -24,6 +24,9 @@ import UserAvatar from "components/UserAvatar";
 // Providers
 import { UserProvider } from "providers";
 
+// Theme
+import { breakpoints } from "theme";
+
 // Styles
 import {
 	Header as HeaderContainer,
@@ -49,12 +52,18 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
 	// Refs
-	const dropdownElementRef = useRef(null);
+	const dropdownElementRefMobile = useRef(null);
+	const dropdownElementRefDesktop = useRef(null);
 
 	// Hooks
 	const dispatch = useDispatch();
 	const { scrollDir, scrollPositionAtTop } = useScrollDirection();
-	useOnClickOutside(dropdownElementRef, () => setIsDropdownOpen(false));
+	useOnClickOutside(dropdownElementRefMobile, () => {
+		if (window.innerWidth < breakpoints.tablet.breakpoint) setIsDropdownOpen(false);
+	});
+	useOnClickOutside(dropdownElementRefDesktop, () => {
+		if (window.innerWidth > breakpoints.tablet.breakpoint) setIsDropdownOpen(false);
+	});
 
 	// Selectors
 	const user = useSelector(selectCurrentUser);
@@ -91,7 +100,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 					<MenuDropdownMobile
 						isTranslucent={isTranslucent}
 						isOpen={isDropdownOpen}
-						ref={dropdownElementRef}
+						ref={dropdownElementRefMobile}
 					>
 						<MenuDropdownMobileList>
 							<MenuDropdownMobileListItem>
@@ -115,7 +124,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 					<MenuDropdownDesktop
 						isTranslucent={isTranslucent}
 						isOpen={isDropdownOpen}
-						ref={dropdownElementRef}
+						ref={dropdownElementRefDesktop}
 					>
 						<MenuDropdownDesktopList>
 							<MenuDropdownDesktopListItem>

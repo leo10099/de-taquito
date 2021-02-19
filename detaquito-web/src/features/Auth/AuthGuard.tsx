@@ -14,7 +14,7 @@ import { Spinner } from "components";
 import { selectAccessTokenExpiry, selectCurrentUser } from "features/Auth/Auth.selectors";
 
 interface AuthGuardProps {
-	children: React.ReactElement[];
+	children: React.ReactElement;
 }
 
 const AuthGuard: React.FC<AuthGuardProps> = ({ children }: AuthGuardProps) => {

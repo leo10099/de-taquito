@@ -1,4 +1,5 @@
 import React, { Suspense, lazy } from "react";
+import { Outlet } from "react-router-dom";
 
 // Providers
 import { AnimatedRoutes } from "providers";
@@ -26,6 +27,7 @@ const Public = () => {
 	return (
 		<Suspense fallback={false}>
 			<AnimatedRoutes exitBeforeEnter routes={routes} />
+			<Outlet />
 		</Suspense>
 	);
 };
