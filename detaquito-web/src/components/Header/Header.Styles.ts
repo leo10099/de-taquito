@@ -135,7 +135,10 @@ export const HeaderAvatarContainerDesktop = styled.div`
 	max-width: 200px;
 `;
 
-export const MenuDropdownDesktop = styled(Dropdown)<{ isTranslucent: boolean }>`
+export const MenuDropdownDesktop = styled(Dropdown)<{
+	isTranslucent: boolean;
+	ref: React.MutableRefObject<null>;
+}>`
 	background-color: ${({ isTranslucent, theme }) =>
 		isTranslucent
 			? "transparent"

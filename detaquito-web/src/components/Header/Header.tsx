@@ -110,14 +110,18 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 	const desktopMenu = useMemo(() => {
 		return (
 			<MenuDesktop>
-				<HeaderAvatarContainerDesktop onClick={openDropdown} ref={dropdownElementRef}>
+				<HeaderAvatarContainerDesktop onClick={openDropdown}>
 					{isLoggedIn ? <UserAvatar user={user} /> : <SignInIcon />}
-					<MenuDropdownDesktop isTranslucent={isTranslucent} isOpen={isDropdownOpen}>
+					<MenuDropdownDesktop
+						isTranslucent={isTranslucent}
+						isOpen={isDropdownOpen}
+						ref={dropdownElementRef}
+					>
 						<MenuDropdownDesktopList>
 							<MenuDropdownDesktopListItem>
 								Perfil <FaUserAlt />
 							</MenuDropdownDesktopListItem>
-							<MenuDropdownDesktopListItem>
+							<MenuDropdownDesktopListItem onClick={doLogout}>
 								Salir <FaSignOutAlt />
 							</MenuDropdownDesktopListItem>
 						</MenuDropdownDesktopList>
@@ -125,7 +129,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 				</HeaderAvatarContainerDesktop>
 			</MenuDesktop>
 		);
-	}, [isDropdownOpen, isLoggedIn, isTranslucent, openDropdown, user]);
+	}, [doLogout, isDropdownOpen, isLoggedIn, isTranslucent, openDropdown, user]);
 
 	return (
 		<UserProvider>
