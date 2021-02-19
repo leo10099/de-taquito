@@ -151,6 +151,23 @@ function* replaceForgottenPassword({ payload }: BaseAction) {
 	}
 }
 
+function* tryLogout({ payload }: BaseAction) {
+	try {
+		const { status } = yield Api(`/auth/logout`, {
+			method: "POST",
+			data: payload,
+		});
+
+		if (status !== 200) {
+			return yield put(actions.logoutFailure());
+		}
+
+		return yield put(actions.logoutSuccess());
+	} catch (e) {
+		return yield put(actions.logoutFailure());
+	}
+}
+
 export default [
 	takeLatest(actions.tryRefreshToken, tryRefreshToken),
 	takeLatest(actions.registrationRequest, trySignUp),
@@ -158,4 +175,5 @@ export default [
 	takeLatest(actions.resetPasswordRequest, tryResetPassword),
 	takeLatest(actions.passwordResetTokenValidationRequest, checkResetToken),
 	takeLatest(actions.passwordResetReplacementRequest, replaceForgottenPassword),
+	takeLatest(actions.logoutRequest, tryLogout),
 ];

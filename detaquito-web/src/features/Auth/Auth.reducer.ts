@@ -143,6 +143,16 @@ const authSlice = createSlice({
 			passwordResetReplacement.loading = false;
 			passwordResetReplacement.success = true;
 		},
+		// Logout
+		logoutRequest: () => {},
+		logoutFailure: () => {
+			console.log(`[Auth.reducer]: login failure`);
+		},
+		logoutSuccess: state => {
+			state.token.accessToken = "";
+			state.token.accessTokenExpiry = 900 * 1000;
+			window.location.replace("/");
+		},
 	},
 });
 

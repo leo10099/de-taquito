@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Ref } from "react";
 import "./Dropdown.Styles";
 
 import { DropdownContainer } from "./Dropdown.Styles";
@@ -8,10 +8,14 @@ interface DropdownComponentProps {
 	children: React.ReactElement;
 }
 
-const DropdownComponent: React.FC<DropdownComponentProps> = ({ children, isOpen = false }) => {
-	if (!isOpen) return null;
+const DropdownComponent: React.FC<DropdownComponentProps> = React.forwardRef(
+	(props, ref: Ref<HTMLDivElement>) => {
+		if (!props.isOpen) return null;
 
-	return <DropdownContainer>{children}</DropdownContainer>;
-};
+		return <DropdownContainer ref={ref}>{props.children}</DropdownContainer>;
+	}
+);
+
+DropdownComponent.displayName = "DropdownComponent";
 
 export default React.memo(DropdownComponent);

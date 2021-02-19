@@ -122,4 +122,16 @@ export class AuthController {
       replacePasswordDto.secret,
     );
   }
+
+  @Post('/logout')
+  async logout(@Res() response: FastifyReply){
+    response.setCookie('token', '', {
+      httpOnly: true,
+      maxAge: 0,
+      path: '/',
+      secure: false,
+    });
+
+    return response.redirect(302, '/');
+  }
 }

@@ -1,3 +1,4 @@
+import React from "react";
 import styled, { css } from "styled-components/macro";
 import { mediaQueries } from "style";
 
@@ -75,7 +76,10 @@ export const HeaderAvatarContainerMobile = styled.div`
 	}
 `;
 
-export const MenuDropdownMobile = styled(Dropdown)<{ isTranslucent: boolean }>`
+export const MenuDropdownMobile = styled(Dropdown)<{
+	isTranslucent: boolean;
+	ref: React.MutableRefObject<null>;
+}>`
 	background-color: ${({ isTranslucent, theme }) =>
 		isTranslucent
 			? "transparent"

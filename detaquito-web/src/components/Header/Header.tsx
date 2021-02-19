@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 // Icons
 import { FaBars, FaUserAlt, FaSignOutAlt } from "react-icons/fa";
@@ -14,6 +14,9 @@ import { useScrollDirection, useOnClickOutside } from "hooks";
 
 // Selectors
 import { selectCurrentUser } from "features/Auth/Auth.selectors";
+
+// Slices
+import AuthSlice from "features/Auth/Auth.reducer";
 
 // Components
 import UserAvatar from "components/UserAvatar";
@@ -49,6 +52,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 	const dropdownElementRef = useRef(null);
 
 	// Hooks
+	const dispatch = useDispatch();
 	const { scrollDir, scrollPositionAtTop } = useScrollDirection();
 	useOnClickOutside(dropdownElementRef, () => setIsDropdownOpen(false));
 
@@ -60,6 +64,11 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 		if (isDropdownOpen) return;
 		setIsDropdownOpen(true);
 	}, [isDropdownOpen]);
+
+	const doLogout = useCallback(() => {
+		dispatch(AuthSlice.actions.logoutRequest());
+		setIsDropdownOpen(false);
+	}, [dispatch]);
 
 	// Memos
 	const shouldShowHeader = useMemo(() => scrollDir === "UP" || scrollPositionAtTop, [
@@ -77,14 +86,18 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 				<MenuItemHamburgerMobile isTranslucent={isTranslucent} onClick={toggleSideDrawer}>
 					<FaBars />
 				</MenuItemHamburgerMobile>
-				<HeaderAvatarContainerMobile onClick={openDropdown} ref={dropdownElementRef}>
+				<HeaderAvatarContainerMobile onClick={openDropdown}>
 					{isLoggedIn ? <UserAvatar user={user} /> : <SignInIcon />}
-					<MenuDropdownMobile isTranslucent={isTranslucent} isOpen={isDropdownOpen}>
+					<MenuDropdownMobile
+						isTranslucent={isTranslucent}
+						isOpen={isDropdownOpen}
+						ref={dropdownElementRef}
+					>
 						<MenuDropdownMobileList>
 							<MenuDropdownMobileListItem>
 								Perfil <FaUserAlt />
 							</MenuDropdownMobileListItem>
-							<MenuDropdownMobileListItem>
+							<MenuDropdownMobileListItem onClick={doLogout}>
 								Salir <FaSignOutAlt />
 							</MenuDropdownMobileListItem>
 						</MenuDropdownMobileList>
@@ -92,7 +105,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 				</HeaderAvatarContainerMobile>
 			</MenuMobile>
 		);
-	}, [isDropdownOpen, isLoggedIn, isTranslucent, openDropdown, toggleSideDrawer, user]);
+	}, [doLogout, isDropdownOpen, isLoggedIn, isTranslucent, openDropdown, toggleSideDrawer, user]);
 
 	const desktopMenu = useMemo(() => {
 		return (

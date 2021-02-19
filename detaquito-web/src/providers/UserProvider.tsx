@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 // Hooks
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 // Auth slice
 import Auth from "features/Auth/Auth.reducer";
@@ -16,16 +17,18 @@ interface AuthGuardProps {
 const AuthGuard: React.FC<AuthGuardProps> = ({ children }: AuthGuardProps) => {
 	// Hooks
 	const dispatch = useDispatch();
+	const location = useLocation();
 
 	// Selectors
 	const currentUser = useSelector(selectCurrentUser);
 
 	// Effects
 	useEffect(() => {
-		if (!currentUser.id) {
+		const isPrivateRotue = location.pathname.includes("/app");
+		if (isPrivateRotue && !currentUser.id) {
 			dispatch(Auth.actions.tryRefreshToken());
 		}
-	}, [dispatch, currentUser.id]);
+	}, [dispatch, currentUser.id, location.pathname]);
 
 	return <>{children}</>;
 };
