@@ -6,7 +6,10 @@ export default {
 	},
 	alias: {
 		required: "Debes ingresar un nombre de usuario",
-		maxLength: "El nombre de usaurio no puede tener más de 50 caracteres",
+		maxLength: "El nombre de usuario no puede tener más de 50 caracteres",
+	},
+	fullName: {
+		maxLength: "Tu nombre no puede tener más de 50 caracteres",
 	},
 	password: {
 		required: "Debes ingresar una contraseña",

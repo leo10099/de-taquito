@@ -160,7 +160,7 @@ export const MenuDropdownDesktopListItem = styled.li`
 	font-size: 16px;
 	justify-content: space-around;
 	letter-spacing: 0.5px;
-	padding: 1.2rem 1.8rem;
+	padding: 1.2rem 3rem;
 	font-size: 18px;
 
 	${mediaQueries.minFullHd} {

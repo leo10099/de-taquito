@@ -10,7 +10,13 @@ export type SetAccessTokenPayload = { accessToken: string; accessTokenExpiry?: n
 export type LoginPayload = { email: string; secret: string };
 export type RegistrationPayload = { email: string; alias: string; secret: string };
 export type UserPayload = { alias: string; avatar: string; email: string; sub: number };
-export type UserData = { id: number | null; alias: string; avatar: string | null; email: string };
+export type UserData = {
+	id: number | null;
+	alias: string;
+	avatar: string | null;
+	email: string;
+	fullName: string;
+};
 
 const authSlice = createSlice({
 	name: "auth",
@@ -31,6 +37,7 @@ const authSlice = createSlice({
 			alias: "",
 			avatar: "",
 			email: "",
+			fullName: "",
 			id: 0,
 		},
 		passwordReset: {
@@ -61,6 +68,7 @@ const authSlice = createSlice({
 			state.user.avatar = payload.avatar;
 			state.user.email = payload.email;
 			state.user.id = payload.id;
+			state.user.fullName = payload.fullName;
 			return state;
 		},
 		// Login

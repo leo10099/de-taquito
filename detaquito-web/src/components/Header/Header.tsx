@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // Icons
@@ -57,6 +57,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 
 	// Hooks
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const { scrollDir, scrollPositionAtTop } = useScrollDirection();
 	useOnClickOutside(dropdownElementRefMobile, () => {
 		if (window.innerWidth < breakpoints.tablet.breakpoint) setIsDropdownOpen(false);
@@ -78,6 +79,10 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 		dispatch(AuthSlice.actions.logoutRequest());
 		setIsDropdownOpen(false);
 	}, [dispatch]);
+
+	const goToProfile = useCallback(() => {
+		navigate("/app/profile");
+	}, [navigate]);
 
 	// Memos
 	const shouldShowHeader = useMemo(() => scrollDir === "UP" || scrollPositionAtTop, [
@@ -103,7 +108,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 						ref={dropdownElementRefMobile}
 					>
 						<MenuDropdownMobileList>
-							<MenuDropdownMobileListItem>
+							<MenuDropdownMobileListItem onClick={goToProfile}>
 								Perfil <FaUserAlt />
 							</MenuDropdownMobileListItem>
 							<MenuDropdownMobileListItem onClick={doLogout}>
@@ -114,7 +119,16 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 				</HeaderAvatarContainerMobile>
 			</MenuMobile>
 		);
-	}, [doLogout, isDropdownOpen, isLoggedIn, isTranslucent, openDropdown, toggleSideDrawer, user]);
+	}, [
+		doLogout,
+		goToProfile,
+		isDropdownOpen,
+		isLoggedIn,
+		isTranslucent,
+		openDropdown,
+		toggleSideDrawer,
+		user,
+	]);
 
 	const desktopMenu = useMemo(() => {
 		return (
@@ -127,7 +141,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 						ref={dropdownElementRefDesktop}
 					>
 						<MenuDropdownDesktopList>
-							<MenuDropdownDesktopListItem>
+							<MenuDropdownDesktopListItem onClick={goToProfile}>
 								Perfil <FaUserAlt />
 							</MenuDropdownDesktopListItem>
 							<MenuDropdownDesktopListItem onClick={doLogout}>
@@ -138,7 +152,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 				</HeaderAvatarContainerDesktop>
 			</MenuDesktop>
 		);
-	}, [doLogout, isDropdownOpen, isLoggedIn, isTranslucent, openDropdown, user]);
+	}, [doLogout, goToProfile, isDropdownOpen, isLoggedIn, isTranslucent, openDropdown, user]);
 
 	return (
 		<UserProvider>
