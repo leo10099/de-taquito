@@ -15,7 +15,6 @@
 		"plugin:prettier/recommended",
 		// eslint-config-prettier
 		"prettier",
-		"prettier/@typescript-eslint",
 		"plugin:jsx-a11y/recommended"
 	],
 	"parserOptions": {
@@ -28,6 +27,8 @@
 		"consistent-return": ["error"],
 		// React
 		"react/display-name": "warn",
+		"react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
 		// TypeScript - ESLint
 		"@typescript-eslint/explicit-function-return-type": "off",
 		"@typescript-eslint/indent": "off",

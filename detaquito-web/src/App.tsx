@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 // Styled-Components Theme Provider
 import { ThemeProvider } from "styled-components/macro";
