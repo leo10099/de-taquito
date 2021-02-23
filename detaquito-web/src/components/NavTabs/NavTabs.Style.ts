@@ -9,10 +9,9 @@ export const NavTabsContainer = styled.nav<{ shouldShowNavTabs: boolean }>`
 	bottom: 0;
 	box-shadow: ${({ theme }) => theme.shadowElevation1};
 	height: 64px;
-	margin-left: -8px;
+	left: 0;
 	position: fixed;
 	transition: transform 400ms ease-in;
-	width: 100vw;
 	${({ shouldShowNavTabs }) =>
 		shouldShowNavTabs
 			? css`

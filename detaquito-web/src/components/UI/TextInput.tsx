@@ -34,7 +34,7 @@ type TextInputCustomProps = {
 };
 
 type IconContainerProps = {
-	hasError: boolean;
+	hasError?: boolean;
 };
 
 const TextInputContainer = styled.div<TextInputCustomProps>`
@@ -98,19 +98,19 @@ const ErrorMessage = styled.p<TextInputCustomProps>`
 	visibility: ${({ hasError }) => (hasError ? "visible" : "hidden")};
 `;
 
-const tooltipOverlayInnerStyle: CSSProperties = {
+export const tooltipOverlayInnerStyle: CSSProperties = {
 	textAlign: "center",
 	letterSpacing: "1px",
 	fontWeight: 600,
 	backgroundColor: gray.gray600,
 };
 
-const tooltipOverlayStyle: CSSProperties = {
+export const tooltipOverlayStyle: CSSProperties = {
 	maxWidth: "200px",
 	width: "100%",
 };
 
-const IconContainer = styled.span<IconContainerProps>`
+export const IconContainer = styled.span<IconContainerProps>`
 	position: absolute;
 	top: 47%;
 	right: 0;
@@ -135,6 +135,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputBaseProps & TextInputCus
 					ref={ref as RefObject<HTMLInputElement>}
 					tooltipText={tooltipText}
 				/>
+
 				{tooltipText && (
 					<Tooltip
 						placement={windowWidth < 768 ? "left" : "top"}

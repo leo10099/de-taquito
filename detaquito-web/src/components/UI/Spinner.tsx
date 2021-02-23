@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { keyframes } from "style";
+import { css, keyframes } from "style";
 
 interface SpinnerProps {
 	color?: string;
 	size?: number;
 	sizeUnit?: string;
+	centered?: boolean;
 }
 
 const motion1 = () => keyframes`
@@ -42,6 +43,15 @@ const EllipsisSpinner = styled.div<SpinnerProps>`
 	position: relative;
 	width: fit-content;
 
+	${({ centered }) =>
+		centered &&
+		css`
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		`}
+
 	div {
 		position: absolute;
 		width: 11px;
@@ -67,8 +77,13 @@ const EllipsisSpinner = styled.div<SpinnerProps>`
 	}
 `;
 
-const Loader = ({ color = "#BDBDBD", size = 10, sizeUnit = "px" }: SpinnerProps) => (
-	<EllipsisSpinner color={color} size={size} sizeUnit={sizeUnit}>
+const Loader = ({
+	color = "#BDBDBD",
+	size = 10,
+	sizeUnit = "px",
+	centered = false,
+}: SpinnerProps) => (
+	<EllipsisSpinner color={color} size={size} sizeUnit={sizeUnit} centered={centered}>
 		<div />
 		<div />
 		<div />

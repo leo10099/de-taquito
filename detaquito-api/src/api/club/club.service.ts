@@ -15,6 +15,34 @@ export class ClubService {
     return await this.clubRepo.find();
   }
 
+  async findAllActiveGroupedByCompetition(): Promise<{ [key: string]: Club }> {
+    const allActiveClubs = await this.clubRepo.find({ relations: ['competition'] });
+    const output = {};
+
+    allActiveClubs.forEach(activeClub => {
+      if (!output[activeClub.competition.country]) {
+        output[activeClub.competition.country] = [];
+        output[activeClub.competition.country].push({
+          id: activeClub.id,
+          name: activeClub.name,
+          logoUrl: activeClub.logoUrl,
+        });
+      } else {
+        output[activeClub.competition.country].push({
+          id: activeClub.id,
+          name: activeClub.name,
+          logoUrl: activeClub.logoUrl,
+        });
+      }
+    });
+
+    return output;
+  }
+
+  async findAllActiveByCompetition(competitonId: string): Promise<Club[]> {
+    return await this.clubRepo.selectActiveByCompetitionId(competitonId);
+  }
+
   async findByExternalServiceId(id: string | number) {
     return this.clubRepo.selectByExternalService(id.toString());
   }

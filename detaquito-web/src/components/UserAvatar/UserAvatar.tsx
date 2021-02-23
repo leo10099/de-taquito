@@ -1,10 +1,10 @@
 import React from "react";
 
-// Images
-import deTaquitoLogo from "assets/img/logo.png";
-
 // Types
 import { UserData } from "features/Auth/Auth.reducer";
+
+// Icons
+import { FaUserCircle } from "react-icons/fa";
 
 // Styles
 import { UserAvatarContainer } from "./UserAvatar.Styles";
@@ -16,7 +16,7 @@ interface UserAvatarProps {
 export const UserAvatar: React.FC<UserAvatarProps> = ({ user }) => {
 	return (
 		<UserAvatarContainer>
-			<img src={user.avatar ? user.avatar : deTaquitoLogo} alt={user.alias} />
+			{user.avatar ? <img src={user.avatar} alt={user.alias} /> : <FaUserCircle />}
 		</UserAvatarContainer>
 	);
 };

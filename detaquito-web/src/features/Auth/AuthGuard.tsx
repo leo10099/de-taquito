@@ -12,10 +12,15 @@ import { Spinner } from "components";
 
 // Selectors
 import { selectAccessTokenExpiry, selectCurrentUser } from "features/Auth/Auth.selectors";
+import { CSSProperties } from "styled-components";
 
 interface AuthGuardProps {
 	children: React.ReactElement;
 }
+
+const AuthGuardContainerStyles = {
+	width: "100%",
+} as CSSProperties;
 
 const AuthGuard: React.FC<AuthGuardProps> = ({ children }: AuthGuardProps) => {
 	// Hooks
@@ -45,9 +50,9 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ children }: AuthGuardProps) => {
 		}
 	}, aMinuteBeforeTokenExpiry);
 
-	if (!currentUser.id) return <Spinner />;
+	if (!currentUser.id) return <Spinner centered />;
 
-	return <>{children}</>;
+	return <div style={AuthGuardContainerStyles}>{children}</div>;
 };
 
 export default React.memo(AuthGuard);

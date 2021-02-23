@@ -31,6 +31,7 @@ export const Header = styled.header<HeaderProps>`
 	width: 100vw;
 	height: 80px;
 	transition: transform 400ms ease-in;
+	z-index: 10;
 	${({ shouldShowHeader }) =>
 		shouldShowHeader
 			? css`

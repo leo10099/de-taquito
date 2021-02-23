@@ -35,6 +35,7 @@ const globalStyles = createGlobalStyle(
 			color: ${() => props.theme.elevation8};
 			font-family: "Open Sans", sans-serif;
 			padding: 0;
+			min-height: 100vh;
 
 			${generateResponsiveText(breakpoints)};
 

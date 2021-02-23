@@ -3,7 +3,6 @@ import { FlexColumnCentered } from "utils/styles";
 
 export const SignUpContainer = styled.main`
 	${FlexColumnCentered()};
-	width: 100vw;
 `;
 
 export const SignUpFormContent = styled.div`

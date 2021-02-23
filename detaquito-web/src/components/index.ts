@@ -7,6 +7,7 @@ import Link from "./UI/Link";
 import Separator from "./UI/Separator";
 import Spinner from "./UI/Spinner";
 import TextInput from "./UI/TextInput";
+import Select from "./UI/Select";
 
 // Layout
 import Container from "./Container";
@@ -28,5 +29,6 @@ export {
 	Layout,
 	Container,
 	NavTabs,
+	Select,
 	SideDrawer,
 };

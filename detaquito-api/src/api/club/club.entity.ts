@@ -5,7 +5,7 @@ import { Competition } from '../competition/competition.entity';
 import { CompetitionMatch } from '../competition-match/competition-match.entity';
 
 export interface ClubExtServiceData {
-  extSeviceName: 'Api-Football';
+  active: boolean;
   id: number;
 }
 
@@ -14,7 +14,7 @@ export class Club extends BaseEntity {
   @PrimaryGeneratedColumn()
   public id: number;
 
-  @Column({ type: 'varchar', length: '100', unique: true })
+  @Column({ type: 'varchar', length: '100' })
   public name: string;
 
   @Column({ type: 'varchar', length: '150', nullable: true })

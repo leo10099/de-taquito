@@ -85,9 +85,17 @@ function* tryLogIn({ payload }: BaseAction) {
 			return yield put(actions.loginFailure(serverNotResponding));
 		}
 
+		const {
+			accessToken,
+		}: {
+			accessToken: string;
+			accessTokenExpiryInSeconds: number;
+		} = data;
+
+		yield updateAccessTokenInCommonHeaders(accessToken);
 		return yield put(actions.loginSuccess(data));
 	} catch (e) {
-		return yield put(actions.loginFailure(e));
+		return yield put(actions.loginFailure(e.message));
 	}
 }
 

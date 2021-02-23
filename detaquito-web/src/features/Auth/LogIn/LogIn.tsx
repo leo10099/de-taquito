@@ -78,6 +78,7 @@ const LogIn: React.FC = () => {
 	}, [error, setError]);
 
 	useEffect(() => {
+		console.log("aca");
 		if (success) navigate("/app/dashboard");
 	}, [navigate, success]);
 

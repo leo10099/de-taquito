@@ -18,6 +18,18 @@ export class ClubController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get('/active')
+  async getAllActiveGroupedByCompetition() {
+    return await this.clubService.findAllActiveGroupedByCompetition();
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/active/:competitionId')
+  async getAllActiveByCompetition(@Param() param: { competitionId: string }) {
+    return await this.clubService.findAllActiveByCompetition(param.competitionId);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Get('/external/:externalServiceId')
   async getOneByExternalServiceId(@Param() param: { externalServiceId: string }) {
     return await this.clubService.findByExternalServiceId(param.externalServiceId);
