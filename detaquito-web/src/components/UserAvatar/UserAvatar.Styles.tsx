@@ -2,7 +2,7 @@ import styled from "styled-components/macro";
 import { mediaQueries } from "style";
 
 // Theme
-import { gray, primary } from "theme";
+import { gray } from "theme";
 
 export const UserAvatarContainer = styled.div`
 	cursor: pointer;
@@ -32,13 +32,11 @@ export const UserAvatarContainer = styled.div`
 		height: 24px;
 
 		${mediaQueries.minNotebook} {
-			background-color: ${primary.primary400};
 			height: 32px;
 			width: 32px;
 		}
 
 		${mediaQueries.minFullHd} {
-			background-color: ${primary.primary400};
 			height: 40px;
 			width: 40px;
 		}

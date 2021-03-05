@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { forwardRef, memo } from "react";
 import styled from "styled-components/macro";
 
 // Components
@@ -28,10 +28,14 @@ interface SelectInputProps {
 	hasError?: boolean;
 	isFullWidth?: boolean;
 	tooltipText?: string;
-	options: {
-		value: string;
-		label: string;
-	}[];
+	name: string;
+	ref?: any;
+	options:
+		| {
+				value: string | number;
+				label: string;
+		  }[]
+		| null;
 }
 
 // Styles
@@ -45,7 +49,13 @@ const BaseSelectLabel = styled(Label)``;
 const BaseSelectInput = styled.select<
 	Pick<SelectInputProps, "isFullWidth" | "tooltipText" | "hasError">
 >`
-	background: inherit;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background: transparent;
+	background-image: url("data:image/svg+xml;utf8,<svg fill='darkgrey' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+	background-repeat: no-repeat;
+	background-position-x: 98%;
+	background-position-y: 12px;
 	border-color: ${({ hasError, theme }) => {
 		return hasError ? theme.error : theme.primaryLight;
 	}};
@@ -64,20 +74,26 @@ const BaseSelectInput = styled.select<
 		tooltipText ? (isFullWidth ? "90%" : "40%") : isFullWidth ? "100%" : "50%"};
 `;
 
-const SelectInput: React.FC<SelectInputProps> = props => {
+const SelectInput = forwardRef<HTMLSelectElement, SelectInputProps>((props, ref) => {
 	// Hooks
 	const windowWidth = useWindowWidth();
 
 	// Props
 	const { options } = props ?? [];
-	const { id, hasError, isFullWidth, label, tooltipText } = props;
+	const { id, hasError, isFullWidth, label, tooltipText, name } = props;
 
-	if (!options.length) return null;
+	if (!options || !options.length) return null;
 
 	return (
 		<BaseSelect>
 			{label && id && <BaseSelectLabel id={id}>{label}</BaseSelectLabel>}
-			<BaseSelectInput {...props} isFullWidth={isFullWidth} tooltipText={tooltipText}>
+			<BaseSelectInput
+				{...props}
+				isFullWidth={isFullWidth}
+				name={name}
+				ref={ref}
+				tooltipText={tooltipText}
+			>
 				{options.map(({ value, label }) => {
 					return (
 						<option value={value} key={`select-option-${label}`}>
@@ -101,6 +117,8 @@ const SelectInput: React.FC<SelectInputProps> = props => {
 			)}
 		</BaseSelect>
 	);
-};
+});
+
+SelectInput.displayName = "SelectInput";
 
 export default memo(SelectInput);

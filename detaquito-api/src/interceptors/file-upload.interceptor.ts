@@ -16,6 +16,8 @@ export class FileUploadValidationInterceptor implements NestInterceptor {
     const req: FastifyRequest & {
       file: FormDataFileMetadata;
     } = context.switchToHttp().getRequest();
+    if (!req.file) return next.handle();
+
     const { file } = req;
 
     if (file.fieldname !== 'file') {

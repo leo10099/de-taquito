@@ -15,6 +15,11 @@ export class EditUserDto {
   @IsOptional()
   @IsString()
   @MaxLength(50)
+  fullName?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(50)
   alias?: string;
 
   @IsOptional()

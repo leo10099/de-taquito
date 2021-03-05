@@ -30,7 +30,7 @@ export class UserRepository extends Repository<User> {
     await this.update(userId, {
       ...updatePayload,
     }).catch((e: DatabaseQueryError) => {
-      if (e.detail.includes('alias')) {
+      if (e.detail && e.detail.includes('alias')) {
         throw new ConflictException(UserErrors.USER_ERROR_ALIAS_EXISTS);
       }
       throw e.message;

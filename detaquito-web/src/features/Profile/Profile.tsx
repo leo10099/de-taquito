@@ -1,5 +1,5 @@
 // Hooks
-import { useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,6 +11,7 @@ import validation from "features/Auth/SignUp/SignUp.validations";
 
 // Slices
 import clubSlice from "features/Club/Club.reducer";
+import profileSlice from "features/Profile/Profile.reducer";
 
 // Selectors
 import { selectCurrentUser } from "features/Auth/Auth.selectors";
@@ -21,6 +22,7 @@ import Logo from "assets/img/logo.png";
 
 // Types
 import { Club } from "features/Club/Club.types";
+import { ProfileFormData } from "features/Profile/Profile.types";
 
 // Styles
 import { ProfileContainer } from "./Profile.Styles";
@@ -29,7 +31,7 @@ const Profile: React.FC = () => {
 	// Hooks
 	const dispatch = useDispatch();
 
-	const { register, handleSubmit, getValues, errors, setError } = useForm({
+	const { register, handleSubmit, errors, setError, watch, formState } = useForm({
 		mode: "onTouched",
 		reValidateMode: "onChange",
 		criteriaMode: "firstError",
@@ -41,20 +43,26 @@ const Profile: React.FC = () => {
 	const club = useSelector(selectClubs);
 
 	// Handlers
-	const onSubmit = () => {};
+	const onSubmit = useCallback(
+		({ alias, favTeam, fullName }: ProfileFormData) => {
+			// Put together new user data object
+			const profile: ProfileFormData = {};
+
+			if (alias && alias !== user.alias) profile.alias = alias;
+			if (favTeam && favTeam !== user.favTeam) profile.favTeam = alias;
+			if (fullName && fullName !== user.fullName) profile.fullName = fullName;
+
+			dispatch(profileSlice.actions.profileUpdateRequest(profile));
+		},
+		[dispatch, user.alias, user.favTeam, user.fullName]
+	);
 
 	// Memos
-
 	const isLoading = useMemo(() => {
 		return !!(club && club.activeClubsLoading);
 	}, [club]);
 
-	const activeClubsList = useMemo(() => {
-		if (!club || !club.activeClubs || club.activeClubs === {}) return null;
-		return Object.keys(club.activeClubs).map(competition => {
-			return club.activeClubs[competition];
-		});
-	}, [club]);
+	const selectedLeague = useMemo(() => watch("favTeamCountry"), [watch]);
 
 	const countryList = useMemo(() => {
 		if (!club || !club.activeClubs) return [];
@@ -70,6 +78,23 @@ const Profile: React.FC = () => {
 		return output;
 	}, [club]);
 
+	const activeClubsList = useMemo(() => {
+		if (!club || !club.activeClubs || club.activeClubs === {} || !selectedLeague) return [];
+
+		return club.activeClubs[selectedLeague]
+			.map(club => {
+				return {
+					value: club.id,
+					label: club.name,
+				};
+			})
+			.sort((a, b) => {
+				const teamA = a.label.toUpperCase();
+				const teamB = b.label.toUpperCase();
+				return teamA < teamB ? -1 : teamA > teamB ? 1 : 0;
+			});
+	}, [club, selectedLeague]);
+
 	// Effects
 	useEffect(() => {
 		dispatch(clubSlice.actions.getAllCompetitionClubsRequest());
@@ -78,6 +103,8 @@ const Profile: React.FC = () => {
 	if (!user || !user.id) return null;
 
 	if (isLoading) return <Spinner centered />;
+
+	console.log(watch("favTeam"));
 
 	return (
 		<ProfileContainer>
@@ -123,12 +150,35 @@ const Profile: React.FC = () => {
 					/>
 
 					<Select
-						options={countryList}
-						label="Equipo favorito"
 						id="Profile-FavTeam"
 						isFullWidth
+						label="Equipo favorito"
+						options={countryList}
 						tooltipText="Si no subes un avatar, el escudo de tu equipo te identificará en las tablas de posiciones"
+						ref={register()}
+						name="favTeamCountry"
 					/>
+
+					{selectedLeague && (
+						<Select
+							id="Profile-FavTeam"
+							isFullWidth
+							options={activeClubsList}
+							ref={register()}
+							name="favTeam"
+						/>
+					)}
+
+					<Button
+						isBlock
+						isLoading={false}
+						isDisabled={!formState.isDirty || !!Object.keys(errors).length}
+						margin="2rem auto"
+						variant="primary"
+						type="submit"
+					>
+						Continuar
+					</Button>
 				</form>
 			</Card>
 		</ProfileContainer>

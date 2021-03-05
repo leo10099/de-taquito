@@ -12,10 +12,11 @@ export type RegistrationPayload = { email: string; alias: string; secret: string
 export type UserPayload = { alias: string; avatar: string; email: string; sub: number };
 export type UserData = {
 	id: number | null;
-	alias: string;
+	alias?: string;
 	avatar: string | null;
 	email: string;
-	fullName: string;
+	fullName?: string;
+	favTeam?: string;
 };
 
 const authSlice = createSlice({
