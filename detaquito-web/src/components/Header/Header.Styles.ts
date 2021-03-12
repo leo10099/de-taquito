@@ -59,7 +59,7 @@ export const MenuItemHamburgerMobile = styled.li<{ isTranslucent: boolean }>`
 	cursor: pointer;
 	height: 44px;
 	width: 44px;
-	padding: 12px;
+	padding: 10px;
 
 	svg {
 		width: 100%;

@@ -46,7 +46,7 @@ const success = {
 	success900: "#2d631b",
 };
 
-const error = {
+export const error = {
 	error050: "#feecef",
 	error100: "#fcd1d4",
 	error200: "#eba19f",

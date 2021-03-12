@@ -73,15 +73,15 @@ export class UserController {
 
   @UseGuards(JwtAuthGuard)
   @Patch()
-  @UseInterceptors(FileInterceptor('file'), FileUploadValidationInterceptor)
+  @UseInterceptors(FileInterceptor('avatar'), FileUploadValidationInterceptor)
   async updateUser(
     @UserData('sub') id,
     @Body() editUserDto: EditUserDto,
     @UploadedFile() file?: FormDataFileMetadata,
   ) {
-    if (!editUserDto || !Object.keys(editUserDto).length) {
+    if ((!editUserDto || !Object.keys(editUserDto).length) && !file) {
       return true;
     }
-    this.userService.editUser(id, editUserDto, file);
+    return this.userService.editUser(id, editUserDto, file);
   }
 }

@@ -1,44 +1,58 @@
-import styled from "styled-components/macro";
+import styled, { css } from "styled-components/macro";
 import { mediaQueries } from "style";
 
 // Theme
-import { gray } from "theme";
+import { gray, error } from "theme";
 
-export const UserAvatarContainer = styled.div`
+export const UserAvatarContainer = styled.div<{ isPreview?: boolean; margin?: string }>`
 	cursor: pointer;
 	display: flex;
 	padding: 10px;
+	position: relative;
+
+	${({ margin }) =>
+		margin &&
+		css`
+			margin: ${margin};
+		`};
+	${({ isPreview }) =>
+		isPreview &&
+		css`
+			pointer-events: none;
+			padding: 0;
+		`}
 
 	img {
-		width: 24px;
-		height: 24px;
+		background-color: ${gray.gray010};
+		width: 32px;
+		height: 32px;
 		border-radius: 50%;
+		object-fit: contain;
 
 		${mediaQueries.minNotebook} {
-			background-color: ${gray.gray010};
-			height: 32px;
-			width: 32px;
+			width: 40px;
+			height: 40px;
 		}
 
 		${mediaQueries.minFullHd} {
 			background-color: ${gray.gray010};
-			height: 38px;
-			width: 38px;
+			height: 44px;
+			width: 44px;
 		}
 	}
 
 	svg {
-		width: 24px;
-		height: 24px;
+		width: 32px;
+		height: 32px;
 
 		${mediaQueries.minNotebook} {
-			height: 32px;
-			width: 32px;
+			width: 40px;
+			height: 40px;
 		}
 
 		${mediaQueries.minFullHd} {
-			height: 40px;
-			width: 40px;
+			height: 44px;
+			width: 44px;
 		}
 	}
 `;

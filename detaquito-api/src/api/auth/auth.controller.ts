@@ -69,6 +69,7 @@ export class AuthController {
       alias: user.alias,
       avatar: user.avatarUrl,
       email: user.email,
+      club: user.club,
     });
   }
 
@@ -124,7 +125,7 @@ export class AuthController {
   }
 
   @Post('/logout')
-  async logout(@Res() response: FastifyReply){
+  async logout(@Res() response: FastifyReply) {
     response.setCookie('token', '', {
       httpOnly: true,
       maxAge: 0,

@@ -1,6 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn, BaseEntity, ManyToOne, OneToMany } from 'typeorm';
 
 // Entities
+import { User } from '../user/user.entity';
 import { Competition } from '../competition/competition.entity';
 import { CompetitionMatch } from '../competition-match/competition-match.entity';
 
@@ -26,6 +27,7 @@ export class Club extends BaseEntity {
   @ManyToOne(
     () => Competition,
     competition => competition.clubs,
+    { eager: true },
   )
   competition: Competition;
 
@@ -34,6 +36,12 @@ export class Club extends BaseEntity {
     match => match.home,
   )
   hostMatches: CompetitionMatch[];
+
+  @OneToMany(
+    () => User,
+    user => user.club,
+  )
+  users: User[];
 
   @OneToMany(
     () => CompetitionMatch,

@@ -4,6 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // Typings
 import { StoreSliceAction } from "store";
 import { SuccessfulAuthenticationPayload } from "features/Auth/Auth.types";
+import { Club } from "features/Club/Club.types";
 
 // Action Types
 export type SetAccessTokenPayload = { accessToken: string; accessTokenExpiry?: number };
@@ -16,7 +17,7 @@ export type UserData = {
 	avatar: string | null;
 	email: string;
 	fullName?: string;
-	favTeam?: string;
+	club?: Club;
 };
 
 const authSlice = createSlice({
@@ -39,6 +40,15 @@ const authSlice = createSlice({
 			avatar: "",
 			email: "",
 			fullName: "",
+			club: {
+				id: 0,
+				name: "",
+				competition: {
+					id: 0,
+					name: "",
+					country: "",
+				},
+			},
 			id: 0,
 		},
 		passwordReset: {
@@ -70,6 +80,7 @@ const authSlice = createSlice({
 			state.user.email = payload.email;
 			state.user.id = payload.id;
 			state.user.fullName = payload.fullName;
+			state.user.club = payload.club;
 			return state;
 		},
 		// Login

@@ -108,7 +108,8 @@ export class AuthService {
       alias: user.alias,
       avatar: user.avatarUrl,
       email: user.email,
-      fullName: user.fullName
+      fullName: user.fullName,
+      club: user.club,
     } as TokenAuthorizationPayload;
   }
 

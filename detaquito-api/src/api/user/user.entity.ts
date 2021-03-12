@@ -1,8 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn, BaseEntity, OneToOne } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, BaseEntity, OneToOne, ManyToOne } from 'typeorm';
 import { Exclude } from 'class-transformer';
 
 // Entities
 import { Player } from '../player/player.entity';
+import { Club } from '../club/club.entity';
 
 @Entity('User')
 export class User extends BaseEntity {
@@ -17,9 +18,6 @@ export class User extends BaseEntity {
 
   @Column({ nullable: true })
   public avatarUrl: string;
-
-  @Column({ nullable: true })
-  public favTeam?: string;
 
   @Column({ nullable: true })
   public fullName?: string;
@@ -46,6 +44,13 @@ export class User extends BaseEntity {
     { nullable: true },
   )
   player?: User;
+
+  @ManyToOne(
+    () => Club,
+    club => club.users,
+    { eager: true },
+  )
+  club?: Club;
 
   constructor(partial: Partial<User>) {
     super();

@@ -81,6 +81,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSideDrawer }: HeaderProps) => {
 	}, [dispatch]);
 
 	const goToProfile = useCallback(() => {
+		setIsDropdownOpen(false);
 		navigate("/app/profile");
 	}, [navigate]);
 

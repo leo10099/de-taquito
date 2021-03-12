@@ -4,12 +4,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { StoreSliceAction } from "store";
 
 const initialState = {
-	profile: {
-		update: {
-			error: null,
-			loading: false,
-		} as StoreSliceAction,
-	},
+	update: {
+		error: null,
+		loading: false,
+	} as StoreSliceAction,
 };
 
 const profileSlice = createSlice({
@@ -18,16 +16,16 @@ const profileSlice = createSlice({
 	reducers: {
 		// Update profile and settings
 		profileUpdateRequest: (state, { payload }: PayloadAction<any>) => {
-			state.profile.update.error = null;
-			state.profile.update.loading = true;
+			state.update.error = null;
+			state.update.loading = true;
 		},
 		profileUpdateFailure: (state, { payload }: PayloadAction<any>) => {
-			state.profile.update.loading = false;
-			state.profile.update.error = payload;
+			state.update.loading = false;
+			state.update.error = payload;
 		},
 		profileUpdateSuccess: state => {
-			state.profile.update.loading = false;
-			state.profile.update.error = null;
+			state.update.loading = false;
+			state.update.error = null;
 		},
 	},
 });

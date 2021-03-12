@@ -1,5 +1,7 @@
 import { IsString, IsEmail, IsOptional, MinLength, MaxLength } from 'class-validator';
 
+import { Club } from '../../club/club.entity';
+
 export class EditUserDto {
   @IsOptional()
   @IsString()
@@ -24,9 +26,8 @@ export class EditUserDto {
 
   @IsOptional()
   @IsString()
-  @MaxLength(50)
-  favTeam?: string;
+  club?: string | Club | null;
 
   @IsOptional()
-  avatarUrl?: any;
+  avatar?: any;
 }

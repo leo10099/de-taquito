@@ -20,16 +20,16 @@ export class FileUploadValidationInterceptor implements NestInterceptor {
 
     const { file } = req;
 
-    if (file.fieldname !== 'file') {
-      throw new HttpException('IMAGE_UPLOAD_UPLOAD_NOT_ALLOWED', 401);
+    if (file.fieldname !== 'avatar') {
+      throw new HttpException('IMAGE_UPLOAD_UPLOAD_NOT_ALLOWED', 403);
     }
 
     if (file.mimetype.split('/').shift() !== 'image') {
-      throw new HttpException('IMAGE_UPLOAD_WRONG_MIME_TYPE', 401);
+      throw new HttpException('IMAGE_UPLOAD_WRONG_MIME_TYPE', 403);
     }
 
-    if (file.size > 512000) {
-      throw new HttpException('IMAGE_UPLOAD_IMAGE_OVER_ALLOWED_SIZE', 401);
+    if (file.size > 1048576) {
+      throw new HttpException('IMAGE_UPLOAD_IMAGE_OVER_ALLOWED_SIZE', 403);
     }
 
     return next.handle();

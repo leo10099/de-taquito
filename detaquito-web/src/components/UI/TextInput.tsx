@@ -86,7 +86,7 @@ export const Label = styled.label.attrs(({ id }) => ({
 	padding-bottom: 10px;
 `;
 
-const ErrorMessage = styled.p<TextInputCustomProps>`
+export const ErrorMessage = styled.p<TextInputCustomProps>`
 	color: ${props => props.theme.error};
 	letter-spacing: 0.5px;
 	margin-top: -1rem;

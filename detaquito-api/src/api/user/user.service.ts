@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { randomBytes } from 'crypto';
 import * as argon2 from 'argon2';
@@ -9,6 +9,9 @@ import DataUri from 'datauri/parser';
 // Components
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
+
+// Models
+import { Club } from '../club/club.entity';
 
 // DTOs
 import { CreateUserDtoLocalStrategy } from './dto/create.user.dto.local';
@@ -69,17 +72,40 @@ export class UserService {
     updatePayload: EditUserDto | Partial<User>,
     file?: FormDataFileMetadata,
   ) {
-    let newUserData = { ...updatePayload };
+    const currentUserData = await User.findOne(userId, { relations: ['club'] });
+    let newUserData: any = {};
+
+    newUserData = { ...currentUserData, ...updatePayload };
+
+    if (updatePayload.club && typeof updatePayload.club === 'string' && updatePayload !== '0') {
+      newUserData.club = await Club.findOne(parseInt(updatePayload.club, 10));
+    }
+
     // If file present, upload avatar image to Cloudinary
     if (file) {
-      const parser = new DataUri();
-      const blob = parser.format(path.extname(file.originalname).toString(), file.buffer);
-      const response: UploadApiResponse = await this.cloudinary.upload(blob.content, {
-        folder: 'avatar',
-        public_id: userId.toString(),
-        overwrite: true,
-      });
-      newUserData = { ...newUserData, avatarUrl: response.url };
+      try {
+        const parser = new DataUri();
+        const blob = parser.format(path.extname(file.originalname).toString(), file.buffer);
+        const response: UploadApiResponse = await this.cloudinary.upload(blob.content, {
+          folder: 'avatar',
+          public_id: userId.toString(),
+          overwrite: true,
+        });
+        newUserData = { ...newUserData, avatarUrl: response.url };
+      } catch (e) {
+        Logger.error(e, 'Cloudinary');
+      }
+    }
+
+    if (!newUserData || !Object.keys(newUserData).length) return true;
+
+    if (!file) {
+      if (newUserData.club === undefined) {
+        newUserData = { ...newUserData, avatarUrl: null };
+      } else {
+        const clubAvatar = await (await Club.findOne(Number(updatePayload.club))).logoUrl;
+        newUserData = { ...newUserData, avatarUrl: clubAvatar };
+      }
     }
 
     return await this.userRepo.updateUser(userId, newUserData);

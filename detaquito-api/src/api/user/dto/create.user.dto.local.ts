@@ -1,4 +1,12 @@
-import { IsString, IsNotEmpty, IsEmail, IsOptional, MinLength, MaxLength } from 'class-validator';
+import {
+  IsString,
+  IsNotEmpty,
+  IsEmail,
+  IsOptional,
+  MinLength,
+  MaxLength,
+  IsNumber,
+} from 'class-validator';
 
 export class CreateUserDtoLocalStrategy {
   @IsNotEmpty()
@@ -17,12 +25,6 @@ export class CreateUserDtoLocalStrategy {
   @IsString()
   @MaxLength(50)
   alias?: string;
-
-  @IsOptional()
-  @IsNotEmpty()
-  @IsString()
-  @MaxLength(50)
-  favTeam?: string;
 
   @IsOptional()
   @IsNotEmpty()

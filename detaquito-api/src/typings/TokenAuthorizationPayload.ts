@@ -1,3 +1,5 @@
+import { Club } from 'src/api/club/club.entity';
+
 export interface TokenAuthorizationPayload {
   accessToken: string;
   refreshToken: string;
@@ -8,4 +10,5 @@ export interface TokenAuthorizationPayload {
   alias: string;
   email: string;
   avatar: string;
+  club?: Club;
 }

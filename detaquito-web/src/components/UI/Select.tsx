@@ -30,6 +30,7 @@ interface SelectInputProps {
 	tooltipText?: string;
 	name: string;
 	ref?: any;
+	defaultValue?: any;
 	options:
 		| {
 				value: string | number;
@@ -80,7 +81,7 @@ const SelectInput = forwardRef<HTMLSelectElement, SelectInputProps>((props, ref)
 
 	// Props
 	const { options } = props ?? [];
-	const { id, hasError, isFullWidth, label, tooltipText, name } = props;
+	const { defaultValue, id, hasError, isFullWidth, label, tooltipText, name } = props;
 
 	if (!options || !options.length) return null;
 
@@ -93,6 +94,7 @@ const SelectInput = forwardRef<HTMLSelectElement, SelectInputProps>((props, ref)
 				name={name}
 				ref={ref}
 				tooltipText={tooltipText}
+				defaultValue={defaultValue}
 			>
 				{options.map(({ value, label }) => {
 					return (
